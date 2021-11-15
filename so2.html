@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Реакторы</title>
+    <script src="./js/reactor_test.js"></script>
+
+    <!--настройка MathJax для оформления математических формул-->
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js"],
+        "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], displayMath: [ ["$$","$$"], ["\\[", "\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },
+        TeX: { noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } } },
+        messageStyle: "none"
+        });
+    </script>
+    <!--подключение MathJax -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"></script>
+<!--    <script src="./js/MathJax-2.7.7/MathJax.js" id=""></script> РАСКОМЕНТИТЬ ПРИ ФИНАЛЬНОМ ПОДКЛЮЧЕНИИ!!!-->
+
+<!--    <link href="bootstrap-5.0.2-dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous>-->
+<!--    <script src="./bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>-->
+    <link href="./bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="./bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
+<body onload="star();">
+
+<form class="border border-dark m-4 p-3">
+    <h1 class="text-center mb-3">Процессы и реакторы окисления SO2</h1>
+    
+    <!-- Главная страница выбора программы -->
+    <div class="container" style="display: none;">
+        <div class="row">
+            <div class="col-4">
+                <h2 class="text-start mb-4">Программы</h2>
+                <div class="mb-3">
+                    <input class="form-check-input" id="equilibrium" type="radio" name="programm" checked="checked">
+                    <label class="form-check-label">Равновесие</label>
+                </div>
+                <div class="mb-3">
+                    <input class="form-check-input" id="reaction-spead" type="radio" name="programm">
+                    <label class="form-check-label">Скорость реакции</label>
+                </div>
+                <div class="mb-3">
+                    <input class="form-check-input" id="optimal-temp" type="radio" name="programm">
+                    <label class="form-check-label">Оптимальные температуры</label>
+                </div>
+                <div class="mb-3">
+                    <input class="form-check-input" id="contact-time" type="radio" name="programm" checked="checked">
+                    <label class="form-check-label">Время контакта</label>
+                </div>
+                <div class="mb-3">
+                    <input class="form-check-input" id="degree-of-transformation" type="radio" name="programm">
+                    <label class="form-check-label">Степень превращения</label>
+                </div>
+                <div class="mb-3">
+                    <input class="form-check-input" id="reactor-promtepl" type="radio" name="programm">
+                    <label class="form-check-label">Реактор с промежуточными<br>теплообменниками</label>
+                </div>
+                <div class="mb-3">
+                    <input class="form-check-input" id="reactor-vvodholgaz" type="radio" name="programm" checked="checked">
+                    <label class="form-check-label">Реактор с вводом холодного<br>газа после 1-го слоя</label>
+                </div>
+                <div class="mb-3">
+                    <input class="form-check-input" id="reactor-promvvodholvoz" type="radio" name="programm">
+                    <label class="form-check-label">Реактор с промежуточным<br>вводом холодного воздуха</label>
+                </div>
+                <div class="mb-5">
+                    <input class="form-check-input" id="reactor-dkda" type="radio" name="programm">
+                    <label class="form-check-label">Вторастадия ректора в<br>схеме ДК/ДА</label>
+                </div>
+            </div>
+
+            <div class="col-8 p-5">
+                <div>
+                    <img src="https://via.placeholder.com/600x300" alt="Тут картинки для каждой вариации программы">
+                </div>
+                <div>
+                    <button class="mt-5" style="width: 12rem;">Начнем, пожалуй...</button>
+                </div>
+                
+            </div>
+          </div>
+    </div>
+
+    <!-- Программа Равновесие -->
+    <div class="container">
+        <h2 class="text-center mb-4">Равновесие степени превращения Xp(T)</h2>
+        <div class="row">
+            <div class="col-3 border-end border-2 border-danger">
+                <h3 class="border-bottom border-dark text-center mb-3">Исходные данные</h3>
+
+                <div class="card mb-3">
+                    <div class="card-header">Реакционный газ</div>
+                    <div class="card-body">
+                        <h6>Объемные доли</h6>
+                        <div id="ob-doli" class="input-group mb-3">                                    
+                            <div class="input-group-text" id="btnGroupAddon">SO2</div>
+                            <input type="text"  class="form-control" id="so2" value="0,1000" size="6">
+                            <div class="input-group-text" id="btnGroupAddon">O2</div>
+                            <input type="text" class="form-control" id="o2" value="0,1000" size="6">
+                        </div>
+
+                        <h6>P.атм</h6>
+                        <div id="tep_rezh_polythrop" class="input-group">
+                            <input type="text"  class="form-control" value="1,0" size="8">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-5">
+                    <div class="card-header">Условия расчета</div>
+                    <div class="card-body">
+                        <div id="t-group" class="input-group mb-3">                                    
+                            <div class="input-group-text" id="btnGroupAddon">Tн</div>
+                            <input type="text"  class="form-control" id="tn" value="700,0" size="6">
+                            <div class="input-group-text" id="btnGroupAddon">Тк</div>
+                            <input type="text" class="form-control" id="tk" value="900,0" size="6">
+                        </div>
+
+                        <h6>Шаг по T</h6>
+                        <div id="step-t" class="input-group">      
+                            <input type="text"  class="form-control" value="10,0" size="8">
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+            <div class="col-9">
+                <h3 class="border-bottom border-dark text-center">Результаты расчета</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="justify-content: center;">
+        <div class="col-4 text-starts"><button style="width: 6rem;">SOS !</button></div>
+        <div class="col-4 text-center"><button style="width: 8rem;">В начало</button></div>
+        <div class="col-4 text-end"><button style="width: 6rem;">ВЫХОД</button></div>
+    </div>
+    
+</form>
+
+</body>
+</html>
