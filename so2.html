@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Реакторы</title>
     <link rel="stylesheet" href="style.css">
-    <script src="./js/reactor_test.js"></script>
 
     <!--настройка MathJax для оформления математических формул-->
     <script type="text/x-mathjax-config">
@@ -27,81 +26,63 @@
     <script src="./bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
 
 </head>
-<body onload="star();">
+<body>
 
 <form class="border border-dark m-4 p-3">
     <h1 class="text-center mb-3">Процессы и реакторы окисления SO2</h1>
     
     <!-- Главная страница выбора программы -->
-    <div class="container" style="display: block;">
+    <div class="container active" id="startPage">
         <div class="row">
             <div class="col-4">
                 <h2 class="text-start mb-4">Программы</h2>
                 
                 <div class="mb-3">
-                    <input class="form-check-input" id="equilibrium" checked type="radio" name="programm">
+                    <input class="form-check-input" id="equilibrium" value="1" checked type="radio" name="programm">
                     <label class="form-check-label">Равновесие</label>
-
-                    <img src="./img/so2/1.svg" id="so2_img" alt="">
                 </div>
                 <div class="mb-3">
-                    <input class="form-check-input" id="reaction-spead" type="radio" name="programm">
+                    <input class="form-check-input" id="reaction-spead" value="2" type="radio" name="programm">
                     <label class="form-check-label">Скорость реакции</label>
-
-                    <img src="./img/so2/2.svg" id="so2_img" alt="">
                 </div>
                 <div class="mb-3">
-                    <input class="form-check-input" id="optimal-temp" type="radio" name="programm">
+                    <input class="form-check-input" id="optimal-temp" value="3" type="radio" name="programm">
                     <label class="form-check-label">Оптимальные температуры</label>
-
-                    <img src="./img/so2/3.svg" id="so2_img" alt="">
                 </div>
                 <div class="mb-3">
-                    <input class="form-check-input" id="contact-time" type="radio" name="programm">
+                    <input class="form-check-input" id="contact-time" value="4" type="radio" name="programm">
                     <label class="form-check-label">Время контакта</label>
-
-                    <img src="./img/so2/4.svg" id="so2_img" alt="">
                 </div>
                 <div class="mb-3">
-                    <input class="form-check-input" id="degree-of-transformation" type="radio" name="programm">
+                    <input class="form-check-input" id="degree-of-transformation" value="5" type="radio" name="programm">
                     <label class="form-check-label">Степень превращения</label>
-
-                    <img src="./img/so2/5.svg" id="so2_img" alt="">
                 </div>
                 <div class="mb-3">
-                    <input class="form-check-input" id="reactor-promtepl" type="radio" name="programm">
+                    <input class="form-check-input" id="reactor-promtepl" value="6" type="radio" name="programm">
                     <label class="form-check-label">Реактор с промежуточными<br>теплообменниками</label>
-
-                    <img src="./img/so2/6.svg" id="so2_img" alt="">
                 </div>
                 <div class="mb-3">
-                    <input class="form-check-input" id="reactor-vvodholgaz" type="radio" name="programm">
+                    <input class="form-check-input" id="reactor-vvodholgaz" value="7" type="radio" name="programm">
                     <label class="form-check-label">Реактор с вводом холодного<br>газа после 1-го слоя</label>
-
-                    <img src="./img/so2/7.svg" id="so2_img" alt="">
                 </div>
                 <div class="mb-3">
-                    <input class="form-check-input" id="reactor-promvvodholvoz" type="radio" name="programm">
+                    <input class="form-check-input" id="reactor-promvvodholvoz" value="8" type="radio" name="programm">
                     <label class="form-check-label">Реактор с промежуточным<br>вводом холодного воздуха</label>
-
-                    <img src="./img/so2/8.svg" id="so2_img" alt="">
                 </div>
                 <div class="mb-5">
-                    <input class="form-check-input" id="reactor-dkda" type="radio" name="programm">
+                    <input class="form-check-input" id="reactor-dkda" value="9" type="radio" name="programm">
                     <label class="form-check-label">Вторастадия ректора в<br>схеме ДК/ДА</label>
-
-                    <img src="./img/so2/9.svg" id="so2_img" alt="">
                 </div>
             </div>
 
             <div class="col-8 p-5">
                 
                 <div style="width: 600px; height: 300px;">
-                    <img src="./img/so2/1.svg" id="so2_img" alt="">
+                    <img src="./img/so2/1.svg" id="so2_img_new" alt="">
                 </div>  
                 
                 <div>
-                    <button class="mt-5" style="width: 12rem;">Начнем, пожалуй...</button>
+                    <button id="btn_start" type="button" class="mt-5" style="width: 12rem;">Начнем, пожалуй...</button>
                 </div>
                 
             </div>
@@ -109,7 +90,7 @@
     </div><!-- /.Главная страница выбора программы -->
 
     <!-- Программа Равновесие -->
-    <div class="container" style="display: none;">
+    <div class="container" id="firstPage">
         <h2 class="text-center mb-4">Равновесие степени превращения Xp(T)</h2>
         <div class="row">
             <div class="col-3 border-end border-2 border-danger">
@@ -182,7 +163,7 @@
     </div><!-- /.Программа Равновесие -->
 
     <!-- Программа Скорость реакции -->
-    <div class="container" style="display: none;">
+    <div class="container" id="secondPage">
         <h2 class="text-center mb-4">Скорость реакции W(T) при степени превращения х</h2>
         <div class="row">
             <div class="col-4 border-end border-2 border-danger">
@@ -313,7 +294,7 @@
     </div><!-- /.Программа Скорость реакции -->
 
     <!-- Программа Оптимальные температуры -->
-    <div class="container" style="display: none;">
+    <div class="container" id="thirdPage">
         <h2 class="text-center mb-4">Оптимальные температуры Топт(х)</h2>
         <div class="row">
             <div class="col-4 border-end border-2 border-danger">
@@ -442,7 +423,7 @@
     </div><!-- /.Программа Оптимальные температуры -->
 
     <!-- Программа Время контакта -->
-    <div class="container" style="display: none;">
+    <div class="container" id="fourthPage">
         <h2 class="text-center mb-4">Время контакта в слое tay(x) (режимы идеального вытеснения и смешения)</h2>
         <div class="row">
             <div class="col-4 border-end border-2 border-danger">
@@ -592,7 +573,7 @@
     </div><!-- /.Программа Время контакта -->
 
     <!-- Программа Степень превращения -->
-    <div class="container" style="display: none;">
+    <div class="container" id="fifthPage">
         <h2 class="text-center mb-4">Степень превращения В слое X(tay) (режимы идельаного вытеснения и смешения)</h2>
         <div class="row">
             <div class="col-4 border-end border-2 border-danger">
@@ -745,7 +726,7 @@
     </div><!-- /.Программа Степень превращения -->
 
     <!-- Программа Реактор с промежуточными теплообменниками -->
-    <div class="container" style="display: none;">
+    <div class="container" id="sixthPage">
         <h2 class="text-center mb-4">Оптимизация многослойного реактора с промежуточными теплообменниками</h2>
         <div class="row">
             <div class="col-4 border-end border-2 border-danger">
@@ -909,7 +890,7 @@
     </div><!-- /.Программа Реактор с промежуточными теплообменниками -->
 
     <!-- Программа Реактор с вводом холодного газа после 1-го слоя -->
-    <div class="container" style="display: none;">
+    <div class="container" id="seventhPage">
         <h2 class="text-center mb-4">Оптимизация многослойного реактора с вводом холодного газа после 1-го слоя</h2>
         <div class="row">
             <div class="col-4 border-end border-2 border-danger">
@@ -1063,7 +1044,7 @@
     </div><!-- /.Программа Реактор с вводом холодного газа после 1-го слоя -->
 
     <!-- Программа Реактор с вводом холодного воздуха -->
-    <div class="container" style="display: none;">
+    <div class="container" id="eighthPage">
         <h2 class="text-center mb-4">Оптимизация многослойного реактора с вводом холодного воздуха между слоями катализатора</h2>
         <div class="row">
             <div class="col-4 border-end border-2 border-danger">
@@ -1217,7 +1198,7 @@
     </div> <!-- /.Программа Реактор с вводом холодного воздуха -->
 
     <!-- Программа Вторая стадия реактора в схеме ДК/ДА -->
-    <div class="container" style="display: none;">
+    <div class="container" id="ninthPage">
         <h2 class="text-center mb-4">Оптимизация второй ступени в системе ДК/ДА</h2>
         <div class="row">
             <div class="col-4 border-end border-2 border-danger">
@@ -1365,12 +1346,14 @@
 
     <!-- Кнопки навигации -->
     <div class="row" style="justify-content: center;">
-        <div class="col-4 text-starts"><button style="width: 6rem;">SOS !</button></div>
-        <div class="col-4 text-center"><button style="width: 8rem;">В начало</button></div>
-        <div class="col-4 text-end"><button style="width: 6rem;">ВЫХОД</button></div>
+        <div class="col-4 text-starts"><button id="btn_sos" type="button" style="width: 6rem;">SOS !</button></div>
+        <div class="col-4 text-center"><button id="btn_back" type="button" style="width: 8rem;">В начало</button></div>
+        <div class="col-4 text-end"><button id="btn_exit" type="button" style="width: 6rem;">ВЫХОД</button></div>
     </div>
     
 </form>
+
+<script src="./js/so2.js"></script>
 
 </body>
 </html>

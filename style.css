@@ -1,19 +1,7 @@
-#so2_img{
+.container {
     display: none;
-    position: absolute;
-    top: 100px;
-    left: 400px;
 }
 
-input#equilibrium:checked ~ #so2_img,
-input#reaction-spead:checked ~ #so2_img,
-input#optimal-temp:checked ~ #so2_img,
-input#contact-time:checked ~ #so2_img,
-input#degree-of-transformation:checked ~ #so2_img,
-input#reactor-promtepl:checked ~ #so2_img,
-input#reactor-vvodholgaz:checked ~ #so2_img,
-input#reactor-promvvodholvoz:checked ~ #so2_img,
-input#reactor-dkda:checked ~ #so2_img
- {
+.active {
     display: block;
 }
