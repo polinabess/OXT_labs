@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Реакторы</title>
+    <link rel="stylesheet" href="style.css">
     <script src="./js/reactor_test.js"></script>
 
     <!--настройка MathJax для оформления математических формул-->
@@ -36,48 +37,69 @@
         <div class="row">
             <div class="col-4">
                 <h2 class="text-start mb-4">Программы</h2>
+                
                 <div class="mb-3">
-                    <input class="form-check-input" id="equilibrium" type="radio" name="programm" checked="checked">
+                    <input class="form-check-input" id="equilibrium" checked type="radio" name="programm">
                     <label class="form-check-label">Равновесие</label>
+
+                    <img src="./img/so2/1.svg" id="so2_img" alt="">
                 </div>
                 <div class="mb-3">
                     <input class="form-check-input" id="reaction-spead" type="radio" name="programm">
                     <label class="form-check-label">Скорость реакции</label>
+
+                    <img src="./img/so2/2.svg" id="so2_img" alt="">
                 </div>
                 <div class="mb-3">
                     <input class="form-check-input" id="optimal-temp" type="radio" name="programm">
                     <label class="form-check-label">Оптимальные температуры</label>
+
+                    <img src="./img/so2/3.svg" id="so2_img" alt="">
                 </div>
                 <div class="mb-3">
-                    <input class="form-check-input" id="contact-time" type="radio" name="programm" checked="checked">
+                    <input class="form-check-input" id="contact-time" type="radio" name="programm">
                     <label class="form-check-label">Время контакта</label>
+
+                    <img src="./img/so2/4.svg" id="so2_img" alt="">
                 </div>
                 <div class="mb-3">
                     <input class="form-check-input" id="degree-of-transformation" type="radio" name="programm">
                     <label class="form-check-label">Степень превращения</label>
+
+                    <img src="./img/so2/5.svg" id="so2_img" alt="">
                 </div>
                 <div class="mb-3">
                     <input class="form-check-input" id="reactor-promtepl" type="radio" name="programm">
                     <label class="form-check-label">Реактор с промежуточными<br>теплообменниками</label>
+
+                    <img src="./img/so2/6.svg" id="so2_img" alt="">
                 </div>
                 <div class="mb-3">
-                    <input class="form-check-input" id="reactor-vvodholgaz" type="radio" name="programm" checked="checked">
+                    <input class="form-check-input" id="reactor-vvodholgaz" type="radio" name="programm">
                     <label class="form-check-label">Реактор с вводом холодного<br>газа после 1-го слоя</label>
+
+                    <img src="./img/so2/7.svg" id="so2_img" alt="">
                 </div>
                 <div class="mb-3">
                     <input class="form-check-input" id="reactor-promvvodholvoz" type="radio" name="programm">
                     <label class="form-check-label">Реактор с промежуточным<br>вводом холодного воздуха</label>
+
+                    <img src="./img/so2/8.svg" id="so2_img" alt="">
                 </div>
                 <div class="mb-5">
                     <input class="form-check-input" id="reactor-dkda" type="radio" name="programm">
                     <label class="form-check-label">Вторастадия ректора в<br>схеме ДК/ДА</label>
+
+                    <img src="./img/so2/9.svg" id="so2_img" alt="">
                 </div>
             </div>
 
             <div class="col-8 p-5">
-                <div>
-                    <img src="./img/so2/1.svg" alt="Тут картинки для каждой вариации программы" style="width: 800; height: 400;">
-                </div>
+                
+                <div style="width: 600px; height: 300px;">
+                    <img src="./img/so2/1.svg" id="so2_img" alt="">
+                </div>  
+                
                 <div>
                     <button class="mt-5" style="width: 12rem;">Начнем, пожалуй...</button>
                 </div>
