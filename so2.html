@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Реакторы</title>
-    <link rel="stylesheet" href="style.css">
 
     <!--настройка MathJax для оформления математических формул-->
     <script type="text/x-mathjax-config">
@@ -27,6 +26,16 @@
 
 </head>
 <body>
+
+<style>
+    .container {
+    display: none;
+    }
+
+    .active {
+        display: block;
+    }
+</style>
 
 <form class="border border-dark m-4 p-3">
     <h1 class="text-center mb-3">Процессы и реакторы окисления SO2</h1>
@@ -90,7 +99,7 @@
     </div><!-- /.Главная страница выбора программы -->
 
     <!-- Программа Равновесие -->
-    <div class="container" id="firstPage">
+    <div class="container" id="Page_1">
         <h2 class="text-center mb-4">Равновесие степени превращения Xp(T)</h2>
         <div class="row">
             <div class="col-3 border-end border-2 border-danger">
@@ -163,7 +172,7 @@
     </div><!-- /.Программа Равновесие -->
 
     <!-- Программа Скорость реакции -->
-    <div class="container" id="secondPage">
+    <div class="container" id="Page_2">
         <h2 class="text-center mb-4">Скорость реакции W(T) при степени превращения х</h2>
         <div class="row">
             <div class="col-4 border-end border-2 border-danger">
@@ -294,7 +303,7 @@
     </div><!-- /.Программа Скорость реакции -->
 
     <!-- Программа Оптимальные температуры -->
-    <div class="container" id="thirdPage">
+    <div class="container" id="Page_3">
         <h2 class="text-center mb-4">Оптимальные температуры Топт(х)</h2>
         <div class="row">
             <div class="col-4 border-end border-2 border-danger">
@@ -423,7 +432,7 @@
     </div><!-- /.Программа Оптимальные температуры -->
 
     <!-- Программа Время контакта -->
-    <div class="container" id="fourthPage">
+    <div class="container" id="Page_4">
         <h2 class="text-center mb-4">Время контакта в слое tay(x) (режимы идеального вытеснения и смешения)</h2>
         <div class="row">
             <div class="col-4 border-end border-2 border-danger">
@@ -573,7 +582,7 @@
     </div><!-- /.Программа Время контакта -->
 
     <!-- Программа Степень превращения -->
-    <div class="container" id="fifthPage">
+    <div class="container" id="Page_5">
         <h2 class="text-center mb-4">Степень превращения В слое X(tay) (режимы идельаного вытеснения и смешения)</h2>
         <div class="row">
             <div class="col-4 border-end border-2 border-danger">
@@ -726,7 +735,7 @@
     </div><!-- /.Программа Степень превращения -->
 
     <!-- Программа Реактор с промежуточными теплообменниками -->
-    <div class="container" id="sixthPage">
+    <div class="container" id="Page_6">
         <h2 class="text-center mb-4">Оптимизация многослойного реактора с промежуточными теплообменниками</h2>
         <div class="row">
             <div class="col-4 border-end border-2 border-danger">
@@ -890,7 +899,7 @@
     </div><!-- /.Программа Реактор с промежуточными теплообменниками -->
 
     <!-- Программа Реактор с вводом холодного газа после 1-го слоя -->
-    <div class="container" id="seventhPage">
+    <div class="container" id="Page_7">
         <h2 class="text-center mb-4">Оптимизация многослойного реактора с вводом холодного газа после 1-го слоя</h2>
         <div class="row">
             <div class="col-4 border-end border-2 border-danger">
@@ -1044,7 +1053,7 @@
     </div><!-- /.Программа Реактор с вводом холодного газа после 1-го слоя -->
 
     <!-- Программа Реактор с вводом холодного воздуха -->
-    <div class="container" id="eighthPage">
+    <div class="container" id="Page_8">
         <h2 class="text-center mb-4">Оптимизация многослойного реактора с вводом холодного воздуха между слоями катализатора</h2>
         <div class="row">
             <div class="col-4 border-end border-2 border-danger">
@@ -1198,7 +1207,7 @@
     </div> <!-- /.Программа Реактор с вводом холодного воздуха -->
 
     <!-- Программа Вторая стадия реактора в схеме ДК/ДА -->
-    <div class="container" id="ninthPage">
+    <div class="container" id="Page_9">
         <h2 class="text-center mb-4">Оптимизация второй ступени в системе ДК/ДА</h2>
         <div class="row">
             <div class="col-4 border-end border-2 border-danger">
