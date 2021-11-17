@@ -32,3 +32,10 @@ btnBack.addEventListener('click', (event) => {
     document.querySelector('#startPage').classList.add('active');
     document.querySelector(pageName).classList.remove('active');
 });
+
+// Обработчик события нажатия на кнопку "СОС!"
+const btnSOS = document.querySelector('#btn_sos');
+btnSOS.addEventListener('click', (event) => {
+    window.open('./help-pdf/help_so2.pdf');
+    // window.open('https://yandex.ru/');
+});
