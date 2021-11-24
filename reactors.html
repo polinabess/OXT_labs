@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Реакторы</title>
-    <script src="./js/reactor_test.js"></script>
+
 
     <!--настройка MathJax для оформления математических формул-->
     <script type="text/x-mathjax-config">
@@ -17,16 +17,21 @@
         });
     </script>
     <!--подключение MathJax -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"></script>
-<!--    <script src="./js/MathJax-2.7.7/MathJax.js" id=""></script> РАСКОМЕНТИТЬ ПРИ ФИНАЛЬНОМ ПОДКЛЮЧЕНИИ!!!-->
+<!--    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"></script>-->
+    <script src="./js/MathJax-2.7.7/MathJax.js" id=""></script>
 
 <!--    <link href="bootstrap-5.0.2-dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous>-->
 <!--    <script src="./bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>-->
     <link href="./bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="./bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
 
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet/less" type="text/css" href="./css/styles_reactor.less" />
+    <script src="./css/less.js-master/dist/less.js" type="text/javascript"></script>
+
 </head>
-<body onload="star();">
+<body onload="start();">
 
 
  <form class="border border-dark m-4 p-3">
@@ -128,11 +133,11 @@
              </div>
              <!--второй столбец страницы (схема реактора, мат.модель, кинетическое ур-е)-->
              <div class="col">
-                 <div class="card" style="width: 18rem;">
+                 <div class="card" style="width: 21rem;">
 
                      <div class="card-body">
                          <!--таблица Схема реактора (картинки)-->
-                         <div class="mb-3">
+                         <div class="mb-3 panel-collapse in" data-parent="#accordion">
                              <label>Схема реактора</label>
                              <div>
                                  <!--идеальное вытеснение изотермический тепловой режим-->
@@ -155,18 +160,18 @@
                              <div>
                                  <!--идеальное вытеснение, простая необратимые и обратимая реакции-->
                                  <!--изотермический-->
-                                 <div class="perfect_extrusion, mm_izoterm">
+                                 <div id="mm_perfect_extrusion_izoterm">
                                      $\frac{dx}{d\tau}=r(x)$ <br>
                                      $\tau=0: x=x_n$
                                  </div>
                                  <!--адиабатический-->
-                                 <div class="perfect_extrusion, mm_adiabat">
+                                 <div id="mm_perfect_extrusion_adiabat">
                                      $\frac{dx}{d\tau}=r(x, T)$ <br>
                                      $\frac{dT}{d\tau}=\Delta Tад r(x, T)$ <br>
                                      $\tau=0: x=x_n, T=T_н$
                                  </div>
                                  <!--политропический-->
-                                 <div class="perfect_extrusion, mm_polythrop">
+                                 <div id="mm_perfect_extrusion_polythrop">
                                      $\frac{dx}{d\tau}=r(x, T)$ <br>
                                      $\frac{dT}{d\tau}=\Delta Tад r(x, T)-B(T-T_x)$ <br>
                                      $\tau=0: x=x_n, T=T_н$
@@ -175,20 +180,20 @@
 
                                  <!--Идеальное вытеснение, сложная реакция-->
                                  <!--изотермический идеальное смешение/вытеснение-->
-                                 <div class="perfect_extrusion, difficult_reaction, mm_izoterm">
+                                 <div id="mm_perfect_extrusion_difficult_reaction_izoterm">
                                      $\frac{dx}{d\tau}=r_1+r_2$ <br>
                                      $\frac{dy}{d\tau}=r_1-r_3$ <br>
                                      $\tau=0: x=x_n, y=y_н$
                                  </div>
                                  <!--адиабатический-->
-                                 <div class="perfect_extrusion, difficult_reaction, mm_adiabat">
+                                 <div id="mm_perfect_extrusion_difficult_reaction_adiabat">
                                      $\frac{dx}{d\tau}=r_1+r_2$ <br>
                                      $\frac{dy}{d\tau}=r_1+r_3$ <br>
                                      $\frac{dT}{d\tau}=\sum_{j} \Delta Tад_j r_j$ <br>
                                      $\tau=0: x=x_n, y=y_н, T=T_н$
                                  </div>
                                  <!--политропический-->
-                                 <div class="perfect_extrusion, difficult_reaction, mm_polythrop">
+                                 <div id="mm_perfect_extrusion_difficult_reaction_polythrop">
                                      $\frac{dx}{d\tau}=r_1+r_2$ <br>
                                      $\frac{dy}{d\tau}=r_1+r_3$ <br>
                                      $\frac{dT}{d\tau}=\sum_{j} \Delta Tад_j r_j-B(T-T_x)$ <br>
@@ -197,16 +202,16 @@
 
                                  <!--Идеальное смешение, простые реакции-->
                                  <!--изотермический-->
-                                 <div>
+                                 <div id="mm_perfect_simple_and_difficult_mixing_izoterm">
                                      $\frac{x-x_n}{\tau}=r(x)$
                                  </div>
                                  <!--адиабатический-->
-                                 <div>
+                                 <div id="mm_perfect_mixing_adiabat">
                                      $\frac{x-x_{н}}{τ}=r(x,T)$<br>
                                      $\frac{T-T_{н}}{τ}=ΔT_{ад}r(x,T)$
                                  </div>
                                  <!--политропический-->
-                                 <div>
+                                 <div id="mm_perfect_mixing_polythrop">
                                      $\frac{x-x_{н}}{τ}=r(x,T)$<br>
                                      $\frac{T-T_{н}}{τ}=ΔT_{ад}r(x,T)-B(T-T_{x})$
                                  </div>
@@ -215,13 +220,13 @@
                                  <!--Идеальное смешение сложные реакции-->
                                  <!--изотермический идеального смешения совпдает с идеальным вытеснением сложных рр -->
                                  <!--адиабатический-->
-                                 <div>
+                                 <div id="mm_perfect_mixing_difficult_reaction_adiabat">
                                      $\frac{x-x_{н}}{τ}=r_{1}+r_{2}$<br>
                                      $\frac{y-y_{н}}{τ}=r_{1}-r_{3}$<br>
                                      $\frac{T-T_{н}}{τ}=\sumΔT_{ад,j}r_{j}$
                                  </div>
                                  <!--политропический-->
-                                 <div>
+                                 <div id="mm_perfect_mixing_difficult_reaction_polythrop">
                                      $\frac{x-x_{н}}{τ}=r_{1}+r_{2}$<br>
                                      $\frac{y-y_{н}}{τ}=r_{1}-r_{3}$<br>
                                      $\frac{T-T_{н}}{τ}=\sumΔT_{ад,j}r_{j}-B(T-T_{x})$
@@ -233,7 +238,7 @@
                              <label>Кинетическое уравнение</label>
 
                              <!--Кинетическое уравнение простой необратимой реакции-->
-                             <div>
+                             <div id="kinetic_equation_simple_unalterable_reaction">
                                  <p>$A+ν_{B}B=ν_{R}R+...$</p>
                                  $r=K\frac{(1-x)^{n_{1}}(1-a*x)^{n_{2}}}{(1+b*x)^{n_{3}}}$<br>
                                  $K=K(T^*)-exp[\frac{E}{R}(1/T^*-1/T)]$<br>
@@ -241,7 +246,7 @@
                              </div>
 
                              <!--Кинетическое уравнение простой обратимой реакции-->
-                             <div>
+                             <div id="kinetic_equation_simple_alterable_reaction">
                                  <p>$A+ν_{B}B=ν_{R}R+ν_{S}S$</p>
                                  $r=K\frac{(1-x)^{n_{1}}(1-a*x)^{n_{2}}}{(1+b*x)^{n_{3}}}[1-\frac{φ(C̄)}{K_{p}}]$<br>
                                  $K=K(T^*)-exp[\frac{E}{R}(1/T^*-1/T)]$<br>
@@ -250,7 +255,7 @@
                              </div>
 
                              <!--Кинетическое уравнение сложной реакции-->
-                             <div>
+                             <div id="kinetic_equation_difficult_reaction">
                                  <img src="./img/reactors/kinetic_equation_difficult_reaction_schema.svg" class="img-fluid" alt="схема сложной реакции">
                                  $r_{1}=K_{1}(1-x)^{n_{1}}$<br>
                                  $r_{2}=K_{2}(1-x)^{n_{2}}$<br>
@@ -276,46 +281,46 @@
                                  <div class="container">
                                      <div class="row">
                                          <div class="col">
-                                             <div class="input-group">
+                                             <div class="input-group" id="T">
                                                 <div class="input-group-text" id="btnGroupAddon">T</div>
-                                                <input id="T" type="number" class="form-control" name="conditions_of_process" value="400" size="8">
+                                                <input type="number" class="form-control" name="conditions_of_process" value="400" size="8">
                                              </div>
                                          </div>
                                          <div class="col">
-                                             <div class="input-group">
+                                             <div class="input-group" id="tay">
                                                 <div class="input-group-text" id="btnGroupAddon">tay</sub></div>
-                                                <input id="tay" type="number" class="form-control" name="conditions_of_process"  value="1" size="8">
+                                                <input type="number" class="form-control" name="conditions_of_process"  value="1" size="8">
                                              </div>
                                          </div>
                                      </div>
                                      <div class="row">
                                          <div class="col">
-                                             <div class="input-group">
+                                             <div class="input-group"  id="Tn">
                                                  <div class="input-group-text" id="btnGroupAddon">T<sub>н</sub></div>
-                                                 <input id="Tn" type="number" class="form-control" name="conditions_of_process" value="400" size="8">
+                                                 <input type="number" class="form-control" name="conditions_of_process" value="400" size="8">
                                             </div>
                                          </div>
                                          <div class="col">
-                                             <div class="input-group">
+                                             <div class="input-group" id="Xk">
                                                  <div class="input-group-text" id="btnGroupAddon">X<sub>к</sub></div>
-                                                 <input id="Xk" type="number" class="form-control" name="conditions_of_process" value="0.8" size="8">
+                                                 <input type="number" class="form-control" name="conditions_of_process" value="0.8" size="8">
                                              </div>
                                          </div>
                                      </div>
                                      <div class="row">
                                          <div class="col">
-                                             <div class="input-group">
+                                             <div class="input-group" id="Xn">
                                                  <div class="input-group-text" id="btnGroupAddon">X<sub>н</sub></div>
-                                                 <input id="Xn" type="number" class="form-control" name="conditions_of_process" value="0" size="8">
+                                                 <input type="number" class="form-control" name="conditions_of_process" value="0" size="8">
                                              </div>
                                          </div>
                                          <div class="col"></div>
                                      </div>
                                      <div class="row">
                                          <div class="col">
-                                             <div class="input-group">
+                                             <div class="input-group" id="Yn">
                                                  <div class="input-group-text" id="btnGroupAddon">Y<sub>н</sub></div>
-                                                 <input id="Yn" type="number" class="form-control" name="conditions_of_process"  value="0" size="8">
+                                                 <input type="number" class="form-control" name="conditions_of_process"  value="0" size="8">
                                              </div>
                                          </div>
                                          <div class="col"></div>
@@ -338,40 +343,40 @@
                              <div class="container">
                                  <div class="row">
                                      <div class="col">
-                                        <div class="input-group">
-                                            <div class="input-group-text" id="btnGroupAddon">Tад</div>
-                                            <input id="Tad" type="number" class="form-control" value="150" size="8">
+                                        <div class="input-group" id="Tad">
+                                            <div class="input-group-text tad" id="btnGroupAddon">Tад</div>
+                                            <input type="number" class="form-control" value="150" size="8">
                                         </div>
                                      </div>
                                      <div class="col">
-                                         <div class="input-group">
+                                         <div class="input-group" id="B">
                                              <!--Политропический тепловой режим вне зависимости от других таблиц-->
                                              <div class="input-group-text" id="btnGroupAddon">B</div>
-                                             <input type="number"  class="form-control" id="B" value="1.5" size="8">
+                                             <input type="number"  class="form-control" value="1.5" size="8">
                                          </div>
                                      </div>
                                  </div>
                                  <div class="row">
                                      <div class="col">
                                          <!--Сложная реакция адиабатический и политропический тепловые режимы-->
-                                         <div id="sl_reac_Tad" class="input-group">
-                                             <div class="input-group-text" id="btnGroupAddon">Tад1</div>
-                                             <input type="number"  class="form-control" id="Tad1" value="150" size="8">
+                                         <div class="input-group"  id="Tad1">
+                                             <div class="input-group-text tad" id="btnGroupAddon">Tад1</div>
+                                             <input type="number"  class="form-control" value="150" size="8">
                                          </div>
                                      </div>
                                      <div class="col">
-                                         <div class="input-group">
+                                         <div class="input-group" id="Tx">
                                              <!--Политропический тепловой режим вне зависимости от других таблиц-->
                                              <div class="input-group-text" id="btnGroupAddon">T<sub>x</sub></div>
-                                             <input type="number" class="form-control" id="Tx" value="500" size="8">
+                                             <input type="number" class="form-control" value="500" size="8">
                                          </div>
                                      </div>
                                  </div>
                                  <div class="row">
                                      <div class="col">
-                                         <div class="input-group">
-                                             <div class="input-group-text" id="btnGroupAddon">Tад2</div>
-                                             <input type="number" class="form-control" id="Tad2" value="100" size="8">
+                                         <div class="input-group" id="Tad2">
+                                             <div class="input-group-text tad" id="btnGroupAddon">Tад2</div>
+                                             <input type="number" class="form-control" value="100" size="8">
                                          </div>
                                      </div>
                                      <div class="col">
@@ -406,9 +411,9 @@
                                  <div class="container">
                                      <div class="row">
                                          <div class="col">
-                                             <div class="input-group">
+                                             <div class="input-group" id="T_star">
                                                 <div class="input-group-text" id="btnGroupAddon">T<sup>*</sup></div>
-                                                <input id="T_star" type="number" class="form-control" value="400" size="8">
+                                                <input type="number" class="form-control" value="400" size="8">
                                              </div>
                                          </div>
                                          <div class="col"></div>
@@ -416,21 +421,21 @@
                                      </div>
                                      <div class="row">
                                          <div class="col">
-                                             <div class="input-group">
+                                             <div class="input-group" id="K">
                                                  <div class="input-group-text" id="btnGroupAddon">K</div>
-                                                 <input id="K" type="number" class="form-control" value="1" size="8">
+                                                 <input type="number" class="form-control" value="1" size="8">
                                              </div>
                                          </div>
                                          <div class="col">
-                                             <div class="input-group">
+                                             <div class="input-group" id="E">
                                                  <div class="input-group-text" id="btnGroupAddon">E</div>
-                                                 <input id="E" type="number" class="form-control" value="30" size="8">
+                                                 <input type="number" class="form-control" value="30" size="8">
                                              </div>
                                          </div>
                                          <div class="col">
-                                             <div class="input-group">
+                                             <div class="input-group" id="param_kinetic_models_a">
                                                  <div class="input-group-text" id="btnGroupAddon">a</div>
-                                                 <input class="form-control" id="param_kinetic_models_a" type="number" value="0" size="3">
+                                                 <input class="form-control" type="number" value="0" size="3">
                                              </div>
                                          </div>
                                      </div>
@@ -438,9 +443,9 @@
                                          <div class="col"></div>
                                          <div class="col"></div>
                                          <div class="col">
-                                             <div class="input-group">
+                                             <div class="input-group" id="param_kinetic_models_b">
                                                  <div class="input-group-text" id="btnGroupAddon">b</div>
-                                                 <input class="form-control" id="param_kinetic_models_b" type="number" value="0" size="3">
+                                                 <input class="form-control" type="number" value="0" size="3">
                                              </div>
                                          </div>
                                      </div>
@@ -451,84 +456,72 @@
                                  <div class="container">
                                      <div class="row">
                                          <div class="col">
-                                             <div class="input-group">
+                                             <div class="input-group" id="K1">
                                                  <div class="input-group-text" id="btnGroupAddon">K<sub>1</sub></div>
-                                                 <input type="number" class="form-control" id="K1" value="1" size="8">
+                                                 <input type="number" class="form-control" value="1" size="8">
                                              </div>
                                          </div>
                                          <div class="col">
-                                             <div class="input-group">
+                                             <div class="input-group" id="E1">
                                                  <div class="input-group-text" id="btnGroupAddon">E<sub>1</sub></div>
-                                                 <input type="number" class="form-control" id="E1" value="20" size="8">
+                                                 <input type="number" class="form-control" value="20" size="8">
+                                             </div>
+                                         </div>
+                                         <div class="col">
+                                             <div class="input-group" id="n1">
+                                                 <div class="input-group-text n-group-text" id="btnGroupAddon">n<sub>1</sub></div>
+                                                 <input type="number" class="form-control n-group-input" value="1" size="8">
                                              </div>
                                          </div>
                                      </div>
                                      <div class="row">
                                          <div class="col">
-                                             <div class="input-group">
+                                             <div class="input-group" id="K2">
                                                  <div class="input-group-text" id="btnGroupAddon">K<sub>2</sub></div>
-                                                 <input type="number" class="form-control" id="K2" value="0.2" size="8">
+                                                 <input type="number" class="form-control" value="0.2" size="8">
                                              </div>
                                          </div>
                                          <div class="col">
-                                             <div class="input-group">
+                                             <div class="input-group" id="E2">
                                                  <div class="input-group-text" id="btnGroupAddon">E<sub>2</sub></div>
-                                                 <input type="number" class="form-control" id="E2" value="20" size="8">
+                                                 <input type="number" class="form-control" value="20" size="8">
+                                             </div>
+                                         </div>
+                                         <div class="col">
+                                             <div class="input-group" id="n2">
+                                                 <div class="input-group-text n-group-text" id="btnGroupAddon">n<sub>2</sub></div>
+                                                 <input type="number" class="form-control n-group-input" value="1" size="8">
                                              </div>
                                          </div>
                                      </div>
                                      <div class="row">
                                          <div class="col">
-                                             <div class="input-group">
+                                             <div class="input-group" id="K3">
                                                  <div class="input-group-text" id="btnGroupAddon">K<sub>3</sub></div>
-                                                 <input type="number" class="form-control" id="K2" value="1" size="8">
+                                                 <input type="number" class="form-control" value="1" size="8">
                                              </div>
                                          </div>
                                          <div class="col">
-                                             <div class="input-group">
+                                             <div class="input-group" id="E3">
                                                  <div class="input-group-text" id="btnGroupAddon">E<sub>3</sub></div>
-                                                 <input type="number" class="form-control" id="E3" value="10" size="8">
+                                                 <input type="number" class="form-control" value="10" size="8">
+                                             </div>
+                                         </div>
+                                         <div class="col">
+                                             <div class="input-group" id="n3">
+                                                 <div class="input-group-text n-group-text" id="btnGroupAddon">n<sub>3</sub></div>
+                                                 <input type="number" class="form-control n-group-input" value="1" size="8">
                                              </div>
                                          </div>
                                      </div>
-
 
                                  </div>
-
-                                 <!--для всех реакций-->
-                                 <div class="container" id="n_block">
-                                     <div class="row">
-                                         <div class="col">
-                                             <div class="input-group">
-                                                <div class="input-group-text" id="btnGroupAddon">n<sub>1</sub></div>
-                                                <input type="number" class="form-control" id="n1" value="1" size="8">
-                                             </div>
-                                         </div>
-                                     </div>
-                                     <div class="row">
-                                         <div class="col">
-                                             <div class="input-group">
-                                                 <div class="input-group-text" id="btnGroupAddon">n<sub>2</sub></div>
-                                                 <input type="number" class="form-control" id="n2" value="1" size="8">
-                                             </div>
-                                         </div>
-                                     </div>
-                                     <div class="row">
-                                         <div class="col">
-                                             <div class="input-group">
-                                                <div class="input-group-text" id="btnGroupAddon">n<sub>3</sub></div>
-                                                <input type="number" class="form-control" id="n3" value="1" size="8">
-                                             </div>
-                                         </div>
-                                     </div>
-                                 </div>
-
                          </div>
                      </div>
 
                  </div>
                  <!--Для обратимой реакции. Выпадающая таблица, приклеенная к 7ой-->
-                 <div class="card" style="width: 28rem;">
+                 <div class="card" style="width: 28rem;" id="table_for_alterable_reaction">
                      <div class="card-header">
                          Для обратимой реакции
                      </div>
@@ -609,10 +602,231 @@
      </div>
 
 
-     <a href="">?</a>
-     <button>РАСЧЕТ</button>
-  </form>
+<!--     <a class="btn btn-success" href="help-pdf/Reactors_instruction_and_tasks.pdf" target="_blank">SOS</a>-->
+     <div class="row mx-1" style="justify-content: center;">
+         <div class="col-4 text-starts"><button id="btn_sos" type="button" style="width: 6rem;">SOS !</button></div>
+         <div class="col-4 text-center"><button id="btn_raschet" type="button" style="width: 8rem;">РАСЧЕТ</button></div>
+         <div class="col-4 text-end"><button id="btn_exit" type="button" style="width: 6rem;">ВЫХОД</button></div>
+     </div>
 
+
+<!--     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Open modal for @mdo</button>-->
+<!--     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">Open modal for @fat</button>-->
+<!--     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for @getbootstrap</button>-->
+
+<!--     <div class="modal fade" id="egxampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">-->
+<!--         <div class="modal-dialog" role="document">-->
+<!--             <div class="modal-content">-->
+<!--                 <div class="modal-header">-->
+<!--                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+<!--                     <h4 class="modal-title" id="exampleModalLabel">New message</h4>-->
+<!--                 </div>-->
+<!--                 <div class="modal-body">-->
+<!--                     <form>-->
+<!--                         <div class="form-group">-->
+<!--                             <label for="recipient-name" class="control-label">Recipient:</label>-->
+<!--                             <input type="text" class="form-control" id="recipient-name">-->
+<!--                         </div>-->
+<!--                         <div class="form-group">-->
+<!--                             <label for="message-text" class="control-label">Message:</label>-->
+<!--                             <textarea class="form-control" id="message-text"></textarea>-->
+<!--                         </div>-->
+<!--                     </form>-->
+<!--                 </div>-->
+<!--                 <div class="modal-footer">-->
+<!--                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+<!--                     <button type="button" class="btn btn-primary">Send message</button>-->
+<!--                 </div>-->
+<!--             </div>-->
+<!--         </div>-->
+<!--     </div>-->
+
+</form>-->
+<!-- <div class="container">-->
+<!--     <div class="accordion-option">-->
+<!--         <h3 class="title">Lorem Ipsum</h3>-->
+<!--         <a href="javascript:void(0)" class="toggle-accordion active" accordion-id="#accordion"></a>-->
+<!--     </div>-->
+<!--     <div class="clearfix"></div>-->
+<!--     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">-->
+<!--         <div class="panel panel-default">-->
+<!--             <div class="panel-heading" role="tab" id="headingOne">-->
+<!--                 <h4 class="panel-title">-->
+<!--                     <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">-->
+<!--                         Collapsible Group Item #1-->
+<!--                     </a>-->
+<!--                 </h4>-->
+<!--             </div>-->
+<!--             <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">-->
+<!--                 <div class="panel-body">-->
+<!--                     Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird-->
+<!--                     on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,-->
+<!--                     raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.-->
+<!--                 </div>-->
+<!--             </div>-->
+<!--         </div>-->
+<!--         <div class="panel panel-default">-->
+<!--             <div class="panel-heading" role="tab" id="headingTwo">-->
+<!--                 <h4 class="panel-title">-->
+<!--                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">-->
+<!--                         Collapsible Group Item #2-->
+<!--                     </a>-->
+<!--                 </h4>-->
+<!--             </div>-->
+<!--             <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">-->
+<!--                 <div class="panel-body">-->
+<!--                     Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird-->
+<!--                     on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,-->
+<!--                     raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.-->
+<!--                 </div>-->
+<!--             </div>-->
+<!--         </div>-->
+<!--         <div class="panel panel-default">-->
+<!--             <div class="panel-heading" role="tab" id="headingThree">-->
+<!--                 <h4 class="panel-title">-->
+<!--                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">-->
+<!--                         Collapsible Group Item #3-->
+<!--                     </a>-->
+<!--                 </h4>-->
+<!--             </div>-->
+<!--             <div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">-->
+<!--                 <div class="panel-body">-->
+<!--                     Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird-->
+<!--                     on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,-->
+<!--                     raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.-->
+<!--                 </div>-->
+<!--             </div>-->
+<!--         </div>-->
+<!--     </div>-->
+<!-- </div>-->
+<!-- <style type="text/css">body {-->
+<!--     color: #6a6c6f;-->
+<!--     background-color: #f1f3f6;-->
+<!--     margin-top: 30px;-->
+<!-- }-->
+
+<!-- .container {-->
+<!--     max-width: 960px;-->
+<!-- }-->
+
+<!-- .panel-default>.panel-heading {-->
+<!--     color: #333;-->
+<!--     background-color: #fff;-->
+<!--     border-color: #e4e5e7;-->
+<!--     padding: 0;-->
+<!--     -webkit-user-select: none;-->
+<!--     -moz-user-select: none;-->
+<!--     -ms-user-select: none;-->
+<!--     user-select: none;-->
+<!-- }-->
+
+<!-- .panel-default>.panel-heading a {-->
+<!--     display: block;-->
+<!--     padding: 10px 15px;-->
+<!-- }-->
+
+<!-- .panel-default>.panel-heading a:after {-->
+<!--     content: "";-->
+<!--     position: relative;-->
+<!--     top: 1px;-->
+<!--     display: inline-block;-->
+<!--     font-family: 'Glyphicons Halflings';-->
+<!--     font-style: normal;-->
+<!--     font-weight: 400;-->
+<!--     line-height: 1;-->
+<!--     -webkit-font-smoothing: antialiased;-->
+<!--     -moz-osx-font-smoothing: grayscale;-->
+<!--     float: right;-->
+<!--     transition: transform .25s linear;-->
+<!--     -webkit-transition: -webkit-transform .25s linear;-->
+<!-- }-->
+
+<!-- .panel-default>.panel-heading a[aria-expanded="true"] {-->
+<!--     background-color: #eee;-->
+<!-- }-->
+
+<!-- .panel-default>.panel-heading a[aria-expanded="true"]:after {-->
+<!--     content: "\2212";-->
+<!--     -webkit-transform: rotate(180deg);-->
+<!--     transform: rotate(180deg);-->
+<!-- }-->
+
+<!-- .panel-default>.panel-heading a[aria-expanded="false"]:after {-->
+<!--     content: "\002b";-->
+<!--     -webkit-transform: rotate(90deg);-->
+<!--     transform: rotate(90deg);-->
+<!-- }-->
+
+<!-- .accordion-option {-->
+<!--     width: 100%;-->
+<!--     float: left;-->
+<!--     clear: both;-->
+<!--     margin: 15px 0;-->
+<!-- }-->
+
+<!-- .accordion-option .title {-->
+<!--     font-size: 20px;-->
+<!--     font-weight: bold;-->
+<!--     float: left;-->
+<!--     padding: 0;-->
+<!--     margin: 0;-->
+<!-- }-->
+
+<!-- .accordion-option .toggle-accordion {-->
+<!--     float: right;-->
+<!--     font-size: 16px;-->
+<!--     color: #6a6c6f;-->
+<!-- }-->
+
+<!-- .accordion-option .toggle-accordion:before {-->
+<!--     content: "Expand All";-->
+<!-- }-->
+
+<!-- .accordion-option .toggle-accordion.active:before {-->
+<!--     content: "Collapse All";-->
+<!-- }-->
+<!-- </style>-->
+
+<!-- <div class="container" id="page_results">-->
+<!--     <div class="row">-->
+<!--&lt;!&ndash;         <div class="col-3 border-end border-2 border-danger">&ndash;&gt;-->
+<!--             <h3 class="border-bottom border-dark text-center mb-3">Резальтаты расчета</h3>-->
+
+
+<!--         </div>-->
+<!--         <div class="col-9 mb-4">-->
+<!--             <div class="row">-->
+<!--                 <div class="col-4">-->
+<!--                     <div class="row mx-2 mb-5">-->
+<!--                         <table width="300" border="1" cellpadding="5" cellspacing="0">-->
+<!--                             <tr>-->
+<!--                                 <td width="100">t</td>-->
+<!--                                 <td width="100">X</td>-->
+<!--                                 <td width="100">Y</td>-->
+<!--                                 <td width="100">S</td>-->
+<!--                                 <td width="100">T</td>-->
+
+<!--                             </tr>-->
+<!--                         </table>-->
+
+<!--                         &lt;!&ndash; ТУТ ДОЛДНЫ ВЫВОДИТЬСЯ РАСЧЕТЫ &ndash;&gt;-->
+<!--                         <img src="https://via.placeholder.com/300x450" alt="Тут расчеты">-->
+<!--                     </div>-->
+<!--                 </div>-->
+<!--                 &lt;!&ndash; ТУТ ДОЛЖЕН БЫТЬ ГРАФИК &ndash;&gt;-->
+<!--                 <div class="col-5">-->
+<!--                     <img src="https://via.placeholder.com/500x500" alt="Тут график">-->
+<!--                 </div>-->
+<!--             </div>-->
+
+<!--             <div class="row mx-1" style="justify-content: center;">-->
+<!--                 <div class="col-4 text-starts"><button style="width: 8rem;"><<</button></div>-->
+<!--                 <div class="col-4 text-starts"><button style="width: 8rem;">График</button></div>-->
+<!--             </div>-->
+<!--         </div>-->
+<!--     </div>-->
+<!-- </div>-->
 
 </body>
+<script src="./js/reactor_test.js"></script>
 </html>
