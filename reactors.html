@@ -23,12 +23,16 @@
 <!--    <link href="bootstrap-5.0.2-dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous>-->
 <!--    <script src="./bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>-->
     <link href="./bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="./bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
 
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-<!--    <link rel="stylesheet/less" type="text/css" href="./css/styles_reactor.less" />-->
-<!--    <script src="./css/less.js-master/dist/less.js" type="text/javascript"></script>-->
+
+<!--
+    <link rel="stylesheet/less" type="text/css" href="./css/styles_reactor.less" />
+    <script src="./css/less.js-master/dist/less.js" type="text/javascript"></script>
+-->
 
 </head>
 <body onload="start();">
@@ -599,15 +603,17 @@
 
              </div>
          </div>
-     </div>
+<!--     </div>-->
 
 
 <!--     <a class="btn btn-success" href="help-pdf/Reactors_instruction_and_tasks.pdf" target="_blank">SOS</a>-->
+
      <div class="row mx-1" style="justify-content: center;">
          <div class="col-4 text-starts"><button id="btn_sos" type="button" style="width: 6rem;">SOS !</button></div>
-         <div class="col-4 text-center"><button id="btn_raschet" type="button" style="width: 8rem;">РАСЧЕТ</button></div>
+         <div class="col-4 text-center"><button id="btn_raschet" type="button" style="width: 8rem;" class="btn btn-primary" data-toggle="modal" data-target="#page_results">РАСЧЕТ</button></div>
          <div class="col-4 text-end"><button id="btn_exit" type="button" style="width: 6rem;">ВЫХОД</button></div>
      </div>
+
 
 
 <!--     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Open modal for @mdo</button>-->
@@ -640,192 +646,48 @@
 <!--             </div>-->
 <!--         </div>-->
 <!--     </div>-->
+<!--    НЕ НУЖНО-->
 
-</form>-->
-<!-- <div class="container">-->
-<!--     <div class="accordion-option">-->
-<!--         <h3 class="title">Lorem Ipsum</h3>-->
-<!--         <a href="javascript:void(0)" class="toggle-accordion active" accordion-id="#accordion"></a>-->
-<!--     </div>-->
-<!--     <div class="clearfix"></div>-->
-<!--     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">-->
-<!--         <div class="panel panel-default">-->
-<!--             <div class="panel-heading" role="tab" id="headingOne">-->
-<!--                 <h4 class="panel-title">-->
-<!--                     <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">-->
-<!--                         Collapsible Group Item #1-->
-<!--                     </a>-->
-<!--                 </h4>-->
-<!--             </div>-->
-<!--             <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">-->
-<!--                 <div class="panel-body">-->
-<!--                     Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird-->
-<!--                     on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,-->
-<!--                     raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.-->
-<!--                 </div>-->
-<!--             </div>-->
-<!--         </div>-->
-<!--         <div class="panel panel-default">-->
-<!--             <div class="panel-heading" role="tab" id="headingTwo">-->
-<!--                 <h4 class="panel-title">-->
-<!--                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">-->
-<!--                         Collapsible Group Item #2-->
-<!--                     </a>-->
-<!--                 </h4>-->
-<!--             </div>-->
-<!--             <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">-->
-<!--                 <div class="panel-body">-->
-<!--                     Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird-->
-<!--                     on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,-->
-<!--                     raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.-->
-<!--                 </div>-->
-<!--             </div>-->
-<!--         </div>-->
-<!--         <div class="panel panel-default">-->
-<!--             <div class="panel-heading" role="tab" id="headingThree">-->
-<!--                 <h4 class="panel-title">-->
-<!--                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">-->
-<!--                         Collapsible Group Item #3-->
-<!--                     </a>-->
-<!--                 </h4>-->
-<!--             </div>-->
-<!--             <div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">-->
-<!--                 <div class="panel-body">-->
-<!--                     Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird-->
-<!--                     on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,-->
-<!--                     raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.-->
-<!--                 </div>-->
-<!--             </div>-->
-<!--         </div>-->
-<!--     </div>-->
-<!-- </div>-->
-<!-- <style type="text/css">body {-->
-<!--     color: #6a6c6f;-->
-<!--     background-color: #f1f3f6;-->
-<!--     margin-top: 30px;-->
-<!-- }-->
+</form>
 
-<!-- .container {-->
-<!--     max-width: 960px;-->
-<!-- }-->
-
-<!-- .panel-default>.panel-heading {-->
-<!--     color: #333;-->
-<!--     background-color: #fff;-->
-<!--     border-color: #e4e5e7;-->
-<!--     padding: 0;-->
-<!--     -webkit-user-select: none;-->
-<!--     -moz-user-select: none;-->
-<!--     -ms-user-select: none;-->
-<!--     user-select: none;-->
-<!-- }-->
-
-<!-- .panel-default>.panel-heading a {-->
-<!--     display: block;-->
-<!--     padding: 10px 15px;-->
-<!-- }-->
-
-<!-- .panel-default>.panel-heading a:after {-->
-<!--     content: "";-->
-<!--     position: relative;-->
-<!--     top: 1px;-->
-<!--     display: inline-block;-->
-<!--     font-family: 'Glyphicons Halflings';-->
-<!--     font-style: normal;-->
-<!--     font-weight: 400;-->
-<!--     line-height: 1;-->
-<!--     -webkit-font-smoothing: antialiased;-->
-<!--     -moz-osx-font-smoothing: grayscale;-->
-<!--     float: right;-->
-<!--     transition: transform .25s linear;-->
-<!--     -webkit-transition: -webkit-transform .25s linear;-->
-<!-- }-->
-
-<!-- .panel-default>.panel-heading a[aria-expanded="true"] {-->
-<!--     background-color: #eee;-->
-<!-- }-->
-
-<!-- .panel-default>.panel-heading a[aria-expanded="true"]:after {-->
-<!--     content: "\2212";-->
-<!--     -webkit-transform: rotate(180deg);-->
-<!--     transform: rotate(180deg);-->
-<!-- }-->
-
-<!-- .panel-default>.panel-heading a[aria-expanded="false"]:after {-->
-<!--     content: "\002b";-->
-<!--     -webkit-transform: rotate(90deg);-->
-<!--     transform: rotate(90deg);-->
-<!-- }-->
-
-<!-- .accordion-option {-->
-<!--     width: 100%;-->
-<!--     float: left;-->
-<!--     clear: both;-->
-<!--     margin: 15px 0;-->
-<!-- }-->
-
-<!-- .accordion-option .title {-->
-<!--     font-size: 20px;-->
-<!--     font-weight: bold;-->
-<!--     float: left;-->
-<!--     padding: 0;-->
-<!--     margin: 0;-->
-<!-- }-->
-
-<!-- .accordion-option .toggle-accordion {-->
-<!--     float: right;-->
-<!--     font-size: 16px;-->
-<!--     color: #6a6c6f;-->
-<!-- }-->
-
-<!-- .accordion-option .toggle-accordion:before {-->
-<!--     content: "Expand All";-->
-<!-- }-->
-
-<!-- .accordion-option .toggle-accordion.active:before {-->
-<!--     content: "Collapse All";-->
-<!-- }-->
-<!-- </style>-->
-
-<!-- <div class="container" id="page_results">-->
-<!--     <div class="row">-->
-<!--&lt;!&ndash;         <div class="col-3 border-end border-2 border-danger">&ndash;&gt;-->
-<!--             <h3 class="border-bottom border-dark text-center mb-3">Резальтаты расчета</h3>-->
+ <div class="container modal fade" tabindex="-1" role="dialog" id="page_results" aria-hidden="true">
+     <div class="row">
+         <div class="col-3 border-end border-2 border-danger">
+             <h3 class="border-bottom border-dark text-center mb-3">Резальтаты расчета</h3>
 
 
-<!--         </div>-->
-<!--         <div class="col-9 mb-4">-->
-<!--             <div class="row">-->
-<!--                 <div class="col-4">-->
-<!--                     <div class="row mx-2 mb-5">-->
-<!--                         <table width="300" border="1" cellpadding="5" cellspacing="0">-->
-<!--                             <tr>-->
-<!--                                 <td width="100">t</td>-->
-<!--                                 <td width="100">X</td>-->
-<!--                                 <td width="100">Y</td>-->
-<!--                                 <td width="100">S</td>-->
-<!--                                 <td width="100">T</td>-->
+         </div>
+         <div class="col-9 mb-4">
+             <div class="row">
+                 <div class="col-4">
+                     <div class="row mx-2 mb-5">
+                         <table width="300" border="1" cellpadding="5" cellspacing="0">
+                             <tr>
+                                 <td width="100">t</td>
+                                 <td width="100">X</td>
+                                 <td width="100">Y</td>
+                                 <td width="100">S</td>
+                                 <td width="100">T</td>
+                             </tr>
+                         </table>
 
-<!--                             </tr>-->
-<!--                         </table>-->
+<!--                          ТУТ ДОЛДНЫ ВЫВОДИТЬСЯ РАСЧЕТЫ -->
+                         <img src="https://via.placeholder.com/300x450" alt="Тут расчеты">
+                     </div>
+                 </div>
+<!--                  ТУТ ДОЛЖЕН БЫТЬ ГРАФИК-->
+                 <div class="col-5">
+                     <img src="https://via.placeholder.com/500x500" alt="Тут график">
+                 </div>
+             </div>
 
-<!--                         &lt;!&ndash; ТУТ ДОЛДНЫ ВЫВОДИТЬСЯ РАСЧЕТЫ &ndash;&gt;-->
-<!--                         <img src="https://via.placeholder.com/300x450" alt="Тут расчеты">-->
-<!--                     </div>-->
-<!--                 </div>-->
-<!--                 &lt;!&ndash; ТУТ ДОЛЖЕН БЫТЬ ГРАФИК &ndash;&gt;-->
-<!--                 <div class="col-5">-->
-<!--                     <img src="https://via.placeholder.com/500x500" alt="Тут график">-->
-<!--                 </div>-->
-<!--             </div>-->
-
-<!--             <div class="row mx-1" style="justify-content: center;">-->
-<!--                 <div class="col-4 text-starts"><button style="width: 8rem;"><<</button></div>-->
-<!--                 <div class="col-4 text-starts"><button style="width: 8rem;">График</button></div>-->
-<!--             </div>-->
-<!--         </div>-->
-<!--     </div>-->
-<!-- </div>-->
+             <div class="row mx-1" style="justify-content: center;">
+                 <div class="col-4 text-starts"><button style="width: 8rem;">Назад</button></div>
+                 <div class="col-4 text-starts"><button style="width: 8rem;">График</button></div>
+             </div>
+         </div>
+     </div>
+ </div>
 
 </body>
 <script src="js/reactor.js"></script>
