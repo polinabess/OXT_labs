@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Процессы и реакторы окисления SO2</title>
@@ -17,1353 +18,1365 @@
     </script> -->
     <!--подключение MathJax -->
     <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"></script> -->
-<!--    <script src="./js/MathJax-2.7.7/MathJax.js" id=""></script> РАСКОМЕНТИТЬ ПРИ ФИНАЛЬНОМ ПОДКЛЮЧЕНИИ!!!-->
+    <!--    <script src="./js/MathJax-2.7.7/MathJax.js" id=""></script> РАСКОМЕНТИТЬ ПРИ ФИНАЛЬНОМ ПОДКЛЮЧЕНИИ!!!-->
 
-<!--    <link href="bootstrap-5.0.2-dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous>-->
-<!--    <script src="./bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>-->
+    <!--    <link href="bootstrap-5.0.2-dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous>-->
+    <!--    <script src="./bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>-->
     <link href="./bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="./bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
 
 </head>
+
 <body>
 
-<style>
-    .container {
-    display: none;
-    }
+    <style>
+        .container {
+            display: none;
+        }
+        
+        .active {
+            display: block;
+        }
+    </style>
 
-    .active {
-        display: block;
-    }
-</style>
+    <form class="border border-dark m-4 p-3">
+        <h1 class="text-center mb-3">Процессы и реакторы окисления SO2</h1>
 
-<form class="border border-dark m-4 p-3">
-    <h1 class="text-center mb-3">Процессы и реакторы окисления SO2</h1>
-    
-    <!-- Главная страница выбора программы -->
-    <div class="container active" id="startPage">
-        <div class="row">
-            <div class="col-4">
-                <h2 class="text-start mb-4">Программы</h2>
-                
-                <div class="mb-3">
-                    <input class="form-check-input" id="equilibrium" value="1" checked type="radio" name="programm">
-                    <label class="form-check-label">Равновесие</label>
-                </div>
-                <div class="mb-3">
-                    <input class="form-check-input" id="reaction-spead" value="2" type="radio" name="programm">
-                    <label class="form-check-label">Скорость реакции</label>
-                </div>
-                <div class="mb-3">
-                    <input class="form-check-input" id="optimal-temp" value="3" type="radio" name="programm">
-                    <label class="form-check-label">Оптимальные температуры</label>
-                </div>
-                <div class="mb-3">
-                    <input class="form-check-input" id="contact-time" value="4" type="radio" name="programm">
-                    <label class="form-check-label">Время контакта</label>
-                </div>
-                <div class="mb-3">
-                    <input class="form-check-input" id="degree-of-transformation" value="5" type="radio" name="programm">
-                    <label class="form-check-label">Степень превращения</label>
-                </div>
-                <div class="mb-3">
-                    <input class="form-check-input" id="reactor-promtepl" value="6" type="radio" name="programm">
-                    <label class="form-check-label">Реактор с промежуточными<br>теплообменниками</label>
-                </div>
-                <div class="mb-3">
-                    <input class="form-check-input" id="reactor-vvodholgaz" value="7" type="radio" name="programm">
-                    <label class="form-check-label">Реактор с вводом холодного<br>газа после 1-го слоя</label>
-                </div>
-                <div class="mb-3">
-                    <input class="form-check-input" id="reactor-promvvodholvoz" value="8" type="radio" name="programm">
-                    <label class="form-check-label">Реактор с промежуточным<br>вводом холодного воздуха</label>
-                </div>
-                <div class="mb-5">
-                    <input class="form-check-input" id="reactor-dkda" value="9" type="radio" name="programm">
-                    <label class="form-check-label">Вторастадия ректора в<br>схеме ДК/ДА</label>
-                </div>
-            </div>
+        <!-- Главная страница выбора программы -->
+        <div class="container active" id="startPage">
+            <div class="row">
+                <div class="col-4">
+                    <h2 class="text-start mb-4">Программы</h2>
 
-            <div class="col-8 p-5">
-                
-                <div style="width: 600px; height: 300px;">
-                    <img src="./img/so2/1.svg" id="so2_img_new" alt="">
-                </div>  
-                
-                <div>
-                    <button id="btn_start" type="button" class="mt-5" style="width: 12rem;">Начнем, пожалуй...</button>
-                </div>
-                
-            </div>
-          </div>
-    </div><!-- /.Главная страница выбора программы -->
-
-    <!-- Программа Равновесие -->
-    <div class="container" id="Page_1">
-        <h2 class="text-center mb-4">Равновесие степени превращения Xp(T)</h2>
-        <div class="row">
-            <div class="col-3 border-end border-2 border-danger">
-                <h3 class="border-bottom border-dark text-center mb-3">Исходные данные</h3>
-
-                <div class="card mb-3">
-                    <div class="card-header">Реакционный газ</div>
-                    <div class="card-body">
-                        <h6>Объемные доли</h6>
-                        <div id="ob-doli" class="input-group mb-3">                                    
-                            <div class="input-group-text" id="btnGroupAddon">SO2</div>
-                            <input type="text"  class="form-control" id="so2" value="0,1000" size="6">
-                            <div class="input-group-text" id="btnGroupAddon">O2</div>
-                            <input type="text" class="form-control" id="o2" value="0,1000" size="6">
-                        </div>
-
-                        <h6>P.атм</h6>
-                        <div id="tep_rezh_polythrop" class="input-group">
-                            <input type="text"  class="form-control" value="1,0" size="8">
-                        </div>
+                    <div class="mb-3">
+                        <input class="form-check-input" id="equilibrium" value="1" checked type="radio" name="programm">
+                        <label class="form-check-label">Равновесие</label>
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-check-input" id="reaction-spead" value="2" type="radio" name="programm">
+                        <label class="form-check-label">Скорость реакции</label>
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-check-input" id="optimal-temp" value="3" type="radio" name="programm">
+                        <label class="form-check-label">Оптимальные температуры</label>
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-check-input" id="contact-time" value="4" type="radio" name="programm">
+                        <label class="form-check-label">Время контакта</label>
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-check-input" id="degree-of-transformation" value="5" type="radio" name="programm">
+                        <label class="form-check-label">Степень превращения</label>
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-check-input" id="reactor-promtepl" value="6" type="radio" name="programm">
+                        <label class="form-check-label">Реактор с промежуточными<br>теплообменниками</label>
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-check-input" id="reactor-vvodholgaz" value="7" type="radio" name="programm">
+                        <label class="form-check-label">Реактор с вводом холодного<br>газа после 1-го слоя</label>
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-check-input" id="reactor-promvvodholvoz" value="8" type="radio" name="programm">
+                        <label class="form-check-label">Реактор с промежуточным<br>вводом холодного воздуха</label>
+                    </div>
+                    <div class="mb-5">
+                        <input class="form-check-input" id="reactor-dkda" value="9" type="radio" name="programm">
+                        <label class="form-check-label">Вторастадия ректора в<br>схеме ДК/ДА</label>
                     </div>
                 </div>
 
-                <div class="card mb-5">
-                    <div class="card-header">Условия расчета</div>
-                    <div class="card-body">
-                        <div id="t-group" class="input-group mb-3">                                    
-                            <div class="input-group-text" id="btnGroupAddon">Tн</div>
-                            <input type="text"  class="form-control" id="tn" value="700,0" size="6">
-                            <div class="input-group-text" id="btnGroupAddon">Тк</div>
-                            <input type="text" class="form-control" id="tk" value="900,0" size="6">
-                        </div>
+                <div class="col-8 p-5">
 
-                        <h6>Шаг по T</h6>
-                        <div id="step-t" class="input-group">      
-                            <input type="text"  class="form-control" value="10,0" size="8">
-                        </div>
+                    <div style="width: 600px; height: 300px;">
+                        <img src="./img/so2/1.svg" id="so2_img_new" alt="">
                     </div>
+
+                    <div>
+                        <button id="btn_start" type="button" class="mt-5" style="width: 12rem;">Начнем, пожалуй...</button>
+                    </div>
+
                 </div>
-
-                
-            </div>
-            <div class="col-9 mb-4">
-                <h3 class="border-bottom border-dark text-center mb-3">Результаты расчета</h3>
-                <div class="row">
-                    <div class="col-4">
-                        <div class="row mx-2 mb-5">
-                            <table width="300" border="1" cellpadding="5" cellspacing="0">
-                                <tr>
-                                <td width="100">T, K</td>
-                                <td width="100">Xp</td>
-                                <td width="100">Kp</td>
-                                </tr>
-                            </table>    
-
-                            <!-- ТУТ ДОЛДНЫ ВЫВОДИТЬСЯ РАСЧЕТЫ -->
-                            <img src="https://via.placeholder.com/300x450" alt="Тут график">
-                        </div>
-                    </div>
-                    <!-- ТУТ ДОЛЖЕН БЫТЬ ГРАФИК -->
-                    <div class="col-5">
-                        <img src="https://via.placeholder.com/500x500" alt="Тут график">
-                    </div>
-                </div>
-
-                <div class="row mx-5 mb-3"><button style="width: 8rem;">ПУСК !</button></div>
-                <div class="row mx-5 mb-5"><button style="width: 8rem;">График</button></div>
             </div>
         </div>
-    </div><!-- /.Программа Равновесие -->
+        <!-- /.Главная страница выбора программы -->
 
-    <!-- Программа Скорость реакции -->
-    <div class="container" id="Page_2">
-        <h2 class="text-center mb-4">Скорость реакции W(T) при степени превращения х</h2>
-        <div class="row">
-            <div class="col-4 border-end border-2 border-danger">
-                <h3 class="border-bottom border-dark text-center mb-3">Исходные данные</h3>
+        <!-- Программа Равновесие -->
+        <div class="container" id="Page_1">
+            <h2 class="text-center mb-4">Равновесие степени превращения Xp(T)</h2>
+            <div class="row">
+                <div class="col-3 border-end border-2 border-danger">
+                    <h3 class="border-bottom border-dark text-center mb-3">Исходные данные</h3>
 
-                <div class="row">
-                    <div class="col-6">
-                        <div class="card mb-3">
-                            <div class="card-header">Реакционный газ</div>
-                            <div class="card-body">
-                                <h6>Объемные доли</h6>
-                                <div id="ob-doli" class="input-group mb-3">                                    
-                                    <div class="input-group-text" id="btnGroupAddon">SO2</div>
-                                    <input type="text"  class="form-control" id="so2" style="width: 4rem;" value="0,1000" size="6">
-                                    <div class="input-group-text" id="btnGroupAddon">O2</div>
-                                    <input type="text" class="form-control" id="o2" style="width: 4rem;" value="0,1000" size="6">
-                                </div>
-        
-                                <h6>P.атм</h6>
-                                <div id="tep_rezh_polythrop" class="input-group">
-                                    <input type="text"  class="form-control" value="1,0" size="8">
-                                </div>
+                    <div class="card mb-3">
+                        <div class="card-header">Реакционный газ</div>
+                        <div class="card-body">
+                            <h6>Объемные доли</h6>
+                            <div id="ob-doli" class="input-group mb-3">
+                                <div class="input-group-text" id="btnGroupAddon">SO2</div>
+                                <input type="text" class="form-control" id="so2" value="0,1000" size="6">
+                                <div class="input-group-text" id="btnGroupAddon">O2</div>
+                                <input type="text" class="form-control" id="o2" value="0,1000" size="6">
+                            </div>
+
+                            <h6>P.атм</h6>
+                            <div id="tep_rezh_polythrop" class="input-group">
+                                <input type="text" class="form-control" id="p" value="1,0" size="8">
                             </div>
                         </div>
                     </div>
-                    <div class="col-6">
-                        <div class="card mb-3">
-                            <div class="card-header">Условия расчета</div>
-                            <div class="card-body">
-                                <div id="t-group" class="input-group mb-3">
-                                    <div class="input-group-text" id="btnGroupAddon">X</div>
-                                    <input type="text"  class="form-control" id="x" style="width: 6rem;" value="0,700" size="6">
-                                    <div class="input-group-text" id="btnGroupAddon">Tн</div>
-                                    <input type="text"  class="form-control" id="tn" style="width: 5rem;" value="700,0" size="6">
-                                    <div class="input-group-text" id="btnGroupAddon">Тк</div>
-                                    <input type="text" class="form-control" id="tk" style="width: 5rem;" value="900,0" size="6">
-                                </div>
-        
-                                <h6>Шаг по T</h6>
-                                <div id="step-t" class="input-group">      
-                                    <input type="text"  class="form-control" value="10,0" size="8">
-                                </div>
+
+                    <div class="card mb-5">
+                        <div class="card-header">Условия расчета</div>
+                        <div class="card-body">
+                            <div id="t-group" class="input-group mb-3">
+                                <div class="input-group-text" id="btnGroupAddon">Tн</div>
+                                <input type="text" class="form-control" id="tn" value="700,0" size="6">
+                                <div class="input-group-text" id="btnGroupAddon">Тк</div>
+                                <input type="text" class="form-control" id="tk" value="900,0" size="6">
+                            </div>
+
+                            <h6>Шаг по T</h6>
+                            <div id="step-t" class="input-group">
+                                <input type="text" class="form-control" id="step-t" value="10,0" size="8">
                             </div>
                         </div>
                     </div>
+
+
                 </div>
+                <div class="col-9 mb-4">
+                    <h3 class="border-bottom border-dark text-center mb-3">Результаты расчета</h3>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="row mx-2 mb-5">
+                                <table width="300" border="1" cellpadding="5" cellspacing="0">
+                                    <tr>
+                                        <td width="100">T, K</td>
+                                        <td width="100">Xp</td>
+                                        <td width="100">Kp</td>
+                                    </tr>
+                                </table>
 
-                <div class="card mb-5">
-                    <div class="card-header">Катализатор</div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-5">
-                                <select class="form-select" aria-label="Выберите">
-                                    <option selected>Выберите</option>
-                                    <option value="1">СВД</option>
-                                    <option value="2">ИК-4</option>
-                                    <option value="3">Классический</option>
-                                    <option value="3">Новый</option>
-                                </select>
-
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">T</div>
-                                    <input class="form-control" type="text" value="753" disabled readonly>
-                                </div>
-                                <div class="input-group mb-2"> 
-                                    <div class="input-group-text" id="btnGroupAddon">K</div>
-                                    <input class="form-control" type="text" value="1,45" disabled readonly>
-                                </div>
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">E1</div>
-                                    <input class="form-control" type="text" value="126,4" disabled readonly>
-                                </div>
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">E2</div>
-                                    <input class="form-control" type="text" value="55,2" disabled readonly>
-                                </div>
-                                <div class="input-group mb-2"> 
-                                    <div class="input-group-text" id="btnGroupAddon">E3</div>
-                                    <input class="form-control" type="text" value="0" disabled readonly>
-                                </div>
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">T12</div>
-                                    <input class="form-control" type="text" value="695" disabled readonly>
-                                </div>
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">T23</div>
-                                    <input class="form-control" type="text" value="803" disabled readonly>
-                                </div>
-                                                  
-                            </div>
-
-                            <div class="col-7">
-                                <img src="./img/so2/graph_T.svg" alt="graph_Temp" style="width: 200px; height: auto;">
+                                <!-- ТУТ ДОЛДНЫ ВЫВОДИТЬСЯ РАСЧЕТЫ -->
+                                <img src="https://via.placeholder.com/300x450" alt="Тут график">
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                
-            </div>
-            <div class="col-8 mb-4">
-                <h3 class="border-bottom border-dark text-center mb-3">Результаты расчета</h3>
-                <div class="row">
-                    <div class="col-4">
-                        <div class="row mx-2 mb-5">
-                            <table width="300" border="1" cellpadding="5" cellspacing="0">
-                                <tr>
-                                <td width="100">T, K</td>
-                                <td width="100">W</td>
-                                <td width="100"></td>
-                                </tr>
-                            </table>    
-
-                            <!-- ТУТ ДОЛДНЫ ВЫВОДИТЬСЯ РАСЧЕТЫ -->
-                            <img src="https://via.placeholder.com/300x450" alt="Тут график">
+                        <!-- ТУТ ДОЛЖЕН БЫТЬ ГРАФИК -->
+                        <div class="col-5">
+                            <img src="https://via.placeholder.com/500x500" alt="Тут график">
                         </div>
                     </div>
-                    <!-- ТУТ ДОЛЖЕН БЫТЬ ГРАФИК -->
-                    <div class="col-5">
-                        <img src="https://via.placeholder.com/500x500" alt="Тут график">
-                    </div>
-                </div>
 
-                <div class="row mx-5 mb-3"><button style="width: 8rem;">ПУСК !</button></div>
-                <div class="row mx-5 mb-5"><button style="width: 8rem;">График</button></div>
+                    <div class="row mx-5 mb-3"><button style="width: 8rem;">ПУСК !</button></div>
+                    <div class="row mx-5 mb-5"><button style="width: 8rem;">График</button></div>
+                </div>
             </div>
         </div>
-    </div><!-- /.Программа Скорость реакции -->
+        <!-- /.Программа Равновесие -->
 
-    <!-- Программа Оптимальные температуры -->
-    <div class="container" id="Page_3">
-        <h2 class="text-center mb-4">Оптимальные температуры Топт(х)</h2>
-        <div class="row">
-            <div class="col-4 border-end border-2 border-danger">
-                <h3 class="border-bottom border-dark text-center mb-3">Исходные данные</h3>
+        <!-- Программа Скорость реакции -->
+        <div class="container" id="Page_2">
+            <h2 class="text-center mb-4">Скорость реакции W(T) при степени превращения х</h2>
+            <div class="row">
+                <div class="col-4 border-end border-2 border-danger">
+                    <h3 class="border-bottom border-dark text-center mb-3">Исходные данные</h3>
 
-                <div class="row">
-                    <div class="col-6">
-                        <div class="card mb-3">
-                            <div class="card-header">Реакционный газ</div>
-                            <div class="card-body">
-                                <h6>Объемные доли</h6>
-                                <div id="ob-doli" class="input-group mb-3">                                    
-                                    <div class="input-group-text" id="btnGroupAddon">SO2</div>
-                                    <input type="text"  class="form-control" id="so2" style="width: 4rem;" value="0,1000" size="6">
-                                    <div class="input-group-text" id="btnGroupAddon">O2</div>
-                                    <input type="text" class="form-control" id="o2" style="width: 4rem;" value="0,1000" size="6">
-                                </div>
-        
-                                <h6>P.атм</h6>
-                                <div id="tep_rezh_polythrop" class="input-group">
-                                    <input type="text"  class="form-control" value="1,0" size="8">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="card mb-3">
-                            <div class="card-header">Условия расчета</div>
-                            <div class="card-body">
-                                <div id="x-group" class="input-group mb-3">
-                                    <div class="input-group-text" id="btnGroupAddon">Xн</div>
-                                    <input type="text"  class="form-control" id="xn" style="width: 5rem;"  value="0,50" size="6">
-                                    <div class="input-group-text" id="btnGroupAddon">Хк</div>
-                                    <input type="text"  class="form-control" id="xk" style="width: 5rem;"  value="0,99" size="6">
-                                </div>
-        
-                                <h6>Шаг по Х</h6>
-                                <div id="step-x" class="input-group">      
-                                    <input type="text"  class="form-control" value="0,01" size="8">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card mb-5">
-                    <div class="card-header">Катализатор</div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-5">
-                                <select class="form-select" aria-label="Выберите">
-                                    <option selected>Выберите</option>
-                                    <option value="1">СВД</option>
-                                    <option value="2">ИК-4</option>
-                                    <option value="3">Классический</option>
-                                    <option value="3">Новый</option>
-                                </select>
-
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">T</div>
-                                    <input class="form-control" type="text" value="753" disabled readonly>
-                                </div>
-                                <div class="input-group mb-2"> 
-                                    <div class="input-group-text" id="btnGroupAddon">K</div>
-                                    <input class="form-control" type="text" value="1,45" disabled readonly>
-                                </div>
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">E1</div>
-                                    <input class="form-control" type="text" value="126,4" disabled readonly>
-                                </div>
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">E2</div>
-                                    <input class="form-control" type="text" value="55,2" disabled readonly>
-                                </div>
-                                <div class="input-group mb-2"> 
-                                    <div class="input-group-text" id="btnGroupAddon">E3</div>
-                                    <input class="form-control" type="text" value="0" disabled readonly>
-                                </div>
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">T12</div>
-                                    <input class="form-control" type="text" value="695" disabled readonly>
-                                </div>
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">T23</div>
-                                    <input class="form-control" type="text" value="803" disabled readonly>
-                                </div>
-                                                  
-                            </div>
-
-                            <div class="col-7">
-                                <img src="./img/so2/graph_T.svg" alt="graph_Temp" style="width: 200px; height: auto;">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                
-            </div>
-            <div class="col-8 mb-4">
-                <h3 class="border-bottom border-dark text-center mb-3">Результаты расчета</h3>
-                <div class="row">
-                    <div class="col-4">
-                        <div class="row mx-2 mb-5">
-                            <table width="300" border="1" cellpadding="5" cellspacing="0">
-                                <tr>
-                                <td width="100">T, K</td>
-                                <td width="100">W</td>
-                                <td width="100"></td>
-                                </tr>
-                            </table>    
-
-                            <!-- ТУТ ДОЛДНЫ ВЫВОДИТЬСЯ РАСЧЕТЫ -->
-                            <img src="https://via.placeholder.com/300x450" alt="Тут график">
-                        </div>
-                    </div>
-                    <!-- ТУТ ДОЛЖЕН БЫТЬ ГРАФИК -->
-                    <div class="col-5">
-                        <img src="https://via.placeholder.com/500x500" alt="Тут график">
-                    </div>
-                </div>
-
-                <div class="row mx-5 mb-3"><button style="width: 8rem;">ПУСК !</button></div>
-                <div class="row mx-5 mb-5"><button style="width: 8rem;">График</button></div>
-            </div>
-        </div>
-    </div><!-- /.Программа Оптимальные температуры -->
-
-    <!-- Программа Время контакта -->
-    <div class="container" id="Page_4">
-        <h2 class="text-center mb-4">Время контакта в слое tay(x) (режимы идеального вытеснения и смешения)</h2>
-        <div class="row">
-            <div class="col-4 border-end border-2 border-danger">
-                <h3 class="border-bottom border-dark text-center mb-3">Исходные данные</h3>
-
-                <div class="row">
-                    <div class="col-6">
-                        <div class="card mb-3">
-                            <div class="card-header">Реакционный газ</div>
-                            <div class="card-body">
-                                <h6>Объемные доли</h6>
-                                <div id="ob-doli" class="input-group mb-3">                                    
-                                    <div class="input-group-text" id="btnGroupAddon">SO2</div>
-                                    <input type="text"  class="form-control" id="so2" style="width: 4rem;" value="0,1000" size="6">
-                                    <div class="input-group-text" id="btnGroupAddon">O2</div>
-                                    <input type="text" class="form-control" id="o2" style="width: 4rem;" value="0,1000" size="6">
-                                </div>
-        
-                                <h6>P.атм</h6>
-                                <div id="tep_rezh_polythrop" class="input-group mb-2">
-                                    <input type="text"  class="form-control" value="1,0" size="8">
-                                </div>
-        
-                                <h6>Т ад</h6>
-                                <div id="tep_rezh_polythrop" class="input-group">
-                                    <input type="text"  class="form-control" value="200,0" size="8">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="card mb-3">
-                            <div class="card-header">Условия расчета</div>
-                            <div class="card-body">
-                                <div id="x-group" class="input-group mb-3">
-                                    <div class="input-group-text" id="btnGroupAddon">Xн</div>
-                                    <input type="text"  class="form-control" id="xn" style="width: 5rem;" value="0,50" size="6">
-                                    <div class="input-group-text" id="btnGroupAddon">Хк</div>
-                                    <input type="text"  class="form-control" id="xk" style="width: 5rem;" value="0,99" size="6">
-                                </div>
-        
-                                <h6>T н</h6>
-                                <div id="step-x" class="input-group">      
-                                    <input type="text"  class="form-control" value="720,0" size="8">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card mb-5">
-                    <div class="card-header">Катализатор</div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-5">
-                                <select class="form-select" aria-label="Выберите">
-                                    <option selected>Выберите</option>
-                                    <option value="1">СВД</option>
-                                    <option value="2">ИК-4</option>
-                                    <option value="3">Классический</option>
-                                    <option value="3">Новый</option>
-                                </select>
-
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">T</div>
-                                    <input class="form-control" type="text" value="753" disabled readonly>
-                                </div>
-                                <div class="input-group mb-2"> 
-                                    <div class="input-group-text" id="btnGroupAddon">K</div>
-                                    <input class="form-control" type="text" value="1,45" disabled readonly>
-                                </div>
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">E1</div>
-                                    <input class="form-control" type="text" value="126,4" disabled readonly>
-                                </div>
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">E2</div>
-                                    <input class="form-control" type="text" value="55,2" disabled readonly>
-                                </div>
-                                <div class="input-group mb-2"> 
-                                    <div class="input-group-text" id="btnGroupAddon">E3</div>
-                                    <input class="form-control" type="text" value="0" disabled readonly>
-                                </div>
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">T12</div>
-                                    <input class="form-control" type="text" value="695" disabled readonly>
-                                </div>
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">T23</div>
-                                    <input class="form-control" type="text" value="803" disabled readonly>
-                                </div>
-                                                  
-                            </div>
-
-                            <div class="col-7">
-                                <img src="./img/so2/graph_T.svg" alt="graph_Temp" style="width: 200px; height: auto;">
-
-                                <div class="card" style="width: 12rem;">
-                                    <div class="card-header">Режим</div>
-                
-                                    <div class="card-body">
-                                        <div>
-                                            <input class="form-check-input" type="radio" name="dvizh_potok" id="perfect_extrusion" checked="checked">
-                                            <label class="form-check-label">ИВ</label>
-                                        </div>
-                                        <div>
-                                            <input class="form-check-input" type="radio" name="dvizh_potok" id="perfect_mixing">
-                                            <label class="form-check-label">ИС</label>
-                                        </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="card mb-3">
+                                <div class="card-header">Реакционный газ</div>
+                                <div class="card-body">
+                                    <h6>Объемные доли</h6>
+                                    <div id="ob-doli" class="input-group mb-3">
+                                        <div class="input-group-text" id="btnGroupAddon">SO2</div>
+                                        <input type="text" class="form-control" id="so2" style="width: 4rem;" value="0,1000" size="6">
+                                        <div class="input-group-text" id="btnGroupAddon">O2</div>
+                                        <input type="text" class="form-control" id="o2" style="width: 4rem;" value="0,1000" size="6">
                                     </div>
-                
+
+                                    <h6>P.атм</h6>
+                                    <div id="tep_rezh_polythrop" class="input-group">
+                                        <input type="text" class="form-control" id="p" value="1,0" size="8">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card mb-3">
+                                <div class="card-header">Условия расчета</div>
+                                <div class="card-body">
+                                    <div id="t-group" class="input-group mb-3">
+                                        <div class="input-group-text" id="btnGroupAddon">X</div>
+                                        <input type="text" class="form-control" id="xvalue" style="width: 6rem;" value="0,700" size="6">
+                                        <div class="input-group-text" id="btnGroupAddon">Tн</div>
+                                        <input type="text" class="form-control" id="tn" style="width: 5rem;" value="700,0" size="6">
+                                        <div class="input-group-text" id="btnGroupAddon">Тк</div>
+                                        <input type="text" class="form-control" id="tk" style="width: 5rem;" value="900,0" size="6">
+                                    </div>
+
+                                    <h6>Шаг по T</h6>
+                                    <div id="step-t" class="input-group">
+                                        <input type="text" class="form-control" id="step-t" value="10,0" size="8">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                
-            </div>
-            <div class="col-8 mb-4">
-                <h3 class="border-bottom border-dark text-center mb-3">Результаты расчета</h3>
-                <div class="row">
-                    <div class="col-4">
-                        <div class="row mx-2 mb-5">
-                            <table width="300" border="1" cellpadding="5" cellspacing="0">
-                                <tr>
-                                <td width="100">T au</td>
-                                <td width="100">X</td>
-                                <td width="100">T</td>
-                                </tr>
-                            </table>    
+                    <div class="card mb-5">
+                        <div class="card-header">Катализатор</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-5">
+                                    <select class="form-select" aria-label="Выберите">
+                                    
+                                    <option value="1">СВД</option>
+                                    <option selected value="2">ИК-4</option>
+                                    <option value="3">Классический</option>
+                                    <option value="4">Новый</option>
+                                </select>
 
-                            <!-- ТУТ ДОЛДНЫ ВЫВОДИТЬСЯ РАСЧЕТЫ -->
-                            <img src="https://via.placeholder.com/300x450" alt="Тут график">
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">T</div>
+                                        <input class="form-control" type="text" id="t" value="753" disabled readonly>
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-text" id="btnGroupAddon">K</div>
+                                        <input class="form-control" type="text" id="k" value="1,45" disabled readonly>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">E1</div>
+                                        <input class="form-control" type="text" id="e1" value="126,4" disabled readonly>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">E2</div>
+                                        <input class="form-control" type="text" id="e2" value="55,2" disabled readonly>
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-text" id="btnGroupAddon">E3</div>
+                                        <input class="form-control" type="text" id="e3" value="0" disabled readonly>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">T12</div>
+                                        <input class="form-control" type="text" id="t12" value="693" disabled readonly>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">T23</div>
+                                        <input class="form-control" type="text" id="t23" value="803" disabled readonly>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-7">
+                                    <img src="./img/so2/graph_T.svg" alt="graph_Temp" style="width: 200px; height: auto;">
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+
+                </div>
+                <div class="col-8 mb-4">
+                    <h3 class="border-bottom border-dark text-center mb-3">Результаты расчета</h3>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="row mx-2 mb-5">
+                                <table width="300" border="1" cellpadding="5" cellspacing="0">
+                                    <tr>
+                                        <td width="100">T, K</td>
+                                        <td width="100">W</td>
+                                        <td width="100"></td>
+                                    </tr>
+                                </table>
+
+                                <!-- ТУТ ДОЛДНЫ ВЫВОДИТЬСЯ РАСЧЕТЫ -->
+                                <img src="https://via.placeholder.com/300x450" alt="Тут график">
+                            </div>
+                        </div>
+                        <!-- ТУТ ДОЛЖЕН БЫТЬ ГРАФИК -->
+                        <div class="col-5">
+                            <img src="https://via.placeholder.com/500x500" alt="Тут график">
+                        </div>
+                    </div>
+
+                    <div class="row mx-5 mb-3"><button style="width: 8rem;">ПУСК !</button></div>
+                    <div class="row mx-5 mb-5"><button style="width: 8rem;">График</button></div>
+                </div>
+            </div>
+        </div>
+        <!-- /.Программа Скорость реакции -->
+
+        <!-- Программа Оптимальные температуры -->
+        <div class="container" id="Page_3">
+            <h2 class="text-center mb-4">Оптимальные температуры Топт(х)</h2>
+            <div class="row">
+                <div class="col-4 border-end border-2 border-danger">
+                    <h3 class="border-bottom border-dark text-center mb-3">Исходные данные</h3>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="card mb-3">
+                                <div class="card-header">Реакционный газ</div>
+                                <div class="card-body">
+                                    <h6>Объемные доли</h6>
+                                    <div id="ob-doli" class="input-group mb-3">
+                                        <div class="input-group-text" id="btnGroupAddon">SO2</div>
+                                        <input type="text" class="form-control" id="so2" style="width: 4rem;" value="0,1000" size="6">
+                                        <div class="input-group-text" id="btnGroupAddon">O2</div>
+                                        <input type="text" class="form-control" id="o2" style="width: 4rem;" value="0,1000" size="6">
+                                    </div>
+
+                                    <h6>P.атм</h6>
+                                    <div id="tep_rezh_polythrop" class="input-group">
+                                        <input type="text" class="form-control" id="p" value="1,0" size="8">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card mb-3">
+                                <div class="card-header">Условия расчета</div>
+                                <div class="card-body">
+                                    <div id="x-group" class="input-group mb-3">
+                                        <div class="input-group-text" id="btnGroupAddon">Xн</div>
+                                        <input type="text" class="form-control" id="xn_3" style="width: 5rem;" value="0,50" size="6">
+                                        <div class="input-group-text" id="btnGroupAddon">Хк</div>
+                                        <input type="text" class="form-control" id="xk_3" style="width: 5rem;" value="0,99" size="6">
+                                    </div>
+
+                                    <h6>Шаг по Х</h6>
+                                    <div id="stepx" class="input-group">
+                                        <input type="text" class="form-control" id="step-x" value="0,01" size="8">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-5">
+                        <div class="card-header">Катализатор</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-5">
+                                    <select class="form-select" aria-label="Выберите">
+                                    
+                                    <option value="1">СВД</option>
+                                    <option selected value="2">ИК-4</option>
+                                    <option value="3">Классический</option>
+                                    <option value="4">Новый</option>
+                                </select>
+
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">T</div>
+                                        <input class="form-control" type="text" id="t" value="753" disabled readonly>
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-text" id="btnGroupAddon">K</div>
+                                        <input class="form-control" type="text" id="k" value="1,45" disabled readonly>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">E1</div>
+                                        <input class="form-control" type="text" id="e1" value="126,4" disabled readonly>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">E2</div>
+                                        <input class="form-control" type="text" id="e2" value="55,2" disabled readonly>
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-text" id="btnGroupAddon">E3</div>
+                                        <input class="form-control" type="text" id="e3" value="0" disabled readonly>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">T12</div>
+                                        <input class="form-control" type="text" id="t12" value="693" disabled readonly>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">T23</div>
+                                        <input class="form-control" type="text" id="t23" value="803" disabled readonly>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-7">
+                                    <img src="./img/so2/graph_T.svg" alt="graph_Temp" style="width: 200px; height: auto;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-8 mb-4">
+                    <h3 class="border-bottom border-dark text-center mb-3">Результаты расчета</h3>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="row mx-2 mb-5">
+                                <table width="300" border="1" cellpadding="5" cellspacing="0">
+                                    <tr>
+                                        <td width="100">T, K</td>
+                                        <td width="100">W</td>
+                                        <td width="100"></td>
+                                    </tr>
+                                </table>
+
+                                <!-- ТУТ ДОЛДНЫ ВЫВОДИТЬСЯ РАСЧЕТЫ -->
+                                <img src="https://via.placeholder.com/300x450" alt="Тут график">
+                            </div>
+                        </div>
+                        <!-- ТУТ ДОЛЖЕН БЫТЬ ГРАФИК -->
+                        <div class="col-5">
+                            <img src="https://via.placeholder.com/500x500" alt="Тут график">
+                        </div>
+                    </div>
+
+                    <div class="row mx-5 mb-3"><button style="width: 8rem;">ПУСК !</button></div>
+                    <div class="row mx-5 mb-5"><button style="width: 8rem;">График</button></div>
+                </div>
+            </div>
+        </div>
+        <!-- /.Программа Оптимальные температуры -->
+
+        <!-- Программа Время контакта -->
+        <div class="container" id="Page_4">
+            <h2 class="text-center mb-4">Время контакта в слое tay(x) (режимы идеального вытеснения и смешения)</h2>
+            <div class="row">
+                <div class="col-4 border-end border-2 border-danger">
+                    <h3 class="border-bottom border-dark text-center mb-3">Исходные данные</h3>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="card mb-3">
+                                <div class="card-header">Реакционный газ</div>
+                                <div class="card-body">
+                                    <h6>Объемные доли</h6>
+                                    <div id="ob-doli" class="input-group mb-3">
+                                        <div class="input-group-text" id="btnGroupAddon">SO2</div>
+                                        <input type="text" class="form-control" id="so2" style="width: 4rem;" value="0,1000" size="6">
+                                        <div class="input-group-text" id="btnGroupAddon">O2</div>
+                                        <input type="text" class="form-control" id="o2" style="width: 4rem;" value="0,1000" size="6">
+                                    </div>
+
+                                    <h6>P.атм</h6>
+                                    <div id="tep_rezh_polythrop" class="input-group mb-2">
+                                        <input type="text" class="form-control" id="p" value="1,0" size="8">
+                                    </div>
+
+                                    <h6>Т ад</h6>
+                                    <div id="tep_rezh_polythrop" class="input-group">
+                                        <input type="text" class="form-control" id='tad' value="200,0" size="8">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card mb-3">
+                                <div class="card-header">Условия расчета</div>
+                                <div class="card-body">
+                                    <div id="x-group" class="input-group mb-3">
+                                        <div class="input-group-text" id="btnGroupAddon">Xн</div>
+                                        <input type="text" class="form-control" id="xn_4" style="width: 5rem;" value="0,00" size="6">
+                                        <div class="input-group-text" id="btnGroupAddon">Хк</div>
+                                        <input type="text" class="form-control" id="xk_4" style="width: 5rem;" value="0,55" size="6">
+                                    </div>
+
+                                    <h6>T н</h6>
+                                    <div id="stepx" class="input-group">
+                                        <input type="text" class="form-control" id="t_n_4" value="720,0" size="8">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-5">
+                        <div class="card-header">Катализатор</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-5">
+                                    <select class="form-select" aria-label="Выберите">
+                                    
+                                    <option value="1">СВД</option>
+                                    <option selected value="2">ИК-4</option>
+                                    <option value="3">Классический</option>
+                                    <option value="4">Новый</option>
+                                </select>
+
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">T</div>
+                                        <input class="form-control" type="text" id="t" value="753" disabled readonly>
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-text" id="btnGroupAddon">K</div>
+                                        <input class="form-control" type="text" id="k" value="1,45" disabled readonly>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">E1</div>
+                                        <input class="form-control" type="text" id="e1" value="126,4" disabled readonly>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">E2</div>
+                                        <input class="form-control" type="text" id="e2" value="55,2" disabled readonly>
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-text" id="btnGroupAddon">E3</div>
+                                        <input class="form-control" type="text" id="e3" value="0" disabled readonly>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">T12</div>
+                                        <input class="form-control" type="text" id="t12" value="693" disabled readonly>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">T23</div>
+                                        <input class="form-control" type="text" id="t23" value="803" disabled readonly>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-7">
+                                    <img src="./img/so2/graph_T.svg" alt="graph_Temp" style="width: 200px; height: auto;">
+
+                                    <div class="card" style="width: 12rem;">
+                                        <div class="card-header">Режим</div>
+
+                                        <div class="card-body">
+                                            <div>
+                                                <input class="form-check-input" type="radio" name="dvizh_potok" id="perfect_extrusion" checked="checked">
+                                                <label class="form-check-label">ИВ</label>
+                                            </div>
+                                            <div>
+                                                <input class="form-check-input" type="radio" name="dvizh_potok" id="perfect_mixing">
+                                                <label class="form-check-label">ИС</label>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-8 mb-4">
+                    <h3 class="border-bottom border-dark text-center mb-3">Результаты расчета</h3>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="row mx-2 mb-5">
+                                <table width="300" border="1" cellpadding="5" cellspacing="0">
+                                    <tr>
+                                        <td width="100">T au</td>
+                                        <td width="100">X</td>
+                                        <td width="100">T</td>
+                                    </tr>
+                                </table>
+
+                                <!-- ТУТ ДОЛДНЫ ВЫВОДИТЬСЯ РАСЧЕТЫ -->
+                                <img src="https://via.placeholder.com/300x450" alt="Тут график">
+                            </div>
+                        </div>
+                        <!-- ТУТ ДОЛЖЕН БЫТЬ ГРАФИК -->
+                        <div class="col-5">
+                            <img src="https://via.placeholder.com/500x500" alt="Тут график">
+                        </div>
+                    </div>
+
+                    <div class="row mx-5 mb-3"><button style="width: 8rem;">ПУСК !</button></div>
+                    <div class="row mx-5 mb-5"><button style="width: 8rem;">График</button></div>
+                </div>
+            </div>
+        </div>
+        <!-- /.Программа Время контакта -->
+
+        <!-- Программа Степень превращения -->
+        <div class="container" id="Page_5">
+            <h2 class="text-center mb-4">Степень превращения в слое X(tay) (режимы идельаного вытеснения и смешения)</h2>
+            <div class="row">
+                <div class="col-4 border-end border-2 border-danger">
+                    <h3 class="border-bottom border-dark text-center mb-3">Исходные данные</h3>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="card mb-3">
+                                <div class="card-header">Реакционный газ</div>
+                                <div class="card-body">
+                                    <h6>Объемные доли</h6>
+                                    <div id="ob-doli" class="input-group mb-3">
+                                        <div class="input-group-text" id="btnGroupAddon">SO2</div>
+                                        <input type="text" class="form-control" id="so2" style="width: 4rem;" value="0,1000" size="6">
+                                        <div class="input-group-text" id="btnGroupAddon">O2</div>
+                                        <input type="text" class="form-control" id="o2" style="width: 4rem;" value="0,1000" size="6">
+                                    </div>
+
+                                    <h6>P.атм</h6>
+                                    <div id="tep_rezh_polythrop" class="input-group mb-2">
+                                        <input type="text" class="form-control" id="p" value="1,0" size="8">
+                                    </div>
+
+                                    <h6>Т ад</h6>
+                                    <div id="tep_rezh_polythrop" class="input-group">
+                                        <input type="text" class="form-control" id='tad' value="200,0" size="8">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card mb-3">
+                                <div class="card-header">Условия расчета</div>
+                                <div class="card-body">
+                                    <div id="x-group" class="input-group mb-3">
+                                        <div class="input-group-text" id="btnGroupAddon">Xн</div>
+                                        <input type="text" class="form-control" id="xn_5" value="0,50" size="6">
+                                    </div>
+
+                                    <h6>T н</h6>
+                                    <div id="stepx" class="input-group mb-2">
+                                        <input type="text" class="form-control" id="t_n_5" value="720,0" size="8">
+                                    </div>
+
+                                    <h6>T ау</h6>
+                                    <div id="stepx" class="input-group">
+                                        <input type="text" class="form-control" id="t_au_5" value="0,600" size="8">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-5">
+                        <div class="card-header">Катализатор</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-5">
+                                    <select class="form-select" aria-label="Выберите">
+                                    
+                                    <option value="1">СВД</option>
+                                    <option selected value="2">ИК-4</option>
+                                    <option value="3">Классический</option>
+                                    <option value="4">Новый</option>
+                                </select>
+
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">T</div>
+                                        <input class="form-control" type="text" id="t" value="753" disabled readonly>
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-text" id="btnGroupAddon">K</div>
+                                        <input class="form-control" type="text" id="k" value="1,45" disabled readonly>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">E1</div>
+                                        <input class="form-control" type="text" id="e1" value="126,4" disabled readonly>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">E2</div>
+                                        <input class="form-control" type="text" id="e2" value="55,2" disabled readonly>
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-text" id="btnGroupAddon">E3</div>
+                                        <input class="form-control" type="text" id="e3" value="0" disabled readonly>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">T12</div>
+                                        <input class="form-control" type="text" id="t12" value="693" disabled readonly>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">T23</div>
+                                        <input class="form-control" type="text" id="t23" value="803" disabled readonly>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-7">
+                                    <img src="./img/so2/graph_T.svg" alt="graph_Temp" style="width: 200px; height: auto;">
+
+                                    <div class="card" style="width: 12rem;">
+                                        <div class="card-header">Режим</div>
+
+                                        <div class="card-body">
+                                            <div>
+                                                <input class="form-check-input" type="radio" name="dvizh_potok" id="perfect_extrusion" checked="checked">
+                                                <label class="form-check-label">ИВ</label>
+                                            </div>
+                                            <div>
+                                                <input class="form-check-input" type="radio" name="dvizh_potok" id="perfect_mixing">
+                                                <label class="form-check-label">ИС</label>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-8 mb-4">
+                    <h3 class="border-bottom border-dark text-center mb-3">Результаты расчета</h3>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="row mx-2 mb-5">
+                                <table width="300" border="1" cellpadding="5" cellspacing="0">
+                                    <tr>
+                                        <td width="100">T au</td>
+                                        <td width="100">X</td>
+                                        <td width="100">T</td>
+                                    </tr>
+                                </table>
+
+                                <!-- ТУТ ДОЛДНЫ ВЫВОДИТЬСЯ РАСЧЕТЫ -->
+                                <img src="https://via.placeholder.com/300x450" alt="Тут график">
+                            </div>
+                        </div>
+                        <!-- ТУТ ДОЛЖЕН БЫТЬ ГРАФИК -->
+                        <div class="col-5">
+                            <img src="https://via.placeholder.com/500x500" alt="Тут график">
+                        </div>
+                    </div>
+
+                    <div class="row mx-5 mb-3"><button style="width: 8rem;">ПУСК !</button></div>
+                    <div class="row mx-5 mb-5"><button style="width: 8rem;">График</button></div>
+                </div>
+            </div>
+        </div>
+        <!-- /.Программа Степень превращения -->
+
+        <!-- Программа Реактор с промежуточными теплообменниками -->
+        <div class="container" id="Page_6">
+            <h2 class="text-center mb-4">Оптимизация многослойного реактора с промежуточными теплообменниками</h2>
+            <div class="row">
+                <div class="col-4 border-end border-2 border-danger">
+                    <h3 class="border-bottom border-dark text-center mb-3">Исходные данные</h3>
+
+                    <div class="card mb-3">
+                        <div class="card-header">Реакционный газ</div>
+                        <div class="card-body">
+                            <h6>Объемные доли</h6>
+                            <div id="ob-doli" class="input-group mb-3">
+                                <div class="input-group-text" id="btnGroupAddon">SO2</div>
+                                <input type="text" class="form-control" id="so2" style="width: 4rem;" value="0,1000" size="6">
+                                <div class="input-group-text" id="btnGroupAddon">O2</div>
+                                <input type="text" class="form-control" id="o2" style="width: 4rem;" value="0,1000" size="6">
+                            </div>
+
+                            <h6>P.атм</h6>
+                            <div id="tep_rezh_polythrop" class="input-group mb-2">
+                                <input type="text" class="form-control" id="p" value="1,0" size="8">
+                            </div>
+
+                            <h6>Т ад</h6>
+                            <div id="tep_rezh_polythrop" class="input-group">
+                                <input type="text" class="form-control" id='tad' value="200,0" size="8">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="card-header">Катализатор</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-5">
+                                    <select class="form-select" aria-label="Выберите">
+                                    
+                                    <option value="1">СВД</option>
+                                    <option selected value="2">ИК-4</option>
+                                    <option value="3">Классический</option>
+                                    <option value="4">Новый</option>
+                                </select>
+
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">T</div>
+                                        <input class="form-control" type="text" id="t" value="753" disabled readonly>
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-text" id="btnGroupAddon">K</div>
+                                        <input class="form-control" type="text" id="k" value="1,45" disabled readonly>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">E1</div>
+                                        <input class="form-control" type="text" id="e1" value="126,4" disabled readonly>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">E2</div>
+                                        <input class="form-control" type="text" id="e2" value="55,2" disabled readonly>
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-text" id="btnGroupAddon">E3</div>
+                                        <input class="form-control" type="text" id="e3" value="0" disabled readonly>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">T12</div>
+                                        <input class="form-control" type="text" id="t12" value="693" disabled readonly>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">T23</div>
+                                        <input class="form-control" type="text" id="t23" value="803" disabled readonly>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-7">
+                                    <img src="./img/so2/graph_T.svg" alt="graph_Temp" style="width: 200px; height: auto;">
+
+                                    <div class="card" style="width: 12rem;">
+                                        <div class="card-header">Режим</div>
+
+                                        <div class="card-body">
+                                            <div>
+                                                <input class="form-check-input" type="radio" name="dvizh_potok" id="perfect_extrusion" checked="checked">
+                                                <label class="form-check-label">ИВ</label>
+                                            </div>
+                                            <div>
+                                                <input class="form-check-input" type="radio" name="dvizh_potok" id="perfect_mixing">
+                                                <label class="form-check-label">ИС</label>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-5">
+                        <div class="card-header">Реактор</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-7">
+
+                                    <h6>Число слоев катализатора</h6>
+                                    <div class="input-group mb-2">
+                                        <input type="text" class="form-control" id="n_6" value="4" size="8">
+                                    </div>
+
+                                    <h6>X1н</h6>
+                                    <div class="input-group mb-2">
+                                        <input type="text" class="form-control" id="x1n_6" value="0,0004" size="8">
+                                    </div>
+
+                                    <h6>Хк</h6>
+                                    <div class="input-group mb-2">
+                                        <input type="text" class="form-control" id="xk_6" value="0,0008" size="8">
+                                    </div>
+
+                                    <h6>Т1н</h6>
+                                    <div class="input-group mb-2">
+                                        <input type="text" class="form-control" id="t1n_6" value="713,0" size="8">
+                                    </div>
+
+                                </div>
+
+                                <div class="col-5">
+                                    <img src="./img/so2/reactor_X1_Xk.svg" alt="reactor_X1_Xk" style="width: 150px; height: auto;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-8 mb-4">
+                    <h3 class="border-bottom border-dark text-center mb-3">Результаты расчета</h3>
+
                     <!-- ТУТ ДОЛЖЕН БЫТЬ ГРАФИК -->
-                    <div class="col-5">
+                    <div class="mx-2 mb-5">
                         <img src="https://via.placeholder.com/500x500" alt="Тут график">
                     </div>
-                </div>
 
-                <div class="row mx-5 mb-3"><button style="width: 8rem;">ПУСК !</button></div>
-                <div class="row mx-5 mb-5"><button style="width: 8rem;">График</button></div>
+                    <div class="mx-2 mb-5">
+                        <table width="600px" border="1" cellpadding="5" cellspacing="0">
+                            <tr>
+                                <td width="100">Слой</td>
+                                <td width="100">Х ин</td>
+                                <td width="100">Х ик</td>
+                                <td width="100">Т ин</td>
+                                <td width="100">Т ик</td>
+                                <td width="100">Т ау</td>
+                            </tr>
+                        </table>
+
+                        <!-- ТУТ ДОЛДНЫ ВЫВОДИТЬСЯ РАСЧЕТЫ -->
+                        <img src="https://via.placeholder.com/600x200" alt="Тут график">
+                    </div>
+
+                    <div class="row mx-5 mb-3"><button style="width: 8rem;">ПУСК !</button></div>
+                    <div class="row mx-5 mb-5"><button style="width: 8rem;">График</button></div>
+                </div>
             </div>
         </div>
-    </div><!-- /.Программа Время контакта -->
+        <!-- /.Программа Реактор с промежуточными теплообменниками -->
 
-    <!-- Программа Степень превращения -->
-    <div class="container" id="Page_5">
-        <h2 class="text-center mb-4">Степень превращения в слое X(tay) (режимы идельаного вытеснения и смешения)</h2>
-        <div class="row">
-            <div class="col-4 border-end border-2 border-danger">
-                <h3 class="border-bottom border-dark text-center mb-3">Исходные данные</h3>
+        <!-- Программа Реактор с вводом холодного газа после 1-го слоя -->
+        <div class="container" id="Page_7">
+            <h2 class="text-center mb-4">Оптимизация многослойного реактора с вводом холодного газа после 1-го слоя</h2>
+            <div class="row">
+                <div class="col-4 border-end border-2 border-danger">
+                    <h3 class="border-bottom border-dark text-center mb-3">Исходные данные</h3>
 
-                <div class="row">
-                    <div class="col-6">
-                        <div class="card mb-3">
-                            <div class="card-header">Реакционный газ</div>
-                            <div class="card-body">
-                                <h6>Объемные доли</h6>
-                                <div id="ob-doli" class="input-group mb-3">                                   
-                                    <div class="input-group-text" id="btnGroupAddon">SO2</div>
-                                    <input type="text"  class="form-control" id="so2" style="width: 4rem;" value="0,1000" size="6">
-                                    <div class="input-group-text" id="btnGroupAddon">O2</div>
-                                    <input type="text" class="form-control" id="o2" style="width: 4rem;" value="0,1000" size="6">
-                                </div>
-        
-                                <h6>P.атм</h6>
-                                <div id="tep_rezh_polythrop" class="input-group mb-2">
-                                    <input type="text"  class="form-control" value="1,0" size="8">
-                                </div>
-        
-                                <h6>Т ад</h6>
-                                <div id="tep_rezh_polythrop" class="input-group">
-                                    <input type="text"  class="form-control" value="200,0" size="8">
-                                </div>
+                    <div class="card mb-3">
+                        <div class="card-header">Реакционный газ</div>
+                        <div class="card-body">
+                            <h6>Объемные доли</h6>
+                            <div id="ob-doli" class="input-group mb-3">
+                                <div class="input-group-text" id="btnGroupAddon">SO2</div>
+                                <input type="text" class="form-control" id="so2" style="width: 4rem;" value="0,1000" size="6">
+                                <div class="input-group-text" id="btnGroupAddon">O2</div>
+                                <input type="text" class="form-control" id="o2" style="width: 4rem;" value="0,1000" size="6">
+                            </div>
+
+                            <h6>P.атм</h6>
+                            <div id="tep_rezh_polythrop" class="input-group mb-2">
+                                <input type="text" class="form-control" id="p" value="1,0" size="8">
+                            </div>
+
+                            <h6>Т ад</h6>
+                            <div id="tep_rezh_polythrop" class="input-group">
+                                <input type="text" class="form-control" id='tad' value="200,0" size="8">
                             </div>
                         </div>
                     </div>
-                    <div class="col-6">
-                        <div class="card mb-3">
-                            <div class="card-header">Условия расчета</div>
-                            <div class="card-body">
-                                <div id="x-group" class="input-group mb-3">
-                                    <div class="input-group-text" id="btnGroupAddon">Xн</div>
-                                    <input type="text"  class="form-control" id="xn" value="0,50" size="6">
-                                </div>
-        
-                                <h6>T н</h6>
-                                <div id="step-x" class="input-group mb-2">      
-                                    <input type="text"  class="form-control" value="720,0" size="8">
-                                </div>
-        
-                                <h6>T ау</h6>
-                                <div id="step-x" class="input-group">      
-                                    <input type="text"  class="form-control" value="0,600" size="8">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-               
-                <div class="card mb-5">
-                    <div class="card-header">Катализатор</div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-5">
-                                <select class="form-select" aria-label="Выберите">
-                                    <option selected>Выберите</option>
+
+                    <div class="card mb-3">
+                        <div class="card-header">Катализатор</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-5">
+                                    <select class="form-select" aria-label="Выберите">
+                                    
                                     <option value="1">СВД</option>
-                                    <option value="2">ИК-4</option>
+                                    <option selected value="2">ИК-4</option>
                                     <option value="3">Классический</option>
-                                    <option value="3">Новый</option>
+                                    <option value="4">Новый</option>
                                 </select>
 
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">T</div>
-                                    <input class="form-control" type="text" value="753" disabled readonly>
-                                </div>
-                                <div class="input-group mb-2"> 
-                                    <div class="input-group-text" id="btnGroupAddon">K</div>
-                                    <input class="form-control" type="text" value="1,45" disabled readonly>
-                                </div>
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">E1</div>
-                                    <input class="form-control" type="text" value="126,4" disabled readonly>
-                                </div>
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">E2</div>
-                                    <input class="form-control" type="text" value="55,2" disabled readonly>
-                                </div>
-                                <div class="input-group mb-2"> 
-                                    <div class="input-group-text" id="btnGroupAddon">E3</div>
-                                    <input class="form-control" type="text" value="0" disabled readonly>
-                                </div>
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">T12</div>
-                                    <input class="form-control" type="text" value="695" disabled readonly>
-                                </div>
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">T23</div>
-                                    <input class="form-control" type="text" value="803" disabled readonly>
-                                </div>
-                                                  
-                            </div>
-
-                            <div class="col-7">
-                                <img src="./img/so2/graph_T.svg" alt="graph_Temp" style="width: 200px; height: auto;">
-
-                                <div class="card" style="width: 12rem;">
-                                    <div class="card-header">Режим</div>
-                
-                                    <div class="card-body">
-                                        <div>
-                                            <input class="form-check-input" type="radio" name="dvizh_potok" id="perfect_extrusion" checked="checked">
-                                            <label class="form-check-label">ИВ</label>
-                                        </div>
-                                        <div>
-                                            <input class="form-check-input" type="radio" name="dvizh_potok" id="perfect_mixing">
-                                            <label class="form-check-label">ИС</label>
-                                        </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">T</div>
+                                        <input class="form-control" type="text" id="t" value="753" disabled readonly>
                                     </div>
-                
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-text" id="btnGroupAddon">K</div>
+                                        <input class="form-control" type="text" id="k" value="1,45" disabled readonly>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">E1</div>
+                                        <input class="form-control" type="text" id="e1" value="126,4" disabled readonly>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">E2</div>
+                                        <input class="form-control" type="text" id="e2" value="55,2" disabled readonly>
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-text" id="btnGroupAddon">E3</div>
+                                        <input class="form-control" type="text" id="e3" value="0" disabled readonly>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">T12</div>
+                                        <input class="form-control" type="text" id="t12" value="693" disabled readonly>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">T23</div>
+                                        <input class="form-control" type="text" id="t23" value="803" disabled readonly>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-7">
+                                    <img src="./img/so2/graph_T.svg" alt="graph_Temp" style="width: 200px; height: auto;">
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <div class="card mb-5">
+                        <div class="card-header">Реактор</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-7">
+
+                                    <h6>Число слоев катализатора</h6>
+                                    <div class="input-group mb-2">
+                                        <input type="text" class="form-control" id="n_7" value="4" size="8">
+                                    </div>
+
+                                    <h6>X1н</h6>
+                                    <div class="input-group mb-2">
+                                        <input type="text" class="form-control" id="x1n_7" value="0,0004" size="8">
+                                    </div>
+
+                                    <h6>Хк</h6>
+                                    <div class="input-group mb-2">
+                                        <input type="text" class="form-control" id="xk_7" value="0,0008" size="8">
+                                    </div>
+
+                                    <h6>Т1н</h6>
+                                    <div class="input-group mb-2">
+                                        <input type="text" class="form-control" id="t1n_7" value="713,0" size="8">
+                                    </div>
+
+                                    <h6>Тхг</h6>
+                                    <div class="input-group mb-2">
+                                        <input type="text" class="form-control" id="thg_7" value="490,0" size="8">
+                                    </div>
+
+                                </div>
+
+                                <div class="col-5">
+                                    <img src="./img/so2/reactor_X1_Xk_Txr.svg" alt="reactor_X1_Xk_Txr" style="width: 150px; height: auto;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
-                
-            </div>
-            <div class="col-8 mb-4">
-                <h3 class="border-bottom border-dark text-center mb-3">Результаты расчета</h3>
-                <div class="row">
-                    <div class="col-4">
-                        <div class="row mx-2 mb-5">
-                            <table width="300" border="1" cellpadding="5" cellspacing="0">
-                                <tr>
-                                <td width="100">T au</td>
-                                <td width="100">X</td>
-                                <td width="100">T</td>
-                                </tr>
-                            </table>    
+                <div class="col-8 mb-4">
+                    <h3 class="border-bottom border-dark text-center mb-3">Результаты расчета</h3>
 
-                            <!-- ТУТ ДОЛДНЫ ВЫВОДИТЬСЯ РАСЧЕТЫ -->
-                            <img src="https://via.placeholder.com/300x450" alt="Тут график">
-                        </div>
-                    </div>
                     <!-- ТУТ ДОЛЖЕН БЫТЬ ГРАФИК -->
-                    <div class="col-5">
+                    <div class="mx-2 mb-5">
                         <img src="https://via.placeholder.com/500x500" alt="Тут график">
                     </div>
-                </div>
 
-                <div class="row mx-5 mb-3"><button style="width: 8rem;">ПУСК !</button></div>
-                <div class="row mx-5 mb-5"><button style="width: 8rem;">График</button></div>
+                    <div class="mx-2 mb-5">
+                        <table width="700px" border="1" cellpadding="5" cellspacing="0">
+                            <tr>
+                                <td width="100">Слой</td>
+                                <td width="100">Х ин</td>
+                                <td width="100">Х ик</td>
+                                <td width="100">Т ин</td>
+                                <td width="100">Т ик</td>
+                                <td width="100">Т ау</td>
+                                <td width="100">V газ</td>
+                            </tr>
+                        </table>
+
+                        <!-- ТУТ ДОЛДНЫ ВЫВОДИТЬСЯ РАСЧЕТЫ -->
+                        <img src="https://via.placeholder.com/700x200" alt="Тут график">
+                    </div>
+
+                    <div class="row mx-5 mb-3"><button style="width: 8rem;">ПУСК !</button></div>
+                    <div class="row mx-5 mb-5"><button style="width: 8rem;">График</button></div>
+                </div>
             </div>
         </div>
-    </div><!-- /.Программа Степень превращения -->
+        <!-- /.Программа Реактор с вводом холодного газа после 1-го слоя -->
 
-    <!-- Программа Реактор с промежуточными теплообменниками -->
-    <div class="container" id="Page_6">
-        <h2 class="text-center mb-4">Оптимизация многослойного реактора с промежуточными теплообменниками</h2>
-        <div class="row">
-            <div class="col-4 border-end border-2 border-danger">
-                <h3 class="border-bottom border-dark text-center mb-3">Исходные данные</h3>
+        <!-- Программа Реактор с вводом холодного воздуха -->
+        <div class="container" id="Page_8">
+            <h2 class="text-center mb-4">Оптимизация многослойного реактора с вводом холодного воздуха между слоями катализатора</h2>
+            <div class="row">
+                <div class="col-4 border-end border-2 border-danger">
+                    <h3 class="border-bottom border-dark text-center mb-3">Исходные данные</h3>
 
-                <div class="card mb-3">
-                    <div class="card-header">Реакционный газ</div>
-                    <div class="card-body">
-                        <h6>Объемные доли</h6>
-                        <div id="ob-doli" class="input-group mb-3">                                   
-                            <div class="input-group-text" id="btnGroupAddon">SO2</div>
-                            <input type="text"  class="form-control" id="so2" style="width: 4rem;" value="0,1000" size="6">
-                            <div class="input-group-text" id="btnGroupAddon">O2</div>
-                            <input type="text" class="form-control" id="o2" style="width: 4rem;" value="0,1000" size="6">
-                        </div>
-
-                        <h6>P.атм</h6>
-                        <div id="tep_rezh_polythrop" class="input-group mb-2">
-                            <input type="text"  class="form-control" value="1,0" size="8">
-                        </div>
-
-                        <h6>Т ад</h6>
-                        <div id="tep_rezh_polythrop" class="input-group">
-                            <input type="text"  class="form-control" value="200,0" size="8">
-                        </div>
-                    </div>
-                </div>
-               
-                <div class="card mb-3">
-                    <div class="card-header">Катализатор</div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-5">
-                                <select class="form-select" aria-label="Выберите">
-                                    <option selected>Выберите</option>
-                                    <option value="1">СВД</option>
-                                    <option value="2">ИК-4</option>
-                                    <option value="3">Классический</option>
-                                    <option value="3">Новый</option>
-                                </select>
-
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">T</div>
-                                    <input class="form-control" type="text" value="753" disabled readonly>
-                                </div>
-                                <div class="input-group mb-2"> 
-                                    <div class="input-group-text" id="btnGroupAddon">K</div>
-                                    <input class="form-control" type="text" value="1,45" disabled readonly>
-                                </div>
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">E1</div>
-                                    <input class="form-control" type="text" value="126,4" disabled readonly>
-                                </div>
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">E2</div>
-                                    <input class="form-control" type="text" value="55,2" disabled readonly>
-                                </div>
-                                <div class="input-group mb-2"> 
-                                    <div class="input-group-text" id="btnGroupAddon">E3</div>
-                                    <input class="form-control" type="text" value="0" disabled readonly>
-                                </div>
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">T12</div>
-                                    <input class="form-control" type="text" value="695" disabled readonly>
-                                </div>
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">T23</div>
-                                    <input class="form-control" type="text" value="803" disabled readonly>
-                                </div>
-                                                  
+                    <div class="card mb-3">
+                        <div class="card-header">Реакционный газ</div>
+                        <div class="card-body">
+                            <h6>Объемные доли</h6>
+                            <div id="ob-doli" class="input-group mb-3">
+                                <div class="input-group-text" id="btnGroupAddon">SO2</div>
+                                <input type="text" class="form-control" id="so2" style="width: 4rem;" value="0,1000" size="6">
+                                <div class="input-group-text" id="btnGroupAddon">O2</div>
+                                <input type="text" class="form-control" id="o2" style="width: 4rem;" value="0,1000" size="6">
                             </div>
 
-                            <div class="col-7">
-                                <img src="./img/so2/graph_T.svg" alt="graph_Temp" style="width: 200px; height: auto;">
+                            <h6>P.атм</h6>
+                            <div id="tep_rezh_polythrop" class="input-group mb-2">
+                                <input type="text" class="form-control" id="p" value="1,0" size="8">
+                            </div>
 
-                                <div class="card" style="width: 12rem;">
-                                    <div class="card-header">Режим</div>
-                
-                                    <div class="card-body">
-                                        <div>
-                                            <input class="form-check-input" type="radio" name="dvizh_potok" id="perfect_extrusion" checked="checked">
-                                            <label class="form-check-label">ИВ</label>
-                                        </div>
-                                        <div>
-                                            <input class="form-check-input" type="radio" name="dvizh_potok" id="perfect_mixing">
-                                            <label class="form-check-label">ИС</label>
-                                        </div>
+                            <h6>Т ад</h6>
+                            <div id="tep_rezh_polythrop" class="input-group">
+                                <input type="text" class="form-control" id='tad' value="200,0" size="8">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="card-header">Катализатор</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-5">
+                                    <select class="form-select" aria-label="Выберите">
+                                    
+                                    <option value="1">СВД</option>
+                                    <option selected value="2">ИК-4</option>
+                                    <option value="3">Классический</option>
+                                    <option value="4">Новый</option>
+                                </select>
+
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">T</div>
+                                        <input class="form-control" type="text" id="t" value="753" disabled readonly>
                                     </div>
-                
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-text" id="btnGroupAddon">K</div>
+                                        <input class="form-control" type="text" id="k" value="1,45" disabled readonly>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">E1</div>
+                                        <input class="form-control" type="text" id="e1" value="126,4" disabled readonly>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">E2</div>
+                                        <input class="form-control" type="text" id="e2" value="55,2" disabled readonly>
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-text" id="btnGroupAddon">E3</div>
+                                        <input class="form-control" type="text" id="e3" value="0" disabled readonly>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">T12</div>
+                                        <input class="form-control" type="text" id="t12" value="693" disabled readonly>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">T23</div>
+                                        <input class="form-control" type="text" id="t23" value="803" disabled readonly>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-7">
+                                    <img src="./img/so2/graph_T.svg" alt="graph_Temp" style="width: 200px; height: auto;">
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="card mb-5">
-                    <div class="card-header">Реактор</div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-7">
-                                
-                                <h6>Число слоев катализатора</h6>
-                                <div id="chislo-sloev" class="input-group mb-2">
-                                    <input type="text"  class="form-control" value="4" size="8">
-                                </div>  
+                    <div class="card mb-5">
+                        <div class="card-header">Реактор</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-7">
 
-                                <h6>X1н</h6>
-                                <div id="x1n" class="input-group mb-2">
-                                    <input type="text"  class="form-control" value="0,0004" size="8">
+                                    <h6>Число слоев катализатора</h6>
+                                    <div class="input-group mb-2">
+                                        <input type="text" class="form-control" id="n_8" value="4" size="8">
+                                    </div>
+
+                                    <h6>X1н</h6>
+                                    <div class="input-group mb-2">
+                                        <input type="text" class="form-control" id="x1n_8" value="0,0004" size="8">
+                                    </div>
+
+                                    <h6>Хк</h6>
+                                    <div class="input-group mb-2">
+                                        <input type="text" class="form-control" id="xk_8" value="0,0008" size="8">
+                                    </div>
+
+                                    <h6>Т1н</h6>
+                                    <div class="input-group mb-2">
+                                        <input type="text" class="form-control" id="t1n_8" value="713,0" size="8">
+                                    </div>
+
+                                    <h6>Тхв</h6>
+                                    <div class="input-group mb-2">
+                                        <input type="text" class="form-control" id="thg_8" value="490,0" size="8">
+                                    </div>
+
                                 </div>
 
-                                <h6>Хк</h6>
-                                <div id="xk" class="input-group mb-2">
-                                    <input type="text"  class="form-control" value="0,0004" size="8">
+                                <div class="col-5">
+                                    <img src="./img/so2/reactor_X1_Xk_Txv.svg" alt="reactor_X1_Xk_Txv" style="width: 150px; height: auto;">
                                 </div>
-
-                                <h6>Т1н</h6>
-                                <div id="t1n" class="input-group mb-2">
-                                    <input type="text"  class="form-control" value="713,0" size="8">
-                                </div>
-      
-                            </div>
-
-                            <div class="col-5">
-                                <img src="./img/so2/reactor_X1_Xk.svg" alt="reactor_X1_Xk" style="width: 150px; height: auto;">
                             </div>
                         </div>
                     </div>
-                </div>
-                
-            </div>
 
-            <div class="col-8 mb-4">
-                <h3 class="border-bottom border-dark text-center mb-3">Результаты расчета</h3>
-
-                <!-- ТУТ ДОЛЖЕН БЫТЬ ГРАФИК -->
-                <div class="mx-2 mb-5">
-                    <img src="https://via.placeholder.com/500x500" alt="Тут график">
                 </div>
 
-                <div class="mx-2 mb-5">
-                    <table width="600px" border="1" cellpadding="5" cellspacing="0">
-                        <tr>
-                        <td width="100">Слой</td>
-                        <td width="100">Х ин</td>
-                        <td width="100">Х ик</td>
-                        <td width="100">Т ин</td>
-                        <td width="100">Т ик</td>
-                        <td width="100">Т ау</td>
-                        </tr>
-                    </table>    
+                <div class="col-8 mb-4">
+                    <h3 class="border-bottom border-dark text-center mb-3">Результаты расчета</h3>
 
-                    <!-- ТУТ ДОЛДНЫ ВЫВОДИТЬСЯ РАСЧЕТЫ -->
-                    <img src="https://via.placeholder.com/600x200" alt="Тут график">
+                    <!-- ТУТ ДОЛЖЕН БЫТЬ ГРАФИК -->
+                    <div class="mx-2 mb-5">
+                        <img src="https://via.placeholder.com/500x500" alt="Тут график">
+                    </div>
+
+                    <div class="mx-2 mb-5">
+                        <table width="700px" border="1" cellpadding="5" cellspacing="0">
+                            <tr>
+                                <td width="100">Слой</td>
+                                <td width="100">Х ин</td>
+                                <td width="100">Х ик</td>
+                                <td width="100">Т ин</td>
+                                <td width="100">Т ик</td>
+                                <td width="100">Т ау</td>
+                                <td width="100">V газ</td>
+                            </tr>
+                        </table>
+
+                        <!-- ТУТ ДОЛДНЫ ВЫВОДИТЬСЯ РАСЧЕТЫ -->
+                        <img src="https://via.placeholder.com/700x200" alt="Тут график">
+                    </div>
+
+                    <div class="row mx-5 mb-3"><button style="width: 8rem;">ПУСК !</button></div>
+                    <div class="row mx-5 mb-5"><button style="width: 8rem;">График</button></div>
                 </div>
-
-                <div class="row mx-5 mb-3"><button style="width: 8rem;">ПУСК !</button></div>
-                <div class="row mx-5 mb-5"><button style="width: 8rem;">График</button></div>
             </div>
         </div>
-    </div><!-- /.Программа Реактор с промежуточными теплообменниками -->
+        <!-- /.Программа Реактор с вводом холодного воздуха -->
 
-    <!-- Программа Реактор с вводом холодного газа после 1-го слоя -->
-    <div class="container" id="Page_7">
-        <h2 class="text-center mb-4">Оптимизация многослойного реактора с вводом холодного газа после 1-го слоя</h2>
-        <div class="row">
-            <div class="col-4 border-end border-2 border-danger">
-                <h3 class="border-bottom border-dark text-center mb-3">Исходные данные</h3>
+        <!-- Программа Вторая стадия реактора в схеме ДК/ДА -->
+        <div class="container" id="Page_9">
+            <h2 class="text-center mb-4">Оптимизация второй ступени в системе ДК/ДА</h2>
+            <div class="row">
+                <div class="col-4 border-end border-2 border-danger">
+                    <h3 class="border-bottom border-dark text-center mb-3">Исходные данные</h3>
 
-                <div class="card mb-3">
-                    <div class="card-header">Реакционный газ</div>
-                    <div class="card-body">
-                        <h6>Объемные доли</h6>
-                        <div id="ob-doli" class="input-group mb-3">                                   
-                            <div class="input-group-text" id="btnGroupAddon">SO2</div>
-                            <input type="text"  class="form-control" id="so2" style="width: 4rem;" value="0,1000" size="6">
-                            <div class="input-group-text" id="btnGroupAddon">O2</div>
-                            <input type="text" class="form-control" id="o2" style="width: 4rem;" value="0,1000" size="6">
-                        </div>
+                    <div class="card mb-3">
+                        <div class="card-header">Реакционный газ</div>
+                        <div class="card-body">
+                            <h6>Объемные доли</h6>
+                            <div id="ob-doli" class="input-group mb-3">
+                                <div class="input-group-text" id="btnGroupAddon">SO2</div>
+                                <input type="text" class="form-control" id="so2" style="width: 4rem;" value="0,1000" size="6">
+                                <div class="input-group-text" id="btnGroupAddon">O2</div>
+                                <input type="text" class="form-control" id="o2" style="width: 4rem;" value="0,1000" size="6">
+                            </div>
 
-                        <h6>P.атм</h6>
-                        <div id="tep_rezh_polythrop" class="input-group mb-2">
-                            <input type="text"  class="form-control" value="1,0" size="8">
-                        </div>
+                            <h6>P.атм</h6>
+                            <div id="tep_rezh_polythrop" class="input-group mb-2">
+                                <input type="text" class="form-control" id="p" value="1,0" size="8">
+                            </div>
 
-                        <h6>Т ад</h6>
-                        <div id="tep_rezh_polythrop" class="input-group">
-                            <input type="text"  class="form-control" value="200,0" size="8">
+                            <h6>Т ад</h6>
+                            <div id="tep_rezh_polythrop" class="input-group">
+                                <input type="text" class="form-control" id='tad' value="200,0" size="8">
+                            </div>
                         </div>
                     </div>
-                </div>
-               
-                <div class="card mb-3">
-                    <div class="card-header">Катализатор</div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-5">
-                                <select class="form-select" aria-label="Выберите">
-                                    <option selected>Выберите</option>
+
+                    <div class="card mb-3">
+                        <div class="card-header">Катализатор</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-5">
+                                    <select class="form-select" aria-label="Выберите">
+                                    
                                     <option value="1">СВД</option>
-                                    <option value="2">ИК-4</option>
+                                    <option selected value="2">ИК-4</option>
                                     <option value="3">Классический</option>
-                                    <option value="3">Новый</option>
+                                    <option value="4">Новый</option>
                                 </select>
 
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">T</div>
-                                    <input class="form-control" type="text" value="753" disabled readonly>
-                                </div>
-                                <div class="input-group mb-2"> 
-                                    <div class="input-group-text" id="btnGroupAddon">K</div>
-                                    <input class="form-control" type="text" value="1,45" disabled readonly>
-                                </div>
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">E1</div>
-                                    <input class="form-control" type="text" value="126,4" disabled readonly>
-                                </div>
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">E2</div>
-                                    <input class="form-control" type="text" value="55,2" disabled readonly>
-                                </div>
-                                <div class="input-group mb-2"> 
-                                    <div class="input-group-text" id="btnGroupAddon">E3</div>
-                                    <input class="form-control" type="text" value="0" disabled readonly>
-                                </div>
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">T12</div>
-                                    <input class="form-control" type="text" value="695" disabled readonly>
-                                </div>
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">T23</div>
-                                    <input class="form-control" type="text" value="803" disabled readonly>
-                                </div>
-                                                  
-                            </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">T</div>
+                                        <input class="form-control" type="text" id="t" value="753" disabled readonly>
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-text" id="btnGroupAddon">K</div>
+                                        <input class="form-control" type="text" id="k" value="1,45" disabled readonly>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">E1</div>
+                                        <input class="form-control" type="text" id="e1" value="126,4" disabled readonly>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">E2</div>
+                                        <input class="form-control" type="text" id="e2" value="55,2" disabled readonly>
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-text" id="btnGroupAddon">E3</div>
+                                        <input class="form-control" type="text" id="e3" value="0" disabled readonly>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">T12</div>
+                                        <input class="form-control" type="text" id="t12" value="693" disabled readonly>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text" id="btnGroupAddon">T23</div>
+                                        <input class="form-control" type="text" id="t23" value="803" disabled readonly>
+                                    </div>
 
-                            <div class="col-7">
-                                <img src="./img/so2/graph_T.svg" alt="graph_Temp" style="width: 200px; height: auto;">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card mb-5">
-                    <div class="card-header">Реактор</div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-7">
-                                
-                                <h6>Число слоев катализатора</h6>
-                                <div id="chislo-sloev" class="input-group mb-2">
-                                    <input type="text"  class="form-control" value="4" size="8">
-                                </div>  
-
-                                <h6>X1н</h6>
-                                <div id="x1n" class="input-group mb-2">
-                                    <input type="text"  class="form-control" value="0,0004" size="8">
                                 </div>
 
-                                <h6>Хк</h6>
-                                <div id="xk" class="input-group mb-2">
-                                    <input type="text"  class="form-control" value="0,0004" size="8">
+                                <div class="col-7">
+                                    <img src="./img/so2/graph_T.svg" alt="graph_Temp" style="width: 200px; height: auto;">
                                 </div>
-
-                                <h6>Т1н</h6>
-                                <div id="t1n" class="input-group mb-2">
-                                    <input type="text"  class="form-control" value="713,0" size="8">
-                                </div>
-                                
-                                <h6>Тхг</h6>
-                                <div id="thg" class="input-group mb-2">
-                                    <input type="text"  class="form-control" value="490,0" size="8">
-                                </div>
-      
-                            </div>
-
-                            <div class="col-5">
-                                <img src="./img/so2/reactor_X1_Xk_Txr.svg" alt="reactor_X1_Xk_Txr" style="width: 150px; height: auto;">
                             </div>
                         </div>
                     </div>
+
+                    <div class="card mb-5">
+                        <div class="card-header">Реактор</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-7">
+
+                                    <h6>Число слоев катализатора</h6>
+                                    <div class="input-group mb-2">
+                                        <input type="text" class="form-control" id="n_9" value="2" size="8">
+                                    </div>
+
+                                    <h6>X1н</h6>
+                                    <div class="input-group mb-2">
+                                        <input type="text" class="form-control" id="x1n_9" value="0,0004" size="8">
+                                    </div>
+
+                                    <h6>Хк</h6>
+                                    <div class="input-group mb-2">
+                                        <input type="text" class="form-control" id="xk_9" value="0,0008" size="8">
+                                    </div>
+
+                                </div>
+
+                                <div class="col-5">
+                                    <img src="./img/so2/reactor_dk_da.svg" alt="reactor_dk_da" style="width: 150px; height: auto;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-                
-            </div>
 
-            <div class="col-8 mb-4">
-                <h3 class="border-bottom border-dark text-center mb-3">Результаты расчета</h3>
+                <div class="col-8 mb-4">
+                    <h3 class="border-bottom border-dark text-center mb-3">Результаты расчета</h3>
 
-                <!-- ТУТ ДОЛЖЕН БЫТЬ ГРАФИК -->
-                <div class="mx-2 mb-5">
-                    <img src="https://via.placeholder.com/500x500" alt="Тут график">
+                    <!-- ТУТ ДОЛЖЕН БЫТЬ ГРАФИК -->
+                    <div class="mx-2 mb-5">
+                        <img src="https://via.placeholder.com/500x500" alt="Тут график">
+                    </div>
+
+                    <div class="mx-2 mb-5">
+                        <table width="600px" border="1" cellpadding="5" cellspacing="0">
+                            <tr>
+                                <td width="100">Слой</td>
+                                <td width="100">Х ин</td>
+                                <td width="100">Х ик</td>
+                                <td width="100">Т ин</td>
+                                <td width="100">Т ик</td>
+                                <td width="100">Т ау</td>
+                            </tr>
+                        </table>
+
+                        <!-- ТУТ ДОЛДНЫ ВЫВОДИТЬСЯ РАСЧЕТЫ -->
+                        <img src="https://via.placeholder.com/600x200" alt="Тут график">
+                    </div>
+
+                    <div class="row mx-5 mb-3"><button style="width: 8rem;">ПУСК !</button></div>
+                    <div class="row mx-5 mb-5"><button style="width: 8rem;">График</button></div>
                 </div>
-
-                <div class="mx-2 mb-5">
-                    <table width="700px" border="1" cellpadding="5" cellspacing="0">
-                        <tr>
-                        <td width="100">Слой</td>
-                        <td width="100">Х ин</td>
-                        <td width="100">Х ик</td>
-                        <td width="100">Т ин</td>
-                        <td width="100">Т ик</td>
-                        <td width="100">Т ау</td>
-                        <td width="100">V газ</td>
-                        </tr>
-                    </table>    
-
-                    <!-- ТУТ ДОЛДНЫ ВЫВОДИТЬСЯ РАСЧЕТЫ -->
-                    <img src="https://via.placeholder.com/700x200" alt="Тут график">
-                </div>
-
-                <div class="row mx-5 mb-3"><button style="width: 8rem;">ПУСК !</button></div>
-                <div class="row mx-5 mb-5"><button style="width: 8rem;">График</button></div>
             </div>
         </div>
-    </div><!-- /.Программа Реактор с вводом холодного газа после 1-го слоя -->
+        <!-- /.Программа Вторая стадия реактора в схеме ДК/ДА -->
 
-    <!-- Программа Реактор с вводом холодного воздуха -->
-    <div class="container" id="Page_8">
-        <h2 class="text-center mb-4">Оптимизация многослойного реактора с вводом холодного воздуха между слоями катализатора</h2>
-        <div class="row">
-            <div class="col-4 border-end border-2 border-danger">
-                <h3 class="border-bottom border-dark text-center mb-3">Исходные данные</h3>
 
-                <div class="card mb-3">
-                    <div class="card-header">Реакционный газ</div>
-                    <div class="card-body">
-                        <h6>Объемные доли</h6>
-                        <div id="ob-doli" class="input-group mb-3">                                   
-                            <div class="input-group-text" id="btnGroupAddon">SO2</div>
-                            <input type="text"  class="form-control" id="so2" style="width: 4rem;" value="0,1000" size="6">
-                            <div class="input-group-text" id="btnGroupAddon">O2</div>
-                            <input type="text" class="form-control" id="o2" style="width: 4rem;" value="0,1000" size="6">
-                        </div>
 
-                        <h6>P.атм</h6>
-                        <div id="tep_rezh_polythrop" class="input-group mb-2">
-                            <input type="text"  class="form-control" value="1,0" size="8">
-                        </div>
 
-                        <h6>Т ад</h6>
-                        <div id="tep_rezh_polythrop" class="input-group">
-                            <input type="text"  class="form-control" value="200,0" size="8">
-                        </div>
-                    </div>
-                </div>
-               
-                <div class="card mb-3">
-                    <div class="card-header">Катализатор</div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-5">
-                                <select class="form-select" aria-label="Выберите">
-                                    <option selected>Выберите</option>
-                                    <option value="1">СВД</option>
-                                    <option value="2">ИК-4</option>
-                                    <option value="3">Классический</option>
-                                    <option value="3">Новый</option>
-                                </select>
 
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">T</div>
-                                    <input class="form-control" type="text" value="753" disabled readonly>
-                                </div>
-                                <div class="input-group mb-2"> 
-                                    <div class="input-group-text" id="btnGroupAddon">K</div>
-                                    <input class="form-control" type="text" value="1,45" disabled readonly>
-                                </div>
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">E1</div>
-                                    <input class="form-control" type="text" value="126,4" disabled readonly>
-                                </div>
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">E2</div>
-                                    <input class="form-control" type="text" value="55,2" disabled readonly>
-                                </div>
-                                <div class="input-group mb-2"> 
-                                    <div class="input-group-text" id="btnGroupAddon">E3</div>
-                                    <input class="form-control" type="text" value="0" disabled readonly>
-                                </div>
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">T12</div>
-                                    <input class="form-control" type="text" value="695" disabled readonly>
-                                </div>
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">T23</div>
-                                    <input class="form-control" type="text" value="803" disabled readonly>
-                                </div>
-                                                  
-                            </div>
-
-                            <div class="col-7">
-                                <img src="./img/so2/graph_T.svg" alt="graph_Temp" style="width: 200px; height: auto;">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card mb-5">
-                    <div class="card-header">Реактор</div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-7">
-                                
-                                <h6>Число слоев катализатора</h6>
-                                <div id="chislo-sloev" class="input-group mb-2">
-                                    <input type="text"  class="form-control" value="4" size="8">
-                                </div>  
-
-                                <h6>X1н</h6>
-                                <div id="x1n" class="input-group mb-2">
-                                    <input type="text"  class="form-control" value="0,0004" size="8">
-                                </div>
-
-                                <h6>Хк</h6>
-                                <div id="xk" class="input-group mb-2">
-                                    <input type="text"  class="form-control" value="0,0004" size="8">
-                                </div>
-
-                                <h6>Т1н</h6>
-                                <div id="t1n" class="input-group mb-2">
-                                    <input type="text"  class="form-control" value="713,0" size="8">
-                                </div>
-                                
-                                <h6>Тхв</h6>
-                                <div id="thg" class="input-group mb-2">
-                                    <input type="text"  class="form-control" value="490,0" size="8">
-                                </div>
-      
-                            </div>
-
-                            <div class="col-5">
-                                <img src="./img/so2/reactor_X1_Xk_Txv.svg" alt="reactor_X1_Xk_Txv" style="width: 150px; height: auto;">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-
-            <div class="col-8 mb-4">
-                <h3 class="border-bottom border-dark text-center mb-3">Результаты расчета</h3>
-
-                <!-- ТУТ ДОЛЖЕН БЫТЬ ГРАФИК -->
-                <div class="mx-2 mb-5">
-                    <img src="https://via.placeholder.com/500x500" alt="Тут график">
-                </div>
-
-                <div class="mx-2 mb-5">
-                    <table width="700px" border="1" cellpadding="5" cellspacing="0">
-                        <tr>
-                        <td width="100">Слой</td>
-                        <td width="100">Х ин</td>
-                        <td width="100">Х ик</td>
-                        <td width="100">Т ин</td>
-                        <td width="100">Т ик</td>
-                        <td width="100">Т ау</td>
-                        <td width="100">V газ</td>
-                        </tr>
-                    </table>    
-
-                    <!-- ТУТ ДОЛДНЫ ВЫВОДИТЬСЯ РАСЧЕТЫ -->
-                    <img src="https://via.placeholder.com/700x200" alt="Тут график">
-                </div>
-
-                <div class="row mx-5 mb-3"><button style="width: 8rem;">ПУСК !</button></div>
-                <div class="row mx-5 mb-5"><button style="width: 8rem;">График</button></div>
-            </div>
+        <!-- Кнопки навигации -->
+        <div class="row mx-1" style="justify-content: center;">
+            <div class="col-4 text-starts"><button id="btn_sos" type="button" style="width: 6rem;">SOS !</button></div>
+            <div class="col-4 text-center"><button id="btn_back" type="button" style="width: 8rem;">В начало</button></div>
+            <div class="col-4 text-end"><button id="btn_exit" type="button" style="width: 6rem;">ВЫХОД</button></div>
         </div>
-    </div> <!-- /.Программа Реактор с вводом холодного воздуха -->
 
-    <!-- Программа Вторая стадия реактора в схеме ДК/ДА -->
-    <div class="container" id="Page_9">
-        <h2 class="text-center mb-4">Оптимизация второй ступени в системе ДК/ДА</h2>
-        <div class="row">
-            <div class="col-4 border-end border-2 border-danger">
-                <h3 class="border-bottom border-dark text-center mb-3">Исходные данные</h3>
+    </form>
 
-                <div class="card mb-3">
-                    <div class="card-header">Реакционный газ</div>
-                    <div class="card-body">
-                        <h6>Объемные доли</h6>
-                        <div id="ob-doli" class="input-group mb-3">                                   
-                            <div class="input-group-text" id="btnGroupAddon">SO2</div>
-                            <input type="text"  class="form-control" id="so2" style="width: 4rem;" value="0,1000" size="6">
-                            <div class="input-group-text" id="btnGroupAddon">O2</div>
-                            <input type="text" class="form-control" id="o2" style="width: 4rem;" value="0,1000" size="6">
-                        </div>
-
-                        <h6>P.атм</h6>
-                        <div id="tep_rezh_polythrop" class="input-group mb-2">
-                            <input type="text"  class="form-control" value="1,0" size="8">
-                        </div>
-
-                        <h6>Т ад</h6>
-                        <div id="tep_rezh_polythrop" class="input-group">
-                            <input type="text"  class="form-control" value="200,0" size="8">
-                        </div>
-                    </div>
-                </div>
-               
-                <div class="card mb-3">
-                    <div class="card-header">Катализатор</div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-5">
-                                <select class="form-select" aria-label="Выберите">
-                                    <option selected>Выберите</option>
-                                    <option value="1">СВД</option>
-                                    <option value="2">ИК-4</option>
-                                    <option value="3">Классический</option>
-                                    <option value="3">Новый</option>
-                                </select>
-
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">T</div>
-                                    <input class="form-control" type="text" value="753" disabled readonly>
-                                </div>
-                                <div class="input-group mb-2"> 
-                                    <div class="input-group-text" id="btnGroupAddon">K</div>
-                                    <input class="form-control" type="text" value="1,45" disabled readonly>
-                                </div>
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">E1</div>
-                                    <input class="form-control" type="text" value="126,4" disabled readonly>
-                                </div>
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">E2</div>
-                                    <input class="form-control" type="text" value="55,2" disabled readonly>
-                                </div>
-                                <div class="input-group mb-2"> 
-                                    <div class="input-group-text" id="btnGroupAddon">E3</div>
-                                    <input class="form-control" type="text" value="0" disabled readonly>
-                                </div>
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">T12</div>
-                                    <input class="form-control" type="text" value="695" disabled readonly>
-                                </div>
-                                <div class="input-group"> 
-                                    <div class="input-group-text" id="btnGroupAddon">T23</div>
-                                    <input class="form-control" type="text" value="803" disabled readonly>
-                                </div>
-                                                  
-                            </div>
-
-                            <div class="col-7">
-                                <img src="./img/so2/graph_T.svg" alt="graph_Temp" style="width: 200px; height: auto;">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card mb-5">
-                    <div class="card-header">Реактор</div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-7">
-                                
-                                <h6>Число слоев катализатора</h6>
-                                <div id="chislo-sloev" class="input-group mb-2">
-                                    <input type="text"  class="form-control" value="4" size="8">
-                                </div>  
-
-                                <h6>X1н</h6>
-                                <div id="x1n" class="input-group mb-2">
-                                    <input type="text"  class="form-control" value="0,0004" size="8">
-                                </div>
-
-                                <h6>Хк</h6>
-                                <div id="xk" class="input-group mb-2">
-                                    <input type="text"  class="form-control" value="0,0004" size="8">
-                                </div>
-      
-                            </div>
-
-                            <div class="col-5">
-                                <img src="./img/so2/reactor_dk_da.svg" alt="reactor_dk_da" style="width: 150px; height: auto;">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-
-            <div class="col-8 mb-4">
-                <h3 class="border-bottom border-dark text-center mb-3">Результаты расчета</h3>
-
-                <!-- ТУТ ДОЛЖЕН БЫТЬ ГРАФИК -->
-                <div class="mx-2 mb-5">
-                    <img src="https://via.placeholder.com/500x500" alt="Тут график">
-                </div>
-
-                <div class="mx-2 mb-5">
-                    <table width="600px" border="1" cellpadding="5" cellspacing="0">
-                        <tr>
-                        <td width="100">Слой</td>
-                        <td width="100">Х ин</td>
-                        <td width="100">Х ик</td>
-                        <td width="100">Т ин</td>
-                        <td width="100">Т ик</td>
-                        <td width="100">Т ау</td>
-                        </tr>
-                    </table>    
-
-                    <!-- ТУТ ДОЛДНЫ ВЫВОДИТЬСЯ РАСЧЕТЫ -->
-                    <img src="https://via.placeholder.com/600x200" alt="Тут график">
-                </div>
-
-                <div class="row mx-5 mb-3"><button style="width: 8rem;">ПУСК !</button></div>
-                <div class="row mx-5 mb-5"><button style="width: 8rem;">График</button></div>
-            </div>
-        </div>
-    </div><!-- /.Программа Вторая стадия реактора в схеме ДК/ДА -->
-
-
-
-
-
-    <!-- Кнопки навигации -->
-    <div class="row mx-1" style="justify-content: center;">
-        <div class="col-4 text-starts"><button id="btn_sos" type="button" style="width: 6rem;">SOS !</button></div>
-        <div class="col-4 text-center"><button id="btn_back" type="button" style="width: 8rem;">В начало</button></div>
-        <div class="col-4 text-end"><button id="btn_exit" type="button" style="width: 6rem;">ВЫХОД</button></div>
-    </div>
-    
-</form>
-
-<!-- Подключение JS к файлу программы -->
-<script src="./js/so2.js"></script>
+    <!-- Подключение JS к файлу программы -->
+    <script src="./js/so2.js"></script>
 
 </body>
+
 </html>

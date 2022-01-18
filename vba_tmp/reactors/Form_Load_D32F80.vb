@@ -1,0 +1,135 @@
+Private Sub Form_Load() 'D32F80
+  Dim var_1C As Me
+  Dim var_30 As Me
+  loc_00D32FD8: var_eax = Unknown_VTable_Call[edx+0000047Ch]
+  loc_00D32FF2: Me.CurrentX = NAN
+  loc_00D3302D: ecx = "DIS"
+  loc_00D33036: var_eax = Unknown_VTable_Call[edx+00000470h]
+  loc_00D3304A: Me.CurrentX = NAN
+  loc_00D33085: ecx = "IT"
+  loc_00D3308E: var_eax = Unknown_VTable_Call[edx+00000460h]
+  loc_00D330A2: Me.CurrentX = NAN
+  loc_00D330DD: ecx = "XTay"
+  loc_00D330E6: var_eax = Unknown_VTable_Call[edx+00000454h]
+  loc_00D330FA: Me.CurrentX = NAN
+  loc_00D33129: ecx = "SIRR"
+  loc_00D33132: var_eax = Call Form2.Variant_process
+  loc_00D33151: var_eax = Unknown_VTable_Call[eax+00000430h]
+  loc_00D33173: var_18 = CStr(400)
+  loc_00D33180: Me.MousePointer = var_18
+  loc_00D331B3: var_eax = Unknown_VTable_Call[eax+0000042Ch]
+  loc_00D331D2: var_18 = CStr(0)
+  loc_00D331DF: Me.MousePointer = var_18
+  loc_00D33212: var_eax = Unknown_VTable_Call[eax+0000043Ch]
+  loc_00D33231: var_18 = CStr(0)
+  loc_00D3323E: Me.MousePointer = var_18
+  loc_00D33271: var_eax = Unknown_VTable_Call[eax+00000438h]
+  loc_00D33290: var_18 = CStr(1)
+  loc_00D3329D: Me.MousePointer = var_18
+  loc_00D332D0: var_eax = Unknown_VTable_Call[eax+00000434h]
+  loc_00D332EC: call __vbaStrR8(var_9999999A, var_3FE99999, var_1C, Unknown_VTable_Call[eax+00000434h], Me, var_1C, Unknown_VTable_Call[eax+00000438h], Me, var_1C, Unknown_VTable_Call[eax+0000043Ch], Me, var_1C, Unknown_VTable_Call[eax+0000042Ch], Me, var_1C, Unknown_VTable_Call[eax+00000430h])
+  loc_00D332F7: var_18 = __vbaStrR8(var_9999999A, var_3FE99999, var_1C, Unknown_VTable_Call[eax+00000434h], Me, var_1C, Unknown_VTable_Call[eax+00000438h], Me, var_1C, Unknown_VTable_Call[eax+0000043Ch], Me, var_1C, Unknown_VTable_Call[eax+0000042Ch], Me, var_1C, Unknown_VTable_Call[eax+00000430h])
+  loc_00D33304: Me.MousePointer = var_18
+  loc_00D33337: var_eax = Unknown_VTable_Call[eax+0000041Ch]
+  loc_00D33359: var_18 = CStr(150)
+  loc_00D33366: Me.MousePointer = var_18
+  loc_00D33399: var_eax = Unknown_VTable_Call[eax+00000418h]
+  loc_00D333B8: var_18 = CStr(100)
+  loc_00D333C5: Me.MousePointer = var_18
+  loc_00D333F8: var_eax = Unknown_VTable_Call[eax+00000414h]
+  loc_00D33411: call __vbaStrR8(00000000h, var_3FF80000, var_1C, Unknown_VTable_Call[eax+00000414h], Me, var_1C, Unknown_VTable_Call[eax+00000418h], Me, var_1C, Unknown_VTable_Call[eax+0000041Ch], Me)
+  loc_00D3341C: var_18 = __vbaStrR8(00000000h, var_3FF80000, var_1C, Unknown_VTable_Call[eax+00000414h], Me, var_1C, Unknown_VTable_Call[eax+00000418h], Me, var_1C, Unknown_VTable_Call[eax+0000041Ch], Me)
+  loc_00D33429: Me.MousePointer = var_18
+  loc_00D3345C: var_eax = Unknown_VTable_Call[eax+000003CCh]
+  loc_00D3347E: var_18 = CStr(400)
+  loc_00D3348B: Me.MousePointer = var_18
+  loc_00D334BE: var_eax = Unknown_VTable_Call[eax+000003C8h]
+  loc_00D334DD: var_18 = CStr(1)
+  loc_00D334EA: Me.MousePointer = var_18
+  loc_00D3351D: var_eax = Unknown_VTable_Call[eax+000003C4h]
+  loc_00D33539: call __vbaStrR8(var_9999999A, var_3FC99999, var_1C, Unknown_VTable_Call[eax+000003C4h], Me, var_1C, Unknown_VTable_Call[eax+000003C8h], Me, var_1C, Unknown_VTable_Call[eax+000003CCh], Me)
+  loc_00D33544: var_18 = __vbaStrR8(var_9999999A, var_3FC99999, var_1C, Unknown_VTable_Call[eax+000003C4h], Me, var_1C, Unknown_VTable_Call[eax+000003C8h], Me, var_1C, Unknown_VTable_Call[eax+000003CCh], Me)
+  loc_00D33551: Me.MousePointer = var_18
+  loc_00D33584: var_eax = Unknown_VTable_Call[eax+000003C0h]
+  loc_00D335A3: var_18 = CStr(1)
+  loc_00D335B0: Me.MousePointer = var_18
+  loc_00D335E3: var_eax = Unknown_VTable_Call[eax+000003BCh]
+  loc_00D33602: var_18 = CStr(30)
+  loc_00D3360F: Me.MousePointer = var_18
+  loc_00D33642: var_eax = Unknown_VTable_Call[eax+000003B8h]
+  loc_00D33661: var_18 = CStr(20)
+  loc_00D3366E: Me.MousePointer = var_18
+  loc_00D336A1: var_eax = Unknown_VTable_Call[eax+000003B4h]
+  loc_00D336C0: var_18 = CStr(10)
+  loc_00D336CD: Me.MousePointer = var_18
+  loc_00D33700: var_eax = Unknown_VTable_Call[eax+000003B0h]
+  loc_00D3371F: var_18 = CStr(0)
+  loc_00D3372C: Me.MousePointer = var_18
+  loc_00D3375F: var_eax = Unknown_VTable_Call[eax+000003ACh]
+  loc_00D3377E: var_18 = CStr(0)
+  loc_00D3378B: Me.MousePointer = var_18
+  loc_00D337BE: var_eax = Unknown_VTable_Call[eax+000003A8h]
+  loc_00D337DD: var_18 = CStr(1)
+  loc_00D337EA: Me.MousePointer = var_18
+  loc_00D3381D: var_eax = Unknown_VTable_Call[eax+000003D0h]
+  loc_00D3383C: var_18 = CStr(1)
+  loc_00D33849: Me.MousePointer = var_18
+  loc_00D3387C: var_eax = Unknown_VTable_Call[eax+000003A4h]
+  loc_00D3389B: var_18 = CStr(1)
+  loc_00D338A8: Me.MousePointer = var_18
+  loc_00D338DB: var_eax = Unknown_VTable_Call[eax+000003A0h]
+  loc_00D338FA: var_18 = CStr(1)
+  loc_00D33907: Me.MousePointer = var_18
+  loc_00D3393A: var_eax = Unknown_VTable_Call[eax+0000039Ch]
+  loc_00D33959: var_18 = CStr(30)
+  loc_00D33966: Me.MousePointer = var_18
+  loc_00D33999: var_eax = Unknown_VTable_Call[eax+00000398h]
+  loc_00D339B8: var_18 = CStr(1)
+  loc_00D339C5: Me.MousePointer = var_18
+  loc_00D339F8: var_eax = Unknown_VTable_Call[eax+00000394h]
+  loc_00D33A17: var_18 = CStr(1)
+  loc_00D33A24: Me.MousePointer = var_18
+  loc_00D33A57: var_eax = Unknown_VTable_Call[eax+00000390h]
+  loc_00D33A76: var_18 = CStr(1)
+  loc_00D33A83: Me.MousePointer = var_18
+  loc_00D33AB6: var_eax = Unknown_VTable_Call[eax+000003D4h]
+  loc_00D33AD2: call __vbaStrR8(var_9999999A, var_3FB99999, var_1C, Unknown_VTable_Call[eax+000003D4h], Me, var_1C, Unknown_VTable_Call[eax+00000390h], Me, var_1C, Unknown_VTable_Call[eax+00000394h], Me, var_1C, Unknown_VTable_Call[eax+00000398h], Me, var_1C, Unknown_VTable_Call[eax+0000039Ch])
+  loc_00D33ADD: var_18 = __vbaStrR8(var_9999999A, var_3FB99999, var_1C, Unknown_VTable_Call[eax+000003D4h], Me, var_1C, Unknown_VTable_Call[eax+00000390h], Me, var_1C, Unknown_VTable_Call[eax+00000394h], Me, var_1C, Unknown_VTable_Call[eax+00000398h], Me, var_1C, Unknown_VTable_Call[eax+0000039Ch])
+  loc_00D33AEA: Me.MousePointer = var_18
+  loc_00D33B1D: var_eax = Unknown_VTable_Call[eax+000003D8h]
+  loc_00D33B39: call __vbaStrR8(var_9999999A, var_3FB99999, var_1C, Unknown_VTable_Call[eax+000003D8h], Me)
+  loc_00D33B44: var_18 = __vbaStrR8(var_9999999A, var_3FB99999, var_1C, Unknown_VTable_Call[eax+000003D8h], Me)
+  loc_00D33B51: Me.MousePointer = var_18
+  loc_00D33B84: var_eax = Unknown_VTable_Call[eax+00000410h]
+  loc_00D33BA6: var_18 = CStr(430)
+  loc_00D33BB3: Me.MousePointer = var_18
+  loc_00D33BE8: var_eax = Unknown_VTable_Call[eax+00000488h]
+  loc_00D33BFD: Me.Enabled = False
+  loc_00D33C26: var_eax = Unknown_VTable_Call[edx+0000033Ch]
+  loc_00D33C3B: var_30 = var_1C
+  loc_00D33C3E: Me.Left = var_467A0000
+  loc_00D33C79: var_eax = Unknown_VTable_Call[edx+00000074h]
+  loc_00D33CB0: ecx = "New"
+  loc_00D33CC1: ecx = "New"
+  loc_00D33CDE: ecx = "New"
+  loc_00D33CEF: ecx = "100"
+  loc_00D33CF8: var_eax = Unknown_VTable_Call[edx+00000364h]
+  loc_00D33D0D: var_eax = Unknown_VTable_Call[ecx+0000009Ch]
+  loc_00D33D36: var_eax = Unknown_VTable_Call[eax+00000378h]
+  loc_00D33D4B: var_eax = Unknown_VTable_Call[edx+0000009Ch]
+  loc_00D33D74: var_eax = Unknown_VTable_Call[edx+00000354h]
+  loc_00D33D89: var_eax = Unknown_VTable_Call[ecx+0000009Ch]
+  loc_00D33DB2: var_eax = Unknown_VTable_Call[eax+00000374h]
+  loc_00D33DC7: var_eax = Unknown_VTable_Call[edx+0000009Ch]
+  loc_00D33DF0: var_eax = Unknown_VTable_Call[edx+0000036Ch]
+  loc_00D33E05: var_eax = Unknown_VTable_Call[ecx+0000009Ch]
+  loc_00D33E2E: var_eax = Unknown_VTable_Call[eax+00000380h]
+  loc_00D33E43: var_eax = Unknown_VTable_Call[edx+0000009Ch]
+  loc_00D33E6C: var_eax = Unknown_VTable_Call[edx+00000368h]
+  loc_00D33E81: var_eax = Unknown_VTable_Call[ecx+0000009Ch]
+  loc_00D33EAA: var_eax = Unknown_VTable_Call[eax+00000360h]
+  loc_00D33EBE: var_eax = Unknown_VTable_Call[edx+0000009Ch]
+  loc_00D33EEE: GoTo loc_00D33F03
+  loc_00D33F02: Exit Sub
+  loc_00D33F03: 'Referenced from: 00D33EEE
+End Sub

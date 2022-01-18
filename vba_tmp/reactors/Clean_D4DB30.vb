@@ -1,0 +1,47 @@
+Public Sub Clean() 'D4DB30
+  loc_00D4DB6D: var_eax = Unknown_VTable_Call[ecx+000004F8h]
+  loc_00D4DB87: Me.Height = 0
+  loc_00D4DBB3: var_eax = Unknown_VTable_Call[ecx+000004F4h]
+  loc_00D4DBC8: Me.Height = 0
+  loc_00D4DBF1: var_eax = Unknown_VTable_Call[eax+000004E4h]
+  loc_00D4DC06: Me.Height = 0
+  loc_00D4DC2F: var_eax = Unknown_VTable_Call[edx+000004D4h]
+  loc_00D4DC44: Me.Height = 0
+  loc_00D4DC6D: var_eax = Unknown_VTable_Call[eax+000004D0h]
+  loc_00D4DC82: Me.Height = 0
+  loc_00D4DCAB: var_eax = Unknown_VTable_Call[edx+000004CCh]
+  loc_00D4DCC0: Me.Height = 0
+  loc_00D4DCE9: var_eax = Unknown_VTable_Call[eax+000004C8h]
+  loc_00D4DCFE: Me.Height = 0
+  loc_00D4DD27: var_eax = Unknown_VTable_Call[edx+000004C4h]
+  loc_00D4DD3C: Me.Height = 0
+  loc_00D4DD65: var_eax = Unknown_VTable_Call[eax+000004C0h]
+  loc_00D4DD7A: Me.Height = 0
+  loc_00D4DDA3: var_eax = Unknown_VTable_Call[edx+000004BCh]
+  loc_00D4DDB8: Me.Height = 0
+  loc_00D4DDE1: var_eax = Unknown_VTable_Call[eax+000004B8h]
+  loc_00D4DDF6: Me.Height = 0
+  loc_00D4DE1F: var_eax = Unknown_VTable_Call[edx+000004B4h]
+  loc_00D4DE34: Me.Height = 0
+  loc_00D4DE5D: var_eax = Unknown_VTable_Call[eax+000004B0h]
+  loc_00D4DE72: Me.Height = 0
+  loc_00D4DE9B: var_eax = Unknown_VTable_Call[edx+000004ACh]
+  loc_00D4DEB0: Me.Height = 0
+  loc_00D4DED9: var_eax = Unknown_VTable_Call[eax+000004A8h]
+  loc_00D4DEEE: Me.Height = 0
+  loc_00D4DF17: var_eax = Unknown_VTable_Call[edx+000004A4h]
+  loc_00D4DF2C: Me.Height = 0
+  loc_00D4DF55: var_eax = Unknown_VTable_Call[eax+000004A0h]
+  loc_00D4DF6A: Me.Height = 0
+  loc_00D4DF93: var_eax = Unknown_VTable_Call[edx+0000049Ch]
+  loc_00D4DFA8: Me.Height = 0
+  loc_00D4DFD1: var_eax = Unknown_VTable_Call[eax+00000498h]
+  loc_00D4DFE6: Me.Height = 0
+  loc_00D4E00F: var_eax = Unknown_VTable_Call[edx+00000494h]
+  loc_00D4E024: Me.Height = 0
+  loc_00D4E04D: var_eax = Unknown_VTable_Call[eax+00000490h]
+  loc_00D4E061: Me.Height = 0
+  loc_00D4E089: GoTo loc_00D4E095
+  loc_00D4E094: Exit Sub
+  loc_00D4E095: 'Referenced from: 00D4E089
+End Sub
