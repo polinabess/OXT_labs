@@ -273,7 +273,7 @@ function IsNumeric(input) {
 
 function Reaction() {
     // Скорость реакции W
-    Kp = Math.pow(10, (4905 / T - 4.6455));
+    Kp = Math.pow(10, 4905 / T - 4.6455);
 
     if (T > T23) {
         Kr = K23 * Math.exp(E3 / Rgas * (1 / T23 - 1 / T));
@@ -289,8 +289,8 @@ function Reaction() {
     }
 
     FU = (CO2 - 0.5 * CSO2 * X) / (1 - 0.5 * CSO2 * X) * P
-    FI = Math.pow((X / (1 - X) / Kp), 2)
-    W = (Kr / CSO20) * (1 - X) / (1 - 0.2 * X) * (FU - FI)
+    FI = Math.pow(X / (1 - X) / Kp, 2)
+    W = Kr / CSO20 * (1 - X) / (1 - 0.2 * X) * (FU - FI)
 }
 
 function Reaction_T() {
@@ -302,76 +302,83 @@ function Reaction_T() {
 }
 
 function ReactorII_DK() {
+
     // Реактор II ступени в системе ДК/ДА
     // Определение Т1н
     TU = 800;
     TD = 650
     ReactII[0, 1] = 1;
     ReactII[1, 1] = XH9;
-    T = (TU + TD) / 2;
-    ReactII[3, 1] = T
-    for (let int = 1; int < J; int++) {
-        XiH = ReactII[1, J];
-        TiH = ReactII[3, J];
-        X = XiH;
-        T = TiH;
-        Tay = 0;
-        SFT = 0
-        diX = (1 - X) / 100;
-        DXS = diX / 6
-        Reaction_T();
-        while (SFT > 0) {
-            Tay1 = Tay;
-            SFT1 = SFT
-            Tay = Tay + DXS / W;
-            SFT = SFT + DXS * FT
-            X = X + diX / 2;
-            T = TiH + Tad9 * (X - XiH)
-            Reaction_T();
-            Tay = Tay + 4 * DXS / W;
-            SFT = SFT + 4 * DXS * FT
-            X = X + diX / 2;
-            T = TiH + Tad9 * (X - XiH)
-            Reaction_T();
-            Tay = Tay + DXS / W;
-            SFT = SFT + DXS * FT
-        }
-        BB = SFT / (SFT - SFT1)
-        X = X - BB * diX;
-        T = TiH + Tad9 * (X - XiH)
-
-        Reaction();
-        Tay = Tay - BB * (Tay - Tay1);
-
-        ReactII[2, J] = X;
-        ReactII[4, J] = T;
-        ReactII[5, J] = Tay
-            /* 
-            AA = "    " & Format(J, "0") & "     " & Format(ReactII(1, J), "0.000") _
-            & "     " & Format(X, "0.000") & "     " & Format(ReactII(3, J), "000.0") _
-            & "     " & Format(T, "000.0") & "     " & Format(Tay, "0.000")
-            List9.AddItem (AA)
-            */
-        if (J < Ncat9) {
-            XiH = ReactII[2, J];
-            TiK = ReactII[4, J];
+    do {
+        T = (TU + TD) / 2;
+        ReactII[3, 1] = T
+        for (let J = 1; J < Ncat9; J++) {
+            XiH = ReactII[1, J];
+            TiH = ReactII[3, J];
             X = XiH;
-            T = TiK;
-            Reaction();
-            WiK = W;
-            dTiH = -20;
-            T = T - 0.001;
-            while (Math.abs(dTiH) < 0.01) {
-                T = T + dTiH;
-                Reaction();
-                if (Math.sign(W - WiK) * Math.sign(dTiH) > 0) { dTiH = -dTiH / 2 }
+            T = TiH;
+            Tay = 0;
+            SFT = 0
+            diX = (1 - X) / 100;
+            DXS = diX / 6
+            Reaction_T();
+            while (SFT <= 0) {
+                Tay1 = Tay;
+                SFT1 = SFT
+                Tay = Tay + DXS / W;
+                SFT = SFT + DXS * FT
+                X = X + diX / 2;
+                T = TiH + Tad9 * (X - XiH)
+                Reaction_T();
+                Tay = Tay + 4 * DXS / W;
+                SFT = SFT + 4 * DXS * FT
+                X = X + diX / 2;
+                T = TiH + Tad9 * (X - XiH)
+                Reaction_T();
+                Tay = Tay + DXS / W;
+                SFT = SFT + DXS * FT
             }
-            ReactII[0, J + 1] = J + 1;
-            ReactII[1, J + 1] = X;
-            ReactII[3, J + 1] = T;
-        }
+            BB = SFT / (SFT - SFT1)
+            X = X - BB * diX;
+            T = TiH + Tad9 * (X - XiH)
 
-    }
+            Reaction();
+            Tay = Tay - BB * (Tay - Tay1);
+
+            ReactII[2, J] = X;
+            ReactII[4, J] = T;
+            ReactII[5, J] = Tay
+                /* 
+                AA = "    " & Format(J, "0") & "     " & Format(ReactII(1, J), "0.000") _
+                & "     " & Format(X, "0.000") & "     " & Format(ReactII(3, J), "000.0") _
+                & "     " & Format(T, "000.0") & "     " & Format(Tay, "0.000")
+                List9.AddItem (AA)
+                */
+
+            console.log(J, ReactII[1, J], X, ReactII[3, J], T, Tay)
+            if (J < Ncat9) {
+                XiH = ReactII[2, J];
+                TiK = ReactII[4, J];
+                X = XiH;
+                T = TiK;
+                Reaction();
+                WiK = W;
+                dTiH = -20;
+                T = T - 0.001;
+                while (Math.abs(dTiH) < 0.01) {
+                    T = T + dTiH;
+                    Reaction();
+                    if (Math.sign(W - WiK) * Math.sign(dTiH) > 0) { dTiH = -dTiH / 2 }
+                }
+                ReactII[0, J + 1] = J + 1;
+                ReactII[1, J + 1] = X;
+                ReactII[3, J + 1] = T;
+            }
+
+        }
+        if (ReactII[2, Ncat9] < XK9) { TU = ReactII[3, 1] } else { TD = ReactII[3, 1] }
+
+    } while (Math.abs(ReactII[1, Ncat9] - XK9) >= 0.0001 || Math.abs(TU - TD) >= 0.01)
 }
 
 function Equlibrim() {
@@ -478,6 +485,8 @@ function m911() {
     XTopt[1, NTopt] = T;
     XTopt[2, NTopt] = W;
     console.log(X, T, W);
+    // Закинуть в табличку X, T, W
+    // Построить график
     X = X + dX3;
 }
 
@@ -497,6 +506,8 @@ function Bed_Tay_X() {
     //AA = AA & "   " & Format(T, "000.0")
     //List4.AddItem (AA)
     console.log(Tay, X, T)
+        // Закинуть в табличку Tay, X, T
+        // Построить график
     switch (Flow) {
         //ИС
         case "FM":
@@ -513,6 +524,8 @@ function Bed_Tay_X() {
             //AA = AA & "   " & Format(T, "000.0")
             //List4.AddItem(AA)
             console.log(Tay, X, T)
+                // Закинуть в табличку Tay, X, T
+                // Построить график
             break;
 
             //'ИВ    
@@ -545,6 +558,8 @@ function Bed_Tay_X() {
                 //AA = AA & "   " & Format(T, "000.0")
                 //List4.AddItem(AA)
                 console.log(Tay, X, T);
+                // Закинуть в табличку Tay, X, T
+                // Построить график
             }
             break;
     }
@@ -552,27 +567,661 @@ function Bed_Tay_X() {
 }
 
 function Bed_X_Tay() {
+    //Степень превращения при заданном tay
+    //List5.Clear
+    XTay[0, 1] = 0;
+    XTay[1, 1] = XH5;
+    XTay[2, 1] = TH5;
+    AA = "";
+    //AA = AA & "0.000" & "   " & Format(XH5, "0.0000")
+    //AA = AA & "   " & Format(TH5, "000.0")
+    //List5.AddItem (AA)
+    console.log("0.000", XH5, TH5)
+        // Закинуть в табличку "0.000", XH5, TH5
+        // Построить график
+    switch (Flow) {
+        case "FM":
+            //ИС
+            XD = XH5;
+            XU = 1;
+            while (Math.abs(XU - XD) >= 0.0001) {
+                X = (XU + XD) / 2;
+                T = TH5 + Tad5 * X;
+                Reaction();
+                if (TayK5 * W + XH5 - X > 0) { XD = X } else { XU = X }
+            }
+
+            XTay[0, 2] = TayK5;
+            XTay[1, 2] = X;
+            XTay[2, 2] = T;
+            AA = "";
+            //AA = AA & Format(TayK5, "0.000") & "   " & Format(X, "0.0000")
+            //AA = AA & "   " & Format(T, "000.0")
+            //List5.AddItem(AA)
+            console.log(TayK5, X, T)
+                // Закинуть в табличку TayK5, X, T
+                // Построить график
+            break;
+        case "IF":
+            //'ИВ
+            dTay = TayK5 / 100;
+            Tay = 0;
+            NXt = 0;
+            X = XH5;
+            T = TH5;
+            Reaction();
+            for (let I = 1; I < 11; I++) {
+                for (let J = 1; J < 11; J++) {
+                    W1 = W;
+                    X1 = X
+                    X = X + W * dTay;
+                    T = TH5 + Tad5 * X;
+                    Reaction();
+                    X = X1 + (W + W1) / 2 * dTay
+                    Tay = Tay + dTay
+                    NXt = NXt + 1
+                    XTay[0, NXt] = Tay;
+                    XTay[1, NXt] = X;
+                    XTay[2, NXt] = T
+                }
+                //AA = ""
+                //AA = AA & Format(Tay, "0.000") & "   " & Format(X, "0.0000")
+                //AA = AA & "   " & Format(T, "000.0")
+                //List5.AddItem(AA)
+                console.log(Tay, X, T)
+                    // Закинуть в табличку Tay, X, T
+                    // Построить график
+            }
+
+    }
+    Taymax = TayK5
+
 
 }
 
 function ReactorTO() {
+    //Реактор с ТО
+    //  'Определение макс. х1н
+    XD = 0;
+    if (2 * CSO2 / CO2 < 1) { XU = 2 * CSO2 / CO2 } else { XU = 1 }
+    W1 = -1;
+    W2 = 1;
+    while (Math.abs(XU - XD) >= 0.00005) {
+        X = (XU + XD) / 2;
+        T = TH6 + Tad6 * (X - XH6)
+        Reaction();
+        if (W < 0) {
+            XU = X;
+            W1 = W
+        } else {
+            XD = X;
+            W2 = W
+        }
+    }
+    X = XD + (XU - XD) * W1 / (W2 - W1);
+    ReactTO[0, 1] = 1;
+    ReactTO[1, 1] = XH6;
+    ReactTO[3, 1] = TH6; // Условия в конце 1-го слоя
+    X1D = X;
+    DX0 = -0.02
+    m250();
+}
 
+function m250() {
+    X1D = X1D + DX0;
+    X = X1D;
+    T = TH6 + Tad6 * (X - XH6)
+    Reaction_T();
+    if (FT <= 0 || W <= 0) {
+        DX0 = DX0 / 2;
+        m250()
+    } //'Расчет 1-го слоя
+
+
+    diX = (X1D - XH6) / 50;
+    X = XH6;
+    T = TH6;
+    Tay = 0
+    Reaction();
+    F = 1 / W;
+    DXS = diX / 6;
+    for (let I = 1; I < 51; I++) {
+
+        Tay = Tay + DXS / W;
+        X = X + diX / 2;
+        T = TH6 + Tad6 * (X - XH6);
+        Reaction();
+        Tay = Tay + 4 * DXS / W;
+        X = X + diX / 2;
+        T = TH6 + Tad6 * (X - XH6);
+        Reaction();
+        Tay = Tay + DXS / W
+    }
+    ReactTO[2, 1] = X;
+    ReactTO[4, 1] = T;
+    ReactTO[5, 1] = Tay
+        //AA = "    1" & "      " & Format(ReactTO(1, 1), "0.000") & "     "
+        //   &
+        //   Format(X, "0.000") & "     " & Format(ReactTO(3, 1), "000.0") _ &
+        //   "     " & Format(T, "000.0") & "      " & Format(Tay, "0.000")
+    console.log(1, ReactTO[1, 1], X, ReactTO[3, 1], T, Tay)
+        //Расчет всех слоев
+    for (let J = 2; J < Ncat6 + 1; J++) {
+        //Определение Tiн опт
+        XiH = ReactTO[2, J - 1];
+        TiK = ReactTO[4, J - 1]
+        X = XiH;
+        T = TiK;
+        Reaction();
+        WiK = W
+        dTiH = -20;
+        T = T - 0.001;
+        while (Math.abs(dTiH) >= 0.01) {
+            T = T + dTiH;
+            Reaction();
+            if (Math.Math.sgn(W - WiK) * Math.Math.sgn(dTiH) > 0) { dTiH = -dTiH / 2 }
+        }
+
+
+        Loop
+        ReactTO[0, J] = J;
+        ReactTO[1, J] = X;
+        ReactTO[3, J] = T //Определение Хiк опт
+        XiH = X;
+        TiH = T;
+        diX = (1 - X) / 50;
+        Tay = 0;
+        SFT = 0
+        diX = (1 - X) / 100;
+        DXS = diX / 6
+        Reaction_T();
+        while (SFT < 0) {
+            Tay1 = Tay;
+            SFT1 = SFT;
+            Tay = Tay + DXS / W;
+            SFT = SFT + DXS * FT;
+            X = X + diX / 2;
+            T = TiH + Tad6 * (X - XiH);
+            Reaction_T();
+            Tay = Tay + 4 * DXS / W;
+            SFT = SFT + 4 * DXS * FT
+            X = X + diX / 2;
+            T = TiH + Tad6 * (X - XiH)
+            Reaction_T()
+            Tay = Tay + DXS / W;
+            SFT = SFT + DXS * FT
+        }
+
+        BB = SFT / (SFT - SFT1)
+        X = X - BB * diX;
+        T = TiH + Tad6 * (X - XiH)
+        Reaction();
+        Tay = Tay - BB * (Tay - Tay1);
+        ReactTO[2, J] = X;
+        ReactTO[4, J] = T;
+        ReactTO[5, J] = Tay;
+        //AA = "    " & Format(J, "0") & "      " & Format(ReactTO(1, J), "0.000") _ &
+        //    "     " & Format(X, "0.000") & "     " & Format(ReactTO(3, J), "000.0") _ &
+        //    "     " & Format(T, "000.0") & "      " & Format(Tay, "0.000")
+        //List6.AddItem(AA)
+        console.log(J, ReactTO[1, J], X, ReactTO[3, J], T, Tay)
+        if (J < Ncat6 && X > XK6) { m250(); }
+    }
+    // Подобрались к XnK?
+    if (Math.Math.sgn(X - XK6) * Math.Math.sgn(DX0) > 0) { DX0 = -DX0 / 2 }
+    if (Math.abs(X - XK6) > 0.0001 && Math.abs(DX0) > 0.0001) { m250(); }
 }
 
 function ReactorTO_FM() {
 
+    ReactTO[0, 0] = 0;
+    ReactTO[1, 0] = XH6;
+    DX0 = 0.05
+    X = (XK6 - XH6) / 2;
+    ReactTO[1, 1] = X;
+    Xa = 2 * Math.log(10) * 4905;
+    Xb = 2 * Math.log(10) * 4.6455;
+    m270();
+}
+
+function m270() {
+    console.log("Вход    " + ReactTO[1, 0])
+
+    X = ReactTO[1, 1];
+    X = X + DX0;
+    ReactTO[1, 1] = X;
+    ReactTO[0, 1] = 1 //Температура в 1-м слое - Топт
+    FU = P * (CO2 - 0.5 * CSO2 * X) / (1 - 0.5 * CSO2 * X)
+    FI = (X / (1 - X)) ^ 2
+    T = Xa / (Xb + Math.log((Xa / E1 * Rgas + 1) * FI / FU))
+    if (T < T12) { m275() }
+    T = Xa / (Xb + Math.log((Xa / E2 * Rgas + 1) * FI / FU))
+    if (T < T12) {
+        T = T12;
+        m275()
+    }
+    if (T < T23) { m275() }
+    if (E3 = 0) {
+        T = T23;
+        m275()
+    }
+    T = Xa / (Xb + Math.log((Xa / E3 * Rgas + 1) * FI / FU))
+    if (T < T23) { T = T23 }
+
+}
+
+function m275() {
+    ReactTO[2, 1] = T;
+    Reaction();
+    ReactTO[4, 1] = W;
+    ReactTO[3, 1] = (X - ReactTO[1, 0]) / W;
+    console.log("    " + ReactTO[0, 1] + "     " + ReactTO[1, 1] + "     " + ReactTO[2, 1] + "     " + ReactTO[2, 1] + "     " + ReactTO[3, 1])
+
+    //Последующие слои
+    for (let J = 2; J < Ncat6 + 1; J++) {
+        ReactTO[0, J] = J //Производная f=1/W по Х для (i-1) слоя
+        X = ReactTO[1, J - 1];
+        X = X + 0.005;
+        Reaction();
+        W1 = W;
+        X = X - 0.01;
+        Reaction();
+        Fx = 100 * (1 / W1 - 1 / W);
+        FF = 1 / ReactTO[4, J - 1] + (ReactTO[1, J - 1] - ReactTO[1, J - 2]) * Fx //Находим  Х и Т опт. для слоя
+        X = ReactTO[1, J - 1]
+        do {
+            X = X + 0.0005
+            FU = P * (CO2 - 0.5 * CSO2 * X) / (1 - 0.5 * CSO2 * X)
+            FI = (X / (1 - X)) ^ 2
+            T = Xa / (Xb + Math.log((Xa / E1 * Rgas + 1) * FI / FU))
+            if (T < T12) { m276(); }
+            T = Xa / (Xb + Math.log((Xa / E2 * Rgas + 1) * FI / FU))
+            if (T < T12) {
+                T = T12;
+                m276();
+            }
+            if (T < T23) { m276(); }
+            if (E3 = 0) {
+                T = T23;
+                m276();
+            }
+            T = Xa / (Xb + Math.log((Xa / E3 * Rgas + 1) * FI / FU))
+            if (T < T23) { T = T23 }
+            276
+            Reaction();
+            FD = 1 / W
+        }
+        while (FD <= FF)
+        ReactTO[1, J] = X;
+        ReactTO[2, J] = T;
+        ReactTO[4, J] = W
+        ReactTO[3, J] = (X - ReactTO[1, 0]) / W
+        console.log(ReactTO[0, J] + "      " + ReactTO[1, J] + "      " + ReactTO[2, J] + "      " + ReactTO[3, J])
+
+    }
+    // Подобрались к XnK?
+    if (Math.sgn(X - XK6) * Math.sgn(DX0) > 0) { DX0 = -DX0 / 2 }
+    if (Math.abs(X - XK6) > 0.0001 && Math.abs(DX0) > 0.0001) { m270(); }
+}
+
+function m276() {
+    do {
+        Reaction();
+        FD = 1 / W
+    }
+    while (FD <= FF)
 }
 
 function ReactorCG() {
+    //Реактор с ХГ после первого слоя
+    //Определение макс. х1н
+    XD = 0
+    if (2 * CSO2 / CO2 < 1) { XU = 2 * CSO2 / CO2 } else { XU = 1 }
+    W1 = -1;
+    W2 = 1
+    while (Math.abs(XU - XD) >= 0.00005) {
+        X = (XU + XD) / 2;
+        T = TH7 + Tad7 * (X - XH7)
+        Reaction();
+        if (W < 0) {
+            XU = X;
+            W1 = W
+        } else {
+            XD = X;
+            W2 = W
+        }
+        T = T
+    }
+    X = XD + (XU - XD) * W1 / (W2 - W1)
+    ReactCG[0, 1] = 1;
+    ReactCG[1, 1] = XH7;
+    ReactCG[3, 1] = TH7 // Условия в конце 1-го слоя
+    X1D = X;
+    DX0 = -0.02
+    m260();
+}
 
+function m260() {
+    // 260 List7.Clear
+    X1D = X1D + DX0;
+    X = X1D;
+    T = TH7 + Tad7 * (X - XH7);
+    Reaction_T();
+    if (FT <= 0 || W <= 0) {
+        DX0 = DX0 / 2;
+        m260();
+    }
+    diX = (X1D - XH7) / 50;
+    X = XH7;
+    T = TH7;
+    Tay = 0
+    Reaction();
+    F = 1 / W;
+    DXS = diX / 6
+    for (let I = 1; I < 51; I++) {
+        Tay = Tay + DXS / W;
+        X = X + diX / 2;
+        T = TH7 + Tad7 * (X - XH7)
+        Reaction()
+        Tay = Tay + 4 * DXS / W;
+        X = X + diX / 2;
+        T = TH7 + Tad7 * (X - XH6)
+        Reaction()
+        Tay = Tay + DXS / W
+    }
+    ReactCG[2, 1] = X;
+    ReactCG[4, 1] = T;
+    ReactCG[5, 1] = Tay //Расчет всех слоев
+    for (let J = 2; J < Ncat7 + 1; J++) {
+        //Определение Tiн опт
+        XiH = ReactCG[2, J - 1];
+        TiK = ReactCG[4, J - 1]
+        X = XiH;
+        T = TiK;
+        Reaction();
+        WiK = W;
+        dTiH = -20;
+        T = T - 0.001;
+        if (J == 2) {
+            while (Math.abs(dTiH) >= 0.01) {
+                T = T + dTiH;
+                Vg1 = (T - Tcg7) / (TiK - Tcg7)
+                X = XiH * Vg1;
+                Reaction();
+                if (Math.sgn(W - WiK) * Math.sgn(dTiH) > 0) { dTiH = -dTiH / 2 }
+            }
+
+            ReactCG[6, 1] = Vg1
+                /*
+                AA = "    1" & "      " & Format(ReactCG(1, 1), "0.000") & "     "
+                _
+                    &
+                    Format(ReactCG(2, 1), "0.000") & "     "
+                _
+                    &
+                    Format(ReactCG(3, 1), "000.0") & "     "
+                _
+                    &
+                    Format(ReactCG(4, 1), "000.0") & "      "
+                _
+                    &
+                    Format(ReactCG(5, 1), "0.000") & "      "
+                _
+                    &
+                    Format(ReactCG(6, 1), "0.000")
+                List7.AddItem(AA)
+                */
+        } else {
+            while (Math.abs(dTiH) >= 0.01) {
+                T = T + dTiH;
+                Reaction();
+                if (Math.sgn(W - WiK) * Math.sgn(dTiH) > 0) { dTiH = -dTiH / 2 }
+            }
+
+        }
+
+        ReactCG[0, J] = J;
+        ReactCG[1, J] = X;
+        ReactCG[3, J] = T
+        ReactCG[6, J] = 1 //Определение Хiк опт
+
+        XiH = X;
+        TiH = T;
+        diX = (1 - X) / 50;
+        Tay = 0;
+        SFT = 0
+        if (J == 2) { F12cg = (X / W - ReactCG[5, 1]) / (TH7 - Tcg7) } else { F12cg = 0 }
+        diX = (1 - X) / 100;
+        DXS = diX / 6
+        Reaction_T();
+
+        while (SFT - F12cg <= 0) {
+            Tay1 = Tay;
+            SFT1 = SFT - F12cg
+            Tay = Tay + DXS / W;
+            SFT = SFT + DXS * FT
+            X = X + diX / 2;
+            T = TiH + Tad7 * (X - XiH)
+            Reaction_T();
+            Tay = Tay + 4 * DXS / W;
+            SFT = SFT + 4 * DXS * FT
+            X = X + diX / 2;
+            T = TiH + Tad7 * (X - XiH)
+            Reaction_T();
+            Tay = Tay + DXS / W;
+            SFT = SFT + DXS * FT
+        }
+        BB = (SFT - F12cg) / (SFT - F12cg - SFT1)
+        X = X - BB * diX;
+        T = TiH + Tad7 * (X - XiH)
+        Reaction();
+        Tay = Tay - BB * (Tay - Tay1)
+        ReactCG[2, J] = X;
+        ReactCG[4, J] = T;
+        ReactCG[5, J] = Tay
+            /*
+            AA = "    " & Format(J, "0") & "      " & Format(ReactCG(1, J), "0.000") _ &
+                "     " & Format(X, "0.000") & "     " & Format(ReactCG(3, J), "000.0") _ &
+                "     " & Format(T, "000.0") & "      " & Format(Tay, "0.000") _ &
+                "      " & Format(ReactCG(6, J), "0.000")
+            List7.AddItem(AA)
+            */
+        if (J < Ncat7 && X > XK7) { m260(); }
+    }
+    // Подобрались к XnK?
+    if (Math.sgn(X - XK7) * Math.sgn(DX0) > 0) { DX0 = -DX0 / 2 }
+    if (Math.abs(X - XK7) > 0.0001 && Math.abs(DX0) > 0.0001) { m260(); }
 }
 
 function ReactorCA() {
-
+    //Реактор с ХB после всех слоев
+    //Определение макс. х1н
+    XD = 0
+    if (2 * CSO20 / CO20 < 1) { XU = 2 * CSO20 / CO20 } else { XU = 1 }
+    W1 = -1;
+    W2 = 1
+    while (Math.abs(XU - XD) >= 0.00005) {
+        X = (XU + XD) / 2;
+        T = TH8 + Tad8 * (X - XH8)
+        Reaction();
+        if (W < 0) {
+            XU = X;
+            W1 = W
+        } else {
+            XD = X;
+            W2 = W
+        }
+        T = T
+    }
+    X = XD + (XU - XD) * W1 / (W2 - W1)
+    T = TH8 + Tad8 * (X - XH8)
+    ReactCA[0, 1] = 1;
+    ReactCA[1, 1] = XH8
+    ReactCA[3, 1] = TH8;
+    ReactCA[6, 1] = 1 //Условия в конце 1-го слоя
+    X1D = X;
+    DX0 = -0.02
+    m280();
 }
 
-function ReactorII_DK() {
+function m280() {
+    //280 List8.Clear
+    X1D = X1D + DX0;
+    X = X1D;
+    T = TH8 + Tad8 * (X - XH8)
+    CSO2 = CSO20;
+    CO2 = CO20
+    Reaction_T();
+    if (FT <= 0 || W <= 0) {
+        DX0 = DX0 / 2;
+        m280();
+    }
+    // Расчет 1-го слоя
+    diX = (X1D - XH8) / 50;
+    X = XH8;
+    T = TH8;
+    Tay = 0
+    Reaction();
+    F = 1 / W;
+    DXS = diX / 6
+    for (let I = 1; I < 51; I++) {
+        Tay = Tay + DXS / W;
+        X = X + diX / 2;
+        T = TH8 + Tad8 * (X - XH8)
+        Reaction
+        Tay = Tay + 4 * DXS / W;
+        X = X + diX / 2;
+        T = TH8 + Tad8 * (X - XH8)
+        Reaction
+        Tay = Tay + DXS / W
+    }
+    ReactCA[2, 1] = X;
+    ReactCA[4, 1] = T;
+    ReactCA[5, 1] = Tay
+    ReactCA[7, 1] = Tay;
+    ReactCA[8, 1] = CSO2;
+    ReactCA[9, 1] = CO2
+        /*
+        AA = "    " & Format(ReactCA(0, 1), "0") & "     "
+        _
+            &
+            Format(ReactCA(1, 1), "0.000") & "     "
+        _
+            &
+            Format(ReactCA(2, 1), "0.000") & "     "
+        _
+            &
+            Format(ReactCA(3, 1), "000.0") & "     "
+        _
+            &
+            Format(ReactCA(4, 1), "000.0") & "      "
+        _
+            &
+            Format(ReactCA(5, 1), "0.000") & "      "
+        _
+            &
+            Format(ReactCA(6, 1), "0.000")
+        List8.AddItem(AA)
+        */
+        //Расчет всех слоев
+    for (let J = 2; J < Ncat8 + 1; J++) { //Определение Tiн опт
+        XiH = ReactCA[2, J - 1];
+        TiK = ReactCA[4, J - 1];
+        Va8 = ReactCA[6, J - 1];
+        X = XiH;
+        T = TiK
+        CSO2 = CSO20 / Va8;
+        CO2 = 0.21 - (0.21 - CO20) / Va8
+        Reaction();
+        WiK = W;
+        Va8i = Va8
+        dTiH = -20;
+        T = T - 0.001
+        while (Math.abs(dTiH) >= 0.01) {
+            T = T + dTiH;
+            Va8 = Va8i * (TiK - Tca8) / (T - Tca8)
+            CSO2 = CSO20 / Va8;
+            CO2 = 0.21 - (0.21 - CO20) / Va8
+            Reaction();
+            if (Math.sgn(W - WiK) * Math.sgn(dTiH) > 0) { dTiH = -dTiH / 2 }
+        }
+        ReactCA[0, J] = J;
+        ReactCA[1, J] = X;
+        ReactCA[3, J] = T;
+        ReactCA[6, J] = Va8 //Определение Хiк опт
+        XiH = X;
+        TiH = T;
+        diX = (1 - X) / 50;
+        Tay = 0;
+        SFT = 0
+        diX = (1 - X) / 100;
+        DXS = diX / 6
+        Reaction_T_V();
+        while (SFT < 0) {
+            Tay1 = Tay;
+            SFT1 = SFT
+            Tay = Tay + DXS / W;
+            SFT = SFT + DXS * F12ca
+            X = X + diX / 2;
+            T = TiH + Tad8 / Va8 * (X - XiH)
+            Reaction_T_V();
+            Tay = Tay + 4 * DXS / W;
+            SFT = SFT + 4 * DXS * F12ca
+            X = X + diX / 2;
+            T = TiH + Tad8 / Va8 * (X - XiH)
+            Reaction_T_V();
+            Tay = Tay + DXS / W;
+            SFT = SFT + DXS * F12ca
+            FT = FT;
+            FV = FV;
+            T = T
+        }
+        BB = SFT / (SFT - SFT1)
+        X = X - BB * diX;
+        T = TiH + Tad8 / Va8 * (X - XiH)
+        Reaction();
+        Tay = Tay - BB * (Tay - Tay1)
+        ReactCA[2, J] = X;
+        ReactCA[4, J] = T;
+        ReactCA[5, J] = Tay / Va8
+        ReactCA[7, J] = Tay;
+        ReactCA[8, J] = CSO2;
+        ReactCA[9, J] = CO2
+            /*
+            AA = "    " & Format(ReactCA(0, J), "0") & "     "
+            _
+                &
+                Format(ReactCA(1, J), "0.000") & "     "
+            _
+                &
+                Format(ReactCA(2, J), "0.000") & "     "
+            _
+                &
+                Format(ReactCA(3, J), "000.0") & "     "
+            _
+                &
+                Format(ReactCA(4, J), "000.0") & "      "
+            _
+                &
+                Format(ReactCA(5, J), "0.000") & "      "
+            _
+                &
+                Format(ReactCA(6, J), "0.000")
+            List8.AddItem(AA)
+            */
+        if (J < Ncat8 && X > XK8) { m280(); }
+    }
+    //Exit Sub
+    //Подобрались к XnK?
+    if (Math.sgn(X - XK8) * Math.sgn(DX0) > 0) { DX0 = -DX0 / 2 }
+    if (Math.abs(X - XK8) > 0.0001 && Math.abs(DX0) > 0.0001) { m280(); }
+}
 
+function Reaction_T_V() {
+    //dF/dV, df/dT и cкорость реакции W
+    Reaction_T()
+    FV = (FU - 0.21 * P) / W / (FU - FI) / (1 - 0.5 * CSO2 * X)
+    F12ca = FT * (T - Tca8) - FV
 }
 
 function Inspection() {
@@ -775,7 +1424,7 @@ function Inspection() {
     // Проверка выбора режима потока
     switch (Variable1) {
         case 4, 5, 6:
-            if (Flow = "") {
+            if (Flow == "") {
                 alert("Режим движения потока???");
                 break;
             }
@@ -1022,8 +1671,10 @@ function Inspection() {
                 alert("Вводите цифры! Десятичное число через запятую! Пример: 12,3!");
                 return
             }
-            if (IsNumeric(x)) { XH5 = parseFloat(x) } else { alert("Вводите цифры! Десятичное число через запятую! Пример: 12,3!") };
-            return
+            if (IsNumeric(x)) { XH5 = parseFloat(xn) } else {
+                alert("Вводите цифры! Десятичное число через запятую! Пример: 12,3!");
+                return
+            }
             if (IsNumeric(tn)) { TH5 = parseFloat(tn) } else {
                 alert("Вводите цифры! Десятичное число через запятую! Пример: 12,3!");
                 return
@@ -1044,7 +1695,7 @@ function Inspection() {
                 alert("Х > Хравн ?!?");
                 return
             }
-            if (Flow = "IF") {
+            if (Flow == "IF") {
                 X = XH5;
                 T = TH5 + Tad5 / 3;
                 Reaction();
@@ -1069,7 +1720,7 @@ function Inspection() {
                 alert("Вводите цифры! Десятичное число через запятую! Пример: 12,3!");
                 return
             }
-            if (Flow = "IF") {
+            if (Flow == "IF") {
                 if (IsNumeric(t1n)) { TH6 = parseFloat(t1n) } else {
                     alert("Вводите цифры! Десятичное число через запятую! Пример: 12,3!");
                     return
